@@ -39,6 +39,11 @@ class SauceRepository extends ServiceEntityRepository
         }
     }
 
+    public function update(Sauce $entity)
+    {
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Sauce[] Returns an array of Sauce objects
 //     */

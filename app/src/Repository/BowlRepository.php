@@ -39,6 +39,11 @@ class BowlRepository extends ServiceEntityRepository
         }
     }
 
+    public function update(Bowl $entity)
+    {
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Bowl[] Returns an array of Bowl objects
 //     */

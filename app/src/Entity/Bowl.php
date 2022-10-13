@@ -22,8 +22,7 @@ class Bowl
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $imagePath = null;
+
 
     #[ORM\OneToMany(mappedBy: 'bowlId', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
@@ -61,18 +60,6 @@ class Bowl
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-    
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
-    }
-
-    public function setImagePath(string $imagePath): self
-    {
-        $this->imagePath = $imagePath;
 
         return $this;
     }
