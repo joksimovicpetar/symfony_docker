@@ -39,6 +39,11 @@ class ExtraIngridientRepository extends ServiceEntityRepository
         }
     }
 
+    public function update(ExtraIngridient $entity)
+    {
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return ExtraIngridient[] Returns an array of ExtraIngridient objects
 //     */

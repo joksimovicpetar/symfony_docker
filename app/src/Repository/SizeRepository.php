@@ -39,6 +39,11 @@ class SizeRepository extends ServiceEntityRepository
         }
     }
 
+    public function update(Size $entity)
+    {
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Size[] Returns an array of Size objects
 //     */

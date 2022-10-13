@@ -39,6 +39,11 @@ class IngridientRepository extends ServiceEntityRepository
         }
     }
 
+    public function update(Ingridient $entity)
+    {
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Ingridient[] Returns an array of Ingridient objects
 //     */

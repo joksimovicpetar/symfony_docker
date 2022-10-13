@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Service\SizeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SizeController extends AbstractController
 {
-    #[Route('/size', name: 'app_size')]
-    public function index(): Response
+    #[Route('/size', name: 'app_size', methods: 'GET')]
+    public function index(SizeService $service): Response
     {
+        $sizes = $service->findAll();
+
         return $this->render('size/index.html.twig', [
-            'controller_name' => 'SizeController',
+            'sizes' => $sizes,
         ]);
     }
 }

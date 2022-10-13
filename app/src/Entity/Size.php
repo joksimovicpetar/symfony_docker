@@ -25,6 +25,12 @@ class Size
     #[ORM\OneToMany(mappedBy: 'sizeId', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
+    #[ORM\Column(length: 255)]
+    private ?string $currency = null;
+
+    #[ORM\Column]
+    private ?float $price = null;
+
     public function __construct()
     {
         $this->itemOrders = new ArrayCollection();
@@ -85,6 +91,30 @@ class Size
                 $itemOrder->setSizeId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
