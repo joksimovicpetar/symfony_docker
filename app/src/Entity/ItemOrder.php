@@ -15,7 +15,7 @@ class ItemOrder
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: "app\Entity\Bowl", inversedBy: 'itemOrders')]
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Bowl", inversedBy: 'itemOrders')]
     private ?Bowl $bowlId = null;
 
     #[ORM\ManyToOne(inversedBy: 'itemOrders')]

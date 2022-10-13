@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,5 +17,12 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
+    }
+
+    #[Route('/start/{name?}', name: 'app_start')]
+
+    public function start(Request $request, $name){
+        $numb = random_int(0,99);
+        return new Response('<h1>Sup '.$name.' number '.$numb.'</h1>');
     }
 }
