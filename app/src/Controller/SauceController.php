@@ -17,14 +17,14 @@ class SauceController extends AbstractController
         $sauce->setDescription('testtestest');
 
         $em = $doctrine->getManager();
-        $em->persist($sauce);
-        $em->flush();
 
-        return new Response("Created");
-
-        /*return $this->render('sauce/index.html.twig', [
-            'controller_name' => 'SauceController',
+        $getSauce = $em->getRepository(Sauce::class)->findOneBy([
+            'id'=>1
         ]);
-        */
+
+        return $this->render('sauce/index.html.twig', [
+            'sauce' => $getSauce
+        ]);
+
     }
 }
