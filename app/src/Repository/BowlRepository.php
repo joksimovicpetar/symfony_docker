@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BowlRepository extends ServiceEntityRepository
 {
-    
+
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -46,6 +46,15 @@ class BowlRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findBowls()
+    {
+           $qb = $this->$this->createQueryBuilder('b');
+
+           $qb
+               ->select('b');
+
+           return $qb;
+    }
 
 
 //    /**

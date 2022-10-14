@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Service;
+use App\Entity\Bowl;
 use App\Repository\BowlRepository;
 
 class BowlService
 {
+
 
     private $repository;
 
@@ -13,17 +15,18 @@ class BowlService
         $this->repository = $repository;
     }
 
-    function save($bowl)
+
+    function save(Bowl $bowl): void
     {
         $this->repository->save($bowl);
     }
 
-    function update($bowl)
+    function update(Bowl $bowl): void
     {
         $this->repository->update($bowl);
     }
 
-    function delete($bowl)
+    function delete(Bowl $bowl): void
     {
         $this->repository->delete($bowl);
     }
@@ -32,6 +35,10 @@ class BowlService
     {
         $bowls = $this->repository->findAll();
         return $bowls;
+    }
+
+    function findBowls(){
+        $bowls = $this->findBowls();
     }
 
 }
