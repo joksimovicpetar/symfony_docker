@@ -22,7 +22,6 @@ class Base
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $imagePath = null;
 

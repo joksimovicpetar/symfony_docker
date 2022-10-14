@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BowlRepository extends ServiceEntityRepository
 {
+    
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Bowl::class);
@@ -43,6 +45,8 @@ class BowlRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->flush();
     }
+
+
 
 //    /**
 //     * @return Bowl[] Returns an array of Bowl objects

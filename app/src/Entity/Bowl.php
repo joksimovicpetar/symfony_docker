@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Nullable;
 
 #[ORM\Entity(repositoryClass: BowlRepository::class)]
 class Bowl
@@ -27,7 +28,8 @@ class Bowl
     #[ORM\OneToMany(mappedBy: 'bowlId', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: 'Image', cascade: ['persist', 'remove']),
+    ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id')]
     private ?Image $imageId = null;
 
     public function __construct()
