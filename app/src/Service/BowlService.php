@@ -38,7 +38,8 @@ class BowlService
     }
 
     function findBowls(){
-        $bowls = $this->findBowls();
+        return $this->repository->findBowls();
+
     }
 
 }

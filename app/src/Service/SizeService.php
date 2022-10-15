@@ -33,4 +33,10 @@ class SizeService
         $sizes = $this->repository->findAll();
         return $sizes;
     }
+
+    function findSizes()
+    {
+        return $this->repository->findSizes();
+
+    }
 }

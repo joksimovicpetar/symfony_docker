@@ -39,6 +39,19 @@ class BaseRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBases()
+    {
+
+
+        return $this->createQueryBuilder('base')
+
+            ->orderBy('base.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return Base[] Returns an array of Base objects
 //     */

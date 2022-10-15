@@ -22,13 +22,11 @@ class Base
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $imagePath = null;
-
     #[ORM\OneToMany(mappedBy: 'baseId', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: 'Image', cascade: ['persist', 'remove']),
+    ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id')]
     private ?Image $imageId = null;
 
     public function __construct()
@@ -65,18 +63,6 @@ class Base
         return $this;
     }
 
-
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
-    }
-
-    public function setImagePath(string $imagePath): self
-    {
-        $this->imagePath = $imagePath;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, ItemOrder>

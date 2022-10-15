@@ -48,12 +48,15 @@ class BowlRepository extends ServiceEntityRepository
 
     public function findBowls()
     {
-           $qb = $this->$this->createQueryBuilder('b');
 
-           $qb
-               ->select('b');
 
-           return $qb;
+        return $this->createQueryBuilder('bowl')
+
+            ->orderBy('bowl.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
     }
 
 

@@ -44,6 +44,18 @@ class SauceRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findSauces()
+    {
+
+
+        return $this->createQueryBuilder('sauce')
+            ->orderBy('sauce.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return Sauce[] Returns an array of Sauce objects
 //     */

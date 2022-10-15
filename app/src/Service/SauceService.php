@@ -34,4 +34,10 @@ class SauceService
         return $sauces;
     }
 
+    function findSauces()
+    {
+        return $this->repository->findSauces();
+
+    }
+
 }

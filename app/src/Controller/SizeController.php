@@ -12,7 +12,7 @@ class SizeController extends AbstractController
     #[Route('/size', name: 'app_size', methods: 'GET')]
     public function index(SizeService $service): Response
     {
-        $sizes = $service->findAll();
+        $sizes = $service->findSizes();
 
         return $this->render('size/index.html.twig', [
             'sizes' => $sizes,

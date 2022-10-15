@@ -14,7 +14,7 @@ class SauceController extends AbstractController
     #[Route('/sauce', name: 'app_sauce', methods: ['GET'])]
     public function index(SauceService $service)
     {
-       $sauces = $service->findAll();
+       $sauces = $service->findSauces();
 
         return $this->render('sauce/index.html.twig', [
             'sauces' => $sauces

@@ -44,6 +44,18 @@ class SizeRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findSizes()
+    {
+
+
+        return $this->createQueryBuilder('size')
+            ->orderBy('size.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return Size[] Returns an array of Size objects
 //     */
