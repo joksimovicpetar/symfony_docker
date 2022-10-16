@@ -13,11 +13,18 @@ class ItemOrderIngridient
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemOrderIngridients')]
+    #[ORM\ManyToOne(targetEntity: 'ItemOrder', inversedBy: 'itemOrderIngridients'),
+    ORM\JoinColumn(name: 'item_order_id', referencedColumnName: 'id')]
     private ?itemOrder $itemOrderId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemOrderIngridients')]
+    #[ORM\ManyToOne(targetEntity: 'Ingridient', inversedBy: 'itemOrderIngridients'),
+    ORM\JoinColumn(name: 'ingridient_id', referencedColumnName: 'id')]
     private ?Ingridient $ingridientsId = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getItemOrderId(): ?itemOrder
     {

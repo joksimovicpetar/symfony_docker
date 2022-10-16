@@ -3,18 +3,26 @@
 {% block title %}Hello ItemOrderIngridientController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table id="bases" class="table table-striped table-field">
+        <thead>
+        <tr>
+            <th >id</th>
+            <th >item_order_id</th>
+            <th >ingridient_id</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for itemOrderIngridient in itemOrderIngridients %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/symfony_docker/src/Controller/ItemOrderIngridientController.php'|file_link(0) }}">src/Controller/ItemOrderIngridientController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/symfony_docker/templates/item_order_ingridient/index.html.twig'|file_link(0) }}">templates/item_order_ingridient/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <tr>
+                <td >{{ itemOrderIngridient.id }}</td>
+                <td >{{ itemOrderIngridient.itemOrderId }}</td>
+                <td >{{ itemOrderIngridient.ingridientsId }}</td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
 {% endblock %}

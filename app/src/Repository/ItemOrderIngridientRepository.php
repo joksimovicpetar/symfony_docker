@@ -39,6 +39,21 @@ class ItemOrderIngridientRepository extends ServiceEntityRepository
         }
     }
 
+    public function findItemOrderIngridient()
+    {
+
+
+        return $this->createQueryBuilder('itemOrderIngridients')
+
+            ->orderBy('itemOrderIngridients.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
+
+
 //    /**
 //     * @return ItemOrderIngridient[] Returns an array of ItemOrderIngridient objects
 //     */
