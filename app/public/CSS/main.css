@@ -1,6 +1,30 @@
 .btn{
-
-    background-color: #B0413E;
+    color: #B0413E;
+    border-color: #B0413E;
+    background-color: white;
     float: right;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-style: solid;
+    border-width: 1px;
 }
 
+.btn:hover{
+    color: white;
+    background-color: lightcoral;
+}
+
+.nav-wrapper{
+    background-color: white;
+}
+
+.brand-logo{
+    color: black;
+    width: 80px;
+    height: 64px;
+}
+#logo{
+    width: 80px;
+    height: 64px;
+}
