@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\IngridientsService;
+use App\Service\IngridientService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,9 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngridientController extends AbstractController
 {
     #[Route('/ingridient', name: 'ingridient_list', methods: 'GET')]
-    public function index(IngridientsService $service): Response
+    public function index(IngridientService $service): Response
     {
-        $ingridients = $service->findAll();
+        $ingridients = $service->findIngridients();
 
         return $this->render('ingridient/index.html.twig', [
             'ingridients' => $ingridients,

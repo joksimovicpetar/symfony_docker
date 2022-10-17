@@ -4,7 +4,7 @@ namespace App\Service;
 use App\Entity\Ingridient;
 use App\Repository\IngridientRepository;
 
-class IngridientsService
+class IngridientService
 {
     private $repository;
 
@@ -32,5 +32,10 @@ class IngridientsService
     {
         $ingridients = $this->repository->findAll();
         return $ingridients;
+    }
+
+    function findIngridients(){
+        return $this->repository->findIngridients();
+
     }
 }

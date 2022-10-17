@@ -44,6 +44,19 @@ class IngridientRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findIngridients()
+    {
+
+
+        return $this->createQueryBuilder('ingridient')
+
+            ->orderBy('ingridient.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return Ingridient[] Returns an array of Ingridient objects
 //     */

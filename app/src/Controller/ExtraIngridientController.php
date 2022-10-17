@@ -9,12 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExtraIngridientController extends AbstractController
 {
-    #[Route('/extraingridient', name: 'extra_ingridient_list', methods: 'GET')]
+    #[Route('/extra_ingridient', name: 'extra_ingridient_list', methods: 'GET')]
     public function index(ExtraIngridientService $service): Response
     {
-        $extraIngridients = $service->findAll();
+        $extraIngridients = $service->findExtraIngridients();
 
-        return $this->render('ingridient/index.html.twig', [
+        return $this->render('extra_ingridient/index.html.twig', [
             'extraIngridients' => $extraIngridients,
         ]);
     }

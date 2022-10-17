@@ -44,6 +44,19 @@ class ExtraIngridientRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findExtraIngridients()
+    {
+
+
+        return $this->createQueryBuilder('extra_ingridient')
+
+            ->orderBy('extra_ingridient.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return ExtraIngridient[] Returns an array of ExtraIngridient objects
 //     */

@@ -33,5 +33,9 @@ class ExtraIngridientService
         return $extraIngridients;
     }
 
+    function findExtraIngridients(){
+        return $this->repository->findExtraIngridients();
+
+    }
 
 }
