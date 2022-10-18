@@ -3,27 +3,48 @@
 {% block title %}Hello BaseController!{% endblock %}
 
 {% block body %}
-
-    <table id="bases" class="table table-striped table-field">
-        <thead>
-        <tr>
-            <th >id</th>
-            <th >name</th>
-            <th >description</th>
-            <th >image</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for base in bases %}
-
-            <tr>
-                <td >{{ base.id }}</td>
-                <td >{{ base.name }}</td>
-                <td >{{ base.description }}</td>
-                <td ><img src="{{ asset(base.imageId.imagePath) }}" alt="{{ base.imageId.imagePath }}" /></td>
-            </tr>
-        {% endfor %}
-
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col s4">
+                <h2 class="caption-bowl">Pick the base</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <p class="text-bowl">
+                    Temperature is important - the base of your poke bowl should be warm and the other ingredients should be cold.
+                <p/>
+            </div>
+        </div>
+        <div class="row">
+            {% for base in bases %}
+                <div class="col s4">
+                    {% include 'base/base-component.html.twig' with {'base': base} %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+{% block footer %}
+    <div class="container">
+        <div class="row">
+            <div class="col s8 col-footer">
+                <p>Step 3 of 6</p>
+            </div>
+            <div class="col s4">
+
+                <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/size">Back</a>
+                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/sauce">Next</a>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8">
+                <div class="progress">
+                    <div class="determinate" style="width: 49.9%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock %}

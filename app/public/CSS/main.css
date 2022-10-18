@@ -37,13 +37,19 @@
     width: calc(280px * 4);
 }
 
-.card {
+.card-bowl {
     box-shadow: 0 3px 10px 0 #aaa;
     cursor: pointer;
     height: 400px;
     position: relative;
     width: 300px;
     border-radius: 7px;
+}
+
+.card-bowl:hover{
+    border-color: #B0413E;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .card .card-title{
@@ -159,7 +165,60 @@ footer{
     text-align: center;
 }
 
+.btn-previous{
+    color: #3c4a6c;
+    float: right;
+    border-radius: 7px;
+    margin-top: 14px;
+    margin-right: 10px;
+    background-color: white;
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    border-color: #3c4a6c;
+    border-style: solid;
+    border-width: 1px;
+}
+
 .progress .determinate{
     background-color: #B0413E;
 }
 
+#size-price{
+    font-size: 24px;
+    font-weight: bolder;
+}
+.card-size{
+    box-shadow: 0 3px 10px 0 #aaa;
+    cursor: pointer;
+    height: 200px;
+    position: relative;
+    width: 500px;
+    border-radius: 7px;
+}
+
+.card-size:hover{
+    border-color: #B0413E;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.card-base{
+    box-shadow: 0 3px 10px 0 #aaa;
+    cursor: pointer;
+    height: 400px;
+    position: relative;
+    width: 300px;
+    border-radius: 7px;
+}
+
+.card-base:hover{
+    border-color: #B0413E;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.caption-size{
+    font-size: 30px;
+    font-weight: bolder;
+}

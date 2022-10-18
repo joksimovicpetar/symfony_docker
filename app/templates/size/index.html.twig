@@ -3,28 +3,42 @@
 {% block title %}Hello SizeController!{% endblock %}
 
 {% block body %}
-    <table id="sizes" class="table table-striped table-field">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>description</th>
-            <th>currency</th>
-            <th>price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for size in sizes %}
-            <tr>
-                <td >{{ size.id }}</td>
-                <td >{{ size.name }}</td>
-                <td >{{ size.description }}</td>
-                <td >{{ size.currency }}</td>
-                <td >{{ size.price }}</td>
-            </tr>
-        {% endfor %}
-
-        </tbody>
-    </table>
-
+    <div class="container">
+        <div class="row">
+            <div class="col s4">
+                <h2 class="caption-size">Pick a size</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for size in sizes %}
+                <div class="col s4">
+                    {% include 'size/size-component.html.twig' with {'size': size} %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+
+{% block footer %}
+    <div class="container">
+        <div class="row">
+            <div class="col s8 col-footer">
+                <p>Step 2 of 6</p>
+            </div>
+            <div class="col s4">
+
+                <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/bowl">Back</a>
+                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/base">Next</a>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8">
+                <div class="progress">
+                    <div class="determinate" style="width: 33.3%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock %}
