@@ -1,7 +1,18 @@
 <tr>
-    <td >{{ bowl.id }}</td>
-    <td >{{ bowl.name }}</td>
-    <td >{{ bowl.description }}</td>
-    
-    <td ><img src="{{ asset(bowl.imageId.imagePath) }}" alt="{{ bowl.imageId.imagePath }}" /></td>
+
+
+        <div class="card">
+            <img src="{{ asset(bowl.imageId.imagePath) }}" alt="{{ bowl.imageId.imagePath }}" class="card-img-top">
+            <div class="card-body">
+                <h2 class="card-title">{{ bowl.name }}</h2>
+                <p id="card-text">
+                    {{ bowl.description }}
+                </p>
+            </div>
+        </div>
+
+
+
+
+
 </tr>
