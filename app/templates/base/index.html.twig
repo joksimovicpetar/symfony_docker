@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BaseController!{% endblock %}
+{% block title %}Pick a base{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col s4">
                 <p class="text-bowl">
-                    Temperature is important - the base of your poke bowl should be warm and the other ingredients should be cold.
+                    Temperature is important - the base of your poke bowl should be warm and the other ingridients should be cold.
                 <p/>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="base-rows">
             {% for base in bases %}
                 <div class="col s4">
                     {% include 'base/base-component.html.twig' with {'base': base} %}
@@ -24,6 +24,10 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/base.js') }}"></script>
 {% endblock %}
 {% block footer %}
     <div class="container">

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choose Bowl{% endblock %}
+{% block title %}Pick a bowl{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col s4">
                 <p class="text-bowl">Select the type of bowl you would like, the size, add the base, sauce and all the
-                    added ingridients. We'll take care of the rest!
+                    added ingredients. We'll take care of the rest!
                 <p/>
             </div>
         </div>
@@ -26,7 +26,8 @@
     </div>
 {% endblock %}
 {% block javascriptsBody %}
-        <script src="{{ asset('js/bowl.js') }}"></script>
+    <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/bowl.js') }}"></script>
 {% endblock %}
 {% block footer %}
     <div class="container">

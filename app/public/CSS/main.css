@@ -256,7 +256,7 @@ footer{
     border-width: 1px;
 }
 
-#list-ingredient{
+#list-ingridient{
     justify-content: left;
 }
 
@@ -289,7 +289,7 @@ footer{
     border-width: 1px;
 }
 
-.card-extra-ingredient{
+.card-extra-ingridient{
     box-shadow: 0 3px 10px 0 #aaa;
     cursor: pointer;
     position: relative;
@@ -299,7 +299,7 @@ footer{
     padding: 1px;
 }
 
-.card-extra-ingredient:hover{
+.card-extra-ingridient:hover{
     border-width: 1px;
     border-color: #B0413E;
     border-style: solid;

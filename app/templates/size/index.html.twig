@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SizeController!{% endblock %}
+{% block title %}Pick a size{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -9,7 +9,7 @@
                 <h2 class="caption-size">Pick a size</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="size-rows">
             {% for size in sizes %}
                 <div class="col s4">
                     {% include 'size/size-component.html.twig' with {'size': size} %}
@@ -18,7 +18,10 @@
         </div>
     </div>
 {% endblock %}
-
+{% block javascriptsBody %}
+    <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/size.js') }}"></script>
+{% endblock %}
 {% block footer %}
     <div class="container">
         <div class="row">

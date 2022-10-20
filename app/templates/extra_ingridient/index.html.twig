@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Choose extra ingredients{% endblock %}
+{% block title %}Pick extra ingredients{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -16,7 +16,7 @@
                 <p/>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="extra-ingredient-rows">
             {% for extraIngridient in extraIngridients %}
                 <div class="col s12">
                     {% include 'extra_ingridient/extra-ingridient-component.html.twig' with {'extraIngridient': extraIngridient} %}
@@ -24,6 +24,9 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/extra_ingridient.js') }}"></script>
 {% endblock %}
 {% block footer %}
     <div class="container">

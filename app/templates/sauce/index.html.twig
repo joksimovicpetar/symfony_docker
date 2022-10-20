@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SauceController!{% endblock %}
+{% block title %}Pick a sauce{% endblock %}
 
 {% block body %}
    <div class="container">
@@ -11,11 +11,11 @@
       </div>
       <div class="row">
          <div class="col s4">
-            <p class="text-bowl">Most sauces mix well with the base of the poke bowl. Make sure to read their ingredients and pick one that's right for you
+            <p class="text-bowl">Most sauces mix well with the base of the poke bowl. Make sure to read their ingridients and pick one that's right for you
             <p/>
          </div>
       </div>
-      <div class="row">
+      <div class="row" id="sauce-rows">
          {% for sauce in sauces %}
             <div class="col s6">
                {% include 'sauce/sauce-component.html.twig' with {'sauce': sauce} %}
@@ -23,6 +23,10 @@
          {% endfor %}
       </div>
    </div>
+{% endblock %}
+{% block javascriptsBody %}
+   <script src="{{ asset('js/active-function.js') }}"></script>
+   <script src="{{ asset('js/sauce.js') }}"></script>
 {% endblock %}
 {% block footer %}
    <div class="container">

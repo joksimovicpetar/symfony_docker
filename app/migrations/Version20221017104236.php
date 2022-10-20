@@ -41,15 +41,15 @@ final class Version20221017104236 extends AbstractMigration
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (1, 'Ponzu sauce', 'Ponzu sauce is a Japanese dipping sauce made from soy sauce or tamari, citrus juice, mirin, katsuobushi (bonito flakes), kombu (kelp), and rice vinegar.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (2, 'Ginger sauce', 'The sauce is made with peeled and finely chopped fresh ginger, light soy sauce, and rice vinegar.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (3, 'Sesame sauce', 'Chinese sesame paste is a richly flavored, thick paste made from toasted white sesame seeds.');
-                            INSERT INTO symfony_docker.sauce (id, name, description) VALUES (4, 'Eel sauce', 'Easy to make, eel sauce is a simple reduction of only four ingredients: sake, mirin, sugar, and soy sauce.');
+                            INSERT INTO symfony_docker.sauce (id, name, description) VALUES (4, 'Eel sauce', 'Easy to make, eel sauce is a simple reduction of only four ingridients: sake, mirin, sugar, and soy sauce.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (5, 'Wasabi sauce', 'True wasabi is made from the rhizome (like a plant stem that grows underground where you would expect to see a root) of the Wasabia japonica plant.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (6, 'Korean spicy sauce', 'This delicious, distinctive taste comes from gochujang, a fermented Korean chili paste made from glutinous rice, fermented soybeans, red chili pepper flakes, and salt.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (7, 'Soy sauce', 'Soy sauce is known as shoyu and soya sauce. It''s made with soybeans, wheat, salt, and a fermenting agent.');
                             INSERT INTO symfony_docker.sauce (id, name, description) VALUES (8, 'Tai Peanut sauce', 'Thai Peanut Sauce is made up of peanut butter, soy sauce, ginger, a sweetener (I used maple syrup), rice wine vinegar, sesame seeds, a spice and water.');
                                                        
-                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (1, 'Small', 'Contains 30 grams and up to 5 additional ingredients.', '$', 5);
-                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (2, 'Medium', 'Contains 60 grams and up to 8 additional ingredients.', '$', 6.99);
-                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (3, 'Large', 'Contains 100 grams of salmon and up to 10 additional ingredients.', '$', 8.99);
+                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (1, 'Small', 'Contains 30 grams and up to 5 additional ingridients.', '$', 5);
+                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (2, 'Medium', 'Contains 60 grams and up to 8 additional ingridients.', '$', 6.99);
+                            INSERT INTO symfony_docker.size (id, name, description, currency, price) VALUES (3, 'Large', 'Contains 100 grams of salmon and up to 10 additional ingridients.', '$', 8.99);
 
                             INSERT INTO symfony_docker.ingridient (id, name) VALUES (1, 'Avocado');
                             INSERT INTO symfony_docker.ingridient (id, name) VALUES (2, 'Edamame');
