@@ -44,12 +44,18 @@
     position: relative;
     width: 300px;
     border-radius: 7px;
+    margin: 0px;
 }
 
-.card-bowl:hover{
+.bowl-item-js{
+    padding: 0px;
+}
+
+.active, .card-bowl:hover{
     border-color: #B0413E;
     border-style: solid;
     border-width: 1px;
+    border-radius: 7px;
 }
 
 .card .card-title{
@@ -303,4 +309,8 @@ footer{
     font-size: 20px;
     font-weight: bolder;
     margin: 15px;
+}
+
+.links{
+    color: black;
 }

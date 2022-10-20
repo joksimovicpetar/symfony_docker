@@ -16,14 +16,17 @@
                 <p/>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="card-rows">
             {% for bowl in bowls %}
-                <div class="col s3">
+                <div class="col s3 bowl-item-js">
                     {% include 'bowl/bowl-component.html.twig' with {'bowl': bowl} %}
                 </div>
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+{% block javascriptsBody %}
+        <script src="{{ asset('js/bowl.js') }}"></script>
 {% endblock %}
 {% block footer %}
     <div class="container">

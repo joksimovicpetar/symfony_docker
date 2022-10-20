@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ItemOrderController extends AbstractController
 {
-    #[Route('/item/order', name: 'app_item_order')]
+    #[Route('/item_order', name: 'app_item_order')]
     public function index(): Response
     {
         return $this->render('item_order/index.html.twig', [
