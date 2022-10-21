@@ -15,23 +15,30 @@ class ItemOrder
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: "App\Entity\Bowl", inversedBy: 'itemOrders')]
+    #[ORM\ManyToOne(targetEntity: 'Bowl', inversedBy: 'itemOrders'),
+    ORM\JoinColumn(name: 'bowl_id', referencedColumnName: 'id')]
     private ?Bowl $bowlId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemOrders')]
+    #[ORM\ManyToOne(targetEntity: 'Size', inversedBy: 'itemOrders'),
+    ORM\JoinColumn(name: 'size_id', referencedColumnName: 'id')]
     private ?Size $sizeId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemOrders')]
+    #[ORM\ManyToOne(targetEntity: 'Base', inversedBy: 'itemOrders'),
+    ORM\JoinColumn(name: 'base_id', referencedColumnName: 'id')]
     private ?Base $baseId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'itemOrders')]
+    #[ORM\ManyToOne(targetEntity: 'Sauce', inversedBy: 'itemOrders'),
+    ORM\JoinColumn(name: 'sauce_id', referencedColumnName: 'id')]
     private ?Sauce $sauceId = null;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrderId', targetEntity: ItemOrderIngridient::class)]
+    #[ORM\OneToMany(mappedBy: 'itemOrderId' , targetEntity: ItemOrderIngridient::class, orphanRemoval: true)]
     private Collection $itemOrderIngridients;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrderId', targetEntity: ItemOrderExtraIngridient::class)]
+    #[ORM\OneToMany(mappedBy: 'itemOrderId', targetEntity: ItemOrderExtraIngridient::class, orphanRemoval: true)]
     private Collection $itemOrderExtraIngridients;
+
+    #[ORM\Column]
+    private ?int $orderStep = null;
 
 
     public function __construct()
@@ -150,6 +157,18 @@ class ItemOrder
                 $itemOrderExtraIngridient->setItemOrderId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrderStep(): ?int
+    {
+        return $this->orderStep;
+    }
+
+    public function setOrderStep(int $orderStep): self
+    {
+        $this->orderStep = $orderStep;
 
         return $this;
     }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ItemOrder{% endblock %}
+
+{% block body %}
+    <h1>ItemOrder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ item_order.id }}</td>
+            </tr>
+            <tr>
+                <th>OrderStep</th>
+                <td>{{ item_order.orderStep }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_item_order_index') }}">back to list</a>
+
+    <a href="{{ path('app_item_order_edit', {'id': item_order.id}) }}">edit</a>
+
+    {{ include('item_order/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ItemOrderController!{% endblock %}
+{% block title %}ItemOrder index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>ItemOrder index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>OrderStep</th>
+                <th>bowl</th>
+                <th>size</th>
+                <th>sauce</th>
+                <th>base</th>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/symfony_docker/src/Controller/ItemOrderController.php'|file_link(0) }}">src/Controller/ItemOrderController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/symfony_docker/templates/item_order/index.html.twig'|file_link(0) }}">templates/item_order/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item_order in item_orders %}
+            <tr>
+                <td>{{ item_order.id }}</td>
+                <td>{{ item_order.orderStep }}</td>
+                <td>{{ item_order.bowlId.id }}</td>
+                <td>{{ item_order.sizeId.id }}</td>
+                <td>{{ item_order.sauceId.id }}</td>
+                <td>{{ item_order.baseId.id }}</td>
+                <td>
+                    <a href="{{ path('app_item_order_show', {'id': item_order.id}) }}">show</a>
+                    <a href="{{ path('app_item_order_edit', {'id': item_order.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_item_order_new') }}">Create new</a>
 {% endblock %}
