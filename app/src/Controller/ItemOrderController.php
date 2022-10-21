@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\ItemOrder;
 use App\Form\ItemOrderType;
 use App\Repository\ItemOrderRepository;
+use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\SizeController;
 
 #[Route('/item_order')]
 class ItemOrderController extends AbstractController
@@ -22,9 +24,12 @@ class ItemOrderController extends AbstractController
     }
 
     #[Route('/new', name: 'app_item_order_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ItemOrderRepository $itemOrderRepository)
+    public function new(Request $request, ItemOrderRepository $itemOrderRepository, ItemOrderService $service)
     {
         $itemOrder = new ItemOrder();
+        $service->save($itemOrder);
+
+        return $this->redirectToRoute('app_size');
 
     }
 

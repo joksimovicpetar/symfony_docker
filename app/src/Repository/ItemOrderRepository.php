@@ -21,13 +21,11 @@ class ItemOrderRepository extends ServiceEntityRepository
         parent::__construct($registry, ItemOrder::class);
     }
 
-    public function save(ItemOrder $entity, bool $flush = false): void
+    public function save(ItemOrder $itemOrder): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->persist($itemOrder);
+        $this->getEntityManager()->flush();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
     public function remove(ItemOrder $entity, bool $flush = false): void
