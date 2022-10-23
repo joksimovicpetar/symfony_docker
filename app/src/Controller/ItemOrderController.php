@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ItemOrder;
 use App\Form\ItemOrderType;
 use App\Repository\ItemOrderRepository;
+use App\Service\BowlService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +25,20 @@ class ItemOrderController extends AbstractController
     }
 
     #[Route('/new', name: 'app_item_order_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ItemOrderRepository $itemOrderRepository, ItemOrderService $service)
+
+    public function new(Request $request, ItemOrderRepository $itemOrderRepository, ItemOrderService $service, BowlService $bowlService)
     {
+        $parameters = json_decode($request->getContent(), true);
+        $bowl = $bowlService->find($parameters['bowlId']);
         $itemOrder = new ItemOrder();
+        $itemOrder -> setBowlId($bowl);
         $service->save($itemOrder);
 
-        return $this->redirectToRoute('app_size');
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
+
+//        return $this->redirectToRoute('app_size');
 
     }
 

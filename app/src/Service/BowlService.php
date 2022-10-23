@@ -42,4 +42,9 @@ class BowlService
 
     }
 
+    function find($id){
+        return $this->repository->find($id);
+
+    }
+
 }
