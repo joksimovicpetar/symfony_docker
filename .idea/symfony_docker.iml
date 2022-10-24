@@ -141,6 +141,8 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/willdurand/negotiation" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/willdurand/jsonp-callback-validator" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/friendsofsymfony/rest-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/app/var/log" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

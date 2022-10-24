@@ -15,40 +15,54 @@ class ItemOrderExtraIngridient
 
     #[ORM\ManyToOne(targetEntity: 'ItemOrder', inversedBy: 'itemOrderExtraIngridients'),
     ORM\JoinColumn(name: 'item_order_id', referencedColumnName: 'id')]
-    private ?ItemOrder $itemOrderId = null;
+    private ?ItemOrder $itemOrder = null;
 
     #[ORM\ManyToOne(targetEntity: 'ExtraIngridient', inversedBy: 'itemOrderExtraIngridients'),
     ORM\JoinColumn(name: 'extra_ingridient_id', referencedColumnName: 'id')]
-    private ?ExtraIngridient $extraIngridientId = null;
+    private ?ExtraIngridient $extraIngridient = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getItemOrderId(): ?ItemOrder
+    /**
+     * @return ItemOrder|null
+     */
+    public function getItemOrder(): ?ItemOrder
     {
-        return $this->itemOrderId;
+        return $this->itemOrder;
     }
 
-    public function setItemOrderId(?ItemOrder $itemOrderId): self
+    /**
+     * @param ItemOrder|null $itemOrder
+     * @return ItemOrderExtraIngridient
+     */
+    public function setItemOrder(?ItemOrder $itemOrder): ItemOrderExtraIngridient
     {
-        $this->itemOrderId = $itemOrderId;
-
+        $this->itemOrder = $itemOrder;
         return $this;
     }
 
-    public function getExtraIngridientId(): ?ExtraIngridient
+    /**
+     * @return ExtraIngridient|null
+     */
+    public function getExtraIngridient(): ?ExtraIngridient
     {
-        return $this->extraIngridientId;
+        return $this->extraIngridient;
     }
 
-    public function setExtraIngridientId(?ExtraIngridient $extraIngridientId): self
+    /**
+     * @param ExtraIngridient|null $extraIngridient
+     * @return ItemOrderExtraIngridient
+     */
+    public function setExtraIngridient(?ExtraIngridient $extraIngridient): ItemOrderExtraIngridient
     {
-        $this->extraIngridientId = $extraIngridientId;
-
+        $this->extraIngridient = $extraIngridient;
         return $this;
     }
+
+
 
 
 }

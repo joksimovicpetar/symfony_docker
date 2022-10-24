@@ -23,10 +23,10 @@
             <tr>
                 <td>{{ item_order.id }}</td>
                 <td>{{ item_order.orderStep }}</td>
-                <td>{{ item_order.bowlId.id }}</td>
-                <td>{{ item_order.sizeId.id }}</td>
-                <td>{{ item_order.sauceId.id }}</td>
-                <td>{{ item_order.baseId.id }}</td>
+                <td>{{ item_order.bowl.id }}</td>
+                <td>{{ item_order.size.id }}</td>
+                <td>{{ item_order.sauce.id }}</td>
+                <td>{{ item_order.base.id }}</td>
                 <td>
                     <a href="{{ path('app_item_order_show', {'id': item_order.id}) }}">show</a>
                     <a href="{{ path('app_item_order_edit', {'id': item_order.id}) }}">edit</a>

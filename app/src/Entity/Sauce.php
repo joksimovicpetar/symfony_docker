@@ -22,7 +22,7 @@ class Sauce
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'sauceId', targetEntity: ItemOrder::class)]
+    #[ORM\OneToMany(mappedBy: 'sauce', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
     public function __construct()

@@ -37,6 +37,18 @@ class ItemOrderRepository extends ServiceEntityRepository
         }
     }
 
+    public function findItemOrderIdStatus()
+    {
+        return $this->createQueryBuilder('item_order')
+            ->select('item_order')
+            ->orderBy('item_order.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+
+    }
+
 //    /**
 //     * @return ItemOrder[] Returns an array of ItemOrder objects
 //     */

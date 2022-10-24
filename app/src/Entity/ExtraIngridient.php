@@ -24,7 +24,7 @@ class ExtraIngridient
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'extraIngridientId', targetEntity: ItemOrderExtraIngridient::class)]
+    #[ORM\OneToMany(mappedBy: 'extraIngridient', targetEntity: ItemOrderExtraIngridient::class)]
     private Collection $itemOrderExtraIngridients;
 
     public function __construct()

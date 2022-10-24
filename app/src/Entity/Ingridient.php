@@ -18,7 +18,7 @@ class Ingridient
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'ingridientsId', targetEntity: ItemOrderIngridient::class)]
+    #[ORM\OneToMany(mappedBy: 'ingridient', targetEntity: ItemOrderIngridient::class)]
     private Collection $itemOrderIngridients;
 
     public function __construct()

@@ -25,12 +25,12 @@ class Bowl
 
 
 
-    #[ORM\OneToMany(mappedBy: 'bowlId', targetEntity: ItemOrder::class)]
+    #[ORM\OneToMany(mappedBy: 'bowl', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
     #[ORM\OneToOne(targetEntity: 'Image', cascade: ['persist', 'remove']),
     ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id')]
-    private ?Image $imageId = null;
+    private ?Image $image = null;
 
     public function __construct()
     {
@@ -96,15 +96,23 @@ class Bowl
         return $this;
     }
 
-    public function getImageId(): ?Image
+    /**
+     * @return Image|null
+     */
+    public function getImage(): ?Image
     {
-        return $this->imageId;
+        return $this->image;
     }
 
-    public function setImageId(?Image $imageId): self
+    /**
+     * @param Image|null $image
+     * @return Bowl
+     */
+    public function setImage(?Image $image): Bowl
     {
-        $this->imageId = $imageId;
-
+        $this->image = $image;
         return $this;
     }
+
+
 }

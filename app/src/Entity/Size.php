@@ -22,7 +22,7 @@ class Size
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'sizeId', targetEntity: ItemOrder::class)]
+    #[ORM\OneToMany(mappedBy: 'size', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 
     #[ORM\Column(length: 255)]

@@ -31,7 +31,8 @@ class ItemOrderController extends AbstractController
         $parameters = json_decode($request->getContent(), true);
         $bowl = $bowlService->find($parameters['bowlId']);
         $itemOrder = new ItemOrder();
-        $itemOrder -> setBowlId($bowl);
+        $itemOrder -> setBowl($bowl);
+        $itemOrder -> setOrderStep(1);
         $service->save($itemOrder);
 
         $response = new Response();

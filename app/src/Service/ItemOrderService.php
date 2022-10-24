@@ -34,4 +34,9 @@ class ItemOrderService
         $itemOrders = $this->repository->findAll();
         return $itemOrders;
     }
+
+    function findItemOrderIdStatus()
+    {
+        return $this->repository->findItemOrderIdStatus();
+    }
 }

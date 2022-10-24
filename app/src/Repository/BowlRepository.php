@@ -52,6 +52,8 @@ class BowlRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('bowl')
 
+            ->select('bowl', 'i')
+            ->leftJoin('bowl.image', 'i')
             ->orderBy('bowl.id', 'ASC')
             ->getQuery()
             ->getResult();

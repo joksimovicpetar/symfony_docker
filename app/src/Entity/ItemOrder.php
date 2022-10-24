@@ -17,34 +17,34 @@ class ItemOrder
 
     #[ORM\ManyToOne(targetEntity: 'Bowl', inversedBy: 'itemOrders'),
     ORM\JoinColumn(name: 'bowl_id', referencedColumnName: 'id')]
-    private ?Bowl $bowlId = null;
+    private ?Bowl $bowl = null;
 
     #[ORM\ManyToOne(targetEntity: 'Size', inversedBy: 'itemOrders'),
     ORM\JoinColumn(name: 'size_id', referencedColumnName: 'id')]
-    private ?Size $sizeId = null;
+    private ?Size $size = null;
 
     #[ORM\ManyToOne(targetEntity: 'Base', inversedBy: 'itemOrders'),
     ORM\JoinColumn(name: 'base_id', referencedColumnName: 'id')]
-    private ?Base $baseId = null;
+    private ?Base $base = null;
 
     #[ORM\ManyToOne(targetEntity: 'Sauce', inversedBy: 'itemOrders'),
     ORM\JoinColumn(name: 'sauce_id', referencedColumnName: 'id')]
-    private ?Sauce $sauceId = null;
+    private ?Sauce $sauce = null;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrderId' , targetEntity: ItemOrderIngridient::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'itemOrder' , targetEntity: ItemOrderIngridient::class, orphanRemoval: true)]
     private Collection $itemOrderIngridients;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrderId', targetEntity: ItemOrderExtraIngridient::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: ItemOrderExtraIngridient::class, orphanRemoval: true)]
     private Collection $itemOrderExtraIngridients;
 
     #[ORM\Column]
-    private ?int $orderStep = null;
+    private ?int $orderStep = 1;
 
 
     public function __construct()
     {
         $this->itemOrderIngridients = new ArrayCollection();
-        $this->itemOrderIds = new ArrayCollection();
+        $this->itemOrders = new ArrayCollection();
         $this->itemOrderExtraIngridients = new ArrayCollection();
     }
 
@@ -53,53 +53,79 @@ class ItemOrder
         return $this->id;
     }
 
-    public function getBowlId(): ?Bowl
+    /**
+     * @return Bowl|null
+     */
+    public function getBowl(): ?Bowl
     {
-        return $this->bowlId;
+        return $this->bowl;
     }
 
-    public function setBowlId(?Bowl $bowlId): self
+    /**
+     * @param Bowl|null $bowl
+     * @return ItemOrder
+     */
+    public function setBowl(?Bowl $bowl): ItemOrder
     {
-        $this->bowlId = $bowlId;
-
+        $this->bowl = $bowl;
         return $this;
     }
 
-    public function getSizeId(): ?Size
+    /**
+     * @return Size|null
+     */
+    public function getSize(): ?Size
     {
-        return $this->sizeId;
+        return $this->size;
     }
 
-    public function setSizeId(?Size $sizeId): self
+    /**
+     * @param Size|null $size
+     * @return ItemOrder
+     */
+    public function setSize(?Size $size): ItemOrder
     {
-        $this->sizeId = $sizeId;
-
+        $this->size = $size;
         return $this;
     }
 
-    public function getBaseId(): ?Base
+    /**
+     * @return Base|null
+     */
+    public function getBase(): ?Base
     {
-        return $this->baseId;
+        return $this->base;
     }
 
-    public function setBaseId(?Base $baseId): self
+    /**
+     * @param Base|null $base
+     * @return ItemOrder
+     */
+    public function setBase(?Base $base): ItemOrder
     {
-        $this->baseId = $baseId;
-
+        $this->base = $base;
         return $this;
     }
 
-    public function getSauceId(): ?Sauce
+    /**
+     * @return Sauce|null
+     */
+    public function getSauce(): ?Sauce
     {
-        return $this->sauceId;
+        return $this->sauce;
     }
 
-    public function setSauceId(?Sauce $sauceId): self
+    /**
+     * @param Sauce|null $sauce
+     * @return ItemOrder
+     */
+    public function setSauce(?Sauce $sauce): ItemOrder
     {
-        $this->sauceId = $sauceId;
-
+        $this->sauce = $sauce;
         return $this;
     }
+
+
 
     /**
      * @return Collection<int, ItemOrderIngridient>

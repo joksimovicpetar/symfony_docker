@@ -13,10 +13,10 @@ class ItemOrderType extends AbstractType
     {
         $builder
             ->add('orderStep')
-            ->add('bowlId')
-            ->add('sizeId')
-            ->add('baseId')
-            ->add('sauceId')
+            ->add('bowl')
+            ->add('size')
+            ->add('base')
+            ->add('sauce')
         ;
     }
 
