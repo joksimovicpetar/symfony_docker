@@ -31,14 +31,22 @@ class ItemOrderController extends AbstractController
         $parameters = json_decode($request->getContent(), true);
         $bowl = $bowlService->find($parameters['bowlId']);
         $itemOrder = new ItemOrder();
-        $itemOrder -> setBowl($bowl);
-        $itemOrder -> setOrderStep(1);
-        $service->save($itemOrder);
 
-        $response = new Response();
-        $response->setStatusCode(Response::HTTP_OK);
-        $response->send();
+        $current = $service ->findItemOrderIdStatus();
 
+        if ($current->getOrderStep()==6) {
+            $itemOrder->setBowl($bowl);
+            $itemOrder->setOrderStep(1);
+            $service->save($itemOrder);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
+        } else {
+            $current -> setBowl($bowl);
+            $current->setOrderStep(1);
+            $service->save($current);
+        }
 //        return $this->redirectToRoute('app_size');
 
     }

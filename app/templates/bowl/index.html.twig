@@ -17,9 +17,7 @@
             </div>
         </div>
         <div class="row" id="card-rows">
-
-            {% set currentOrder = current_order()  %}
-            {{ currentOrder.bowl.name }}
+            {% set currentOrder = current_order() %}
             {{ dump (currentOrder) }}
             {% for bowl in bowls %}
                 {% set activeBowl = bowl.id == currentOrder.bowl.id %}
