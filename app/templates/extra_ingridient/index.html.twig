@@ -16,7 +16,7 @@
                 <p/>
             </div>
         </div>
-        <div class="row" id="extra-ingredient">
+        <div class="row" id="extra-ingredient-rows">
             {% for extraIngridient in extraIngridients %}
                 <div class="col s12">
                     {% include 'extra_ingridient/extra-ingridient-component.html.twig' with {'extraIngridient': extraIngridient} %}
@@ -34,7 +34,7 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/ingridient">Back</a>
-                <a class="waves-effect waves-light btn btn-add-to-cart" href="http://localhost:8080/extra_ingridient">Add to cart</a>
+                <a class="waves-effect waves-light btn btn-add-to-cart" id="extra-ingredient-next">Add to cart</a>
 
             </div>
         </div>
@@ -50,5 +50,5 @@
 {%endblock %}
 {% block javascriptsBody %}
     <script src="{{ asset('js/active-multiple-function.js') }}"></script>
-    <script src="{{ asset('js/extra_ingridient.js') }}"></script>
+    <script src="{{ asset('js/extra_ingredient.js') }}"></script>
 {% endblock %}

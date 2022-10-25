@@ -1,1 +1,0 @@
-activeMultiple("extra-ingredient", "card-extra-ingredient")
