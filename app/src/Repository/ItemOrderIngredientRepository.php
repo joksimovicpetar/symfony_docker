@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ItemOrderIngridient;
+use App\Entity\ItemOrderIngredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ItemOrderIngridient>
+ * @extends ServiceEntityRepository<ItemOrderIngredient>
  *
- * @method ItemOrderIngridient|null find($id, $lockMode = null, $lockVersion = null)
- * @method ItemOrderIngridient|null findOneBy(array $criteria, array $orderBy = null)
- * @method ItemOrderIngridient[]    findAll()
- * @method ItemOrderIngridient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ItemOrderIngredient|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ItemOrderIngredient|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ItemOrderIngredient[]    findAll()
+ * @method ItemOrderIngredient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ItemOrderIngridientRepository extends ServiceEntityRepository
+class ItemOrderIngredientRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ItemOrderIngridient::class);
+        parent::__construct($registry, ItemOrderIngredient::class);
     }
 
-    public function save(ItemOrderIngridient $entity, bool $flush = false): void
+    public function save(ItemOrderIngredient $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ItemOrderIngridientRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ItemOrderIngridient $entity, bool $flush = false): void
+    public function remove(ItemOrderIngredient $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,13 +39,13 @@ class ItemOrderIngridientRepository extends ServiceEntityRepository
         }
     }
 
-    public function findItemOrderIngridient()
+    public function findItemOrderIngredient()
     {
 
 
-        return $this->createQueryBuilder('itemOrderIngridients')
+        return $this->createQueryBuilder('itemOrderIngredients')
 
-            ->orderBy('itemOrderIngridients.id', 'ASC')
+            ->orderBy('itemOrderIngredients.id', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -55,7 +55,7 @@ class ItemOrderIngridientRepository extends ServiceEntityRepository
 
 
 //    /**
-//     * @return ItemOrderIngridient[] Returns an array of ItemOrderIngridient objects
+//     * @return ItemOrderIngredient[] Returns an array of ItemOrderIngredient objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -69,7 +69,7 @@ class ItemOrderIngridientRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ItemOrderIngridient
+//    public function findOneBySomeField($value): ?ItemOrderIngredient
 //    {
 //        return $this->createQueryBuilder('i')
 //            ->andWhere('i.exampleField = :val')

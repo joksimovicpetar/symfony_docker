@@ -1,42 +1,42 @@
 <?php
 
 namespace App\Service;
-use App\Repository\ItemOrderExtraIngridientRepository;
+use App\Repository\ItemOrderExtraIngredientRepository;
 
 class ItemOrderExtraIngridentService
 {
     private $repository;
 
-    public function  __construct(ItemOrderExtraIngridientRepository $repository)
+    public function  __construct(ItemOrderExtraIngredientRepository $repository)
     {
         $this->repository = $repository;
     }
 
 
-    function save(ItemOrderExtraIngridientRepository $itemOrderExtraIngridient): void
+    function save(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
     {
-        $this->repository->save($itemOrderExtraIngridient);
+        $this->repository->save($itemOrderExtraIngredient);
     }
 
-    function update(ItemOrderExtraIngridientRepository $itemOrderExtraIngridient): void
+    function update(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
     {
-        $this->repository->update($itemOrderExtraIngridient);
+        $this->repository->update($itemOrderExtraIngredient);
     }
 
-    function delete(ItemOrderExtraIngridientRepository $itemOrderExtraIngridient): void
+    function delete(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
     {
-        $this->repository->delete($itemOrderExtraIngridient);
+        $this->repository->delete($itemOrderExtraIngredient);
     }
 
     function findAll()
     {
-        $itemOrderExtraIngridient = $this->repository->findAll();
-        return $itemOrderExtraIngridient;
+        $itemOrderExtraIngredient = $this->repository->findAll();
+        return $itemOrderExtraIngredient;
     }
 
-    function findItemOrderExtraIngridient(){
+    function findItemOrderExtraIngredient(){
 
-        return $this->repository->findItemOrderExtraIngridient();
+        return $this->repository->findItemOrderExtraIngredient();
 
     }
 }

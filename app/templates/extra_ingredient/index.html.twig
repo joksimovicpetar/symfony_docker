@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="row" id="extra-ingredient-rows">
-            {% for extraIngridient in extraIngridients %}
+            {% for extraIngredient in extraIngredients %}
                 <div class="col s12">
-                    {% include 'extra_ingridient/extra-ingridient-component.html.twig' with {'extraIngridient': extraIngridient} %}
+                    {% include 'extra_ingredient/extra-ingredient-component.html.twig' with {'extraIngredient': extraIngredient} %}
                 </div>
             {% endfor %}
         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="col s4">
 
-                <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/ingridient">Back</a>
+                <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/ingredient">Back</a>
                 <a class="waves-effect waves-light btn btn-add-to-cart" id="extra-ingredient-next">Add to cart</a>
 
             </div>

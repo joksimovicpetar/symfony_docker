@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ExtraIngridientRepository;
+use App\Repository\ExtraIngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ExtraIngridientRepository::class)]
-class ExtraIngridient
+#[ORM\Entity(repositoryClass: ExtraIngredientRepository::class)]
+class ExtraIngredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,12 +24,12 @@ class ExtraIngridient
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'extraIngridient', targetEntity: ItemOrderExtraIngridient::class)]
-    private Collection $itemOrderExtraIngridients;
+    #[ORM\OneToMany(mappedBy: 'extraIngredient', targetEntity: ItemOrderExtraIngredient::class)]
+    private Collection $itemOrderExtraIngredients;
 
     public function __construct()
     {
-        $this->itemOrderExtraIngridients = new ArrayCollection();
+        $this->itemOrderExtraIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,29 +74,29 @@ class ExtraIngridient
     }
 
     /**
-     * @return Collection<int, ItemOrderExtraIngridient>
+     * @return Collection<int, ItemOrderExtraIngredient>
      */
-    public function getItemOrderExtraIngridients(): Collection
+    public function getItemOrderExtraIngredients(): Collection
     {
-        return $this->itemOrderExtraIngridients;
+        return $this->itemOrderExtraIngredients;
     }
 
-    public function addItemOrderExtraIngridient(ItemOrderExtraIngridient $itemOrderExtraIngridient): self
+    public function addItemOrderExtraIngredient(ItemOrderExtraIngredient $itemOrderExtraIngredient): self
     {
-        if (!$this->itemOrderExtraIngridients->contains($itemOrderExtraIngridient)) {
-            $this->itemOrderExtraIngridients->add($itemOrderExtraIngridient);
-            $itemOrderExtraIngridient->setExtraIngridientId($this);
+        if (!$this->itemOrderExtraIngredients->contains($itemOrderExtraIngredient)) {
+            $this->itemOrderExtraIngredients->add($itemOrderExtraIngredient);
+            $itemOrderExtraIngredient->setExtraIngredientId($this);
         }
 
         return $this;
     }
 
-    public function removeItemOrderExtraIngridient(ItemOrderExtraIngridient $itemOrderExtraIngridient): self
+    public function removeItemOrderExtraIngredient(ItemOrderExtraIngredient $itemOrderExtraIngredient): self
     {
-        if ($this->itemOrderExtraIngridients->removeElement($itemOrderExtraIngridient)) {
+        if ($this->itemOrderExtraIngredients->removeElement($itemOrderExtraIngredient)) {
             // set the owning side to null (unless already changed)
-            if ($itemOrderExtraIngridient->getExtraIngridientId() === $this) {
-                $itemOrderExtraIngridient->setExtraIngridientId(null);
+            if ($itemOrderExtraIngredient->getExtraIngredientId() === $this) {
+                $itemOrderExtraIngredient->setExtraIngredientId(null);
             }
         }
 

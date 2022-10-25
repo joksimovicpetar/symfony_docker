@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pick ingridients{% endblock %}
+{% block title %}Pick ingredients{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -12,17 +12,17 @@
         <div class="row">
             <div class="col s4">
                 <p class="text-bowl">
-                    This is what it's all about. Pick added ingridients to make your poke bowl perfectly to your taste.
+                    This is what it's all about. Pick added ingredients to make your poke bowl perfectly to your taste.
                 <p/>
             </div>
         </div>
         <div class="row">
-            {% for ingridient in ingridients %}
-                <div class="col s3 " id="list-ingridient">
+            {% for ingredient in ingredients %}
+                <div class="col s3 " id="list-ingredient">
                     <p>
                         <label>
                             <input type="checkbox" class="filled-in"  />
-                            <span>{{ ingridient.name }}</span>
+                            <span>{{ ingredient.name }}</span>
                         </label>
                     </p>
                 </div>
@@ -39,7 +39,7 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/sauce">Back</a>
-                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/extra_ingridient">Next</a>
+                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/extra_ingredient">Next</a>
 
             </div>
         </div>

@@ -48,7 +48,7 @@ final class Version20221017090813 extends AbstractMigration
                                                  description text
                             );
                             
-                            CREATE Table ingridient(
+                            CREATE Table ingredient(
                                                  id INT PRIMARY KEY AUTO_INCREMENT,
                                                  name varchar(255)
                             );
@@ -61,7 +61,7 @@ final class Version20221017090813 extends AbstractMigration
                                                   price double
                             );
                             
-                            CREATE Table extra_ingridient(
+                            CREATE Table extra_ingredient(
                                                  id INT PRIMARY KEY AUTO_INCREMENT,
                                                  name varchar(255),
                                                  currency varchar(100),
@@ -80,20 +80,20 @@ final class Version20221017090813 extends AbstractMigration
                                                   FOREIGN KEY (sauce_id) REFERENCES sauce(id)
                             );
                             
-                            CREATE Table item_order_ingridient(
+                            CREATE Table item_order_ingredient(
                                                  id INT PRIMARY KEY AUTO_INCREMENT,
                                                  item_order_id INT,
-                                                 ingridient_id INT,
+                                                 ingredient_id INT,
                                                  FOREIGN KEY (item_order_id) REFERENCES item_order(id),
-                                                 FOREIGN KEY (ingridient_id) REFERENCES ingridient(id)
+                                                 FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
                             );
                             
-                            CREATE TABLE item_order_extra_ingridient (
+                            CREATE TABLE item_order_extra_ingredient (
                                                   id INT PRIMARY KEY AUTO_INCREMENT,
                                                   item_order_id int NOT NULL,
-                                                  extra_ingridient_id int NOT NULL,
+                                                  extra_ingredient_id int NOT NULL,
                                                   FOREIGN KEY (item_order_id) REFERENCES item_order(id),
-                                                  FOREIGN KEY (extra_ingridient_id) REFERENCES extra_ingridient(id)
+                                                  FOREIGN KEY (extra_ingredient_id) REFERENCES extra_ingredient(id)
                             );
         ');
     }

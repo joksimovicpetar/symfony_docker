@@ -31,11 +31,11 @@ class ItemOrder
     ORM\JoinColumn(name: 'sauce_id', referencedColumnName: 'id')]
     private ?Sauce $sauce = null;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrder' , targetEntity: ItemOrderIngridient::class, orphanRemoval: true)]
-    private Collection $itemOrderIngridients;
+    #[ORM\OneToMany(mappedBy: 'itemOrder' , targetEntity: ItemOrderIngredient::class, orphanRemoval: true)]
+    private Collection $itemOrderIngredients;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: ItemOrderExtraIngridient::class, orphanRemoval: true)]
-    private Collection $itemOrderExtraIngridients;
+    #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: ItemOrderExtraIngredient::class, orphanRemoval: true)]
+    private Collection $itemOrderExtraIngredients;
 
     #[ORM\Column]
     private ?int $orderStep = 1;
@@ -43,9 +43,9 @@ class ItemOrder
 
     public function __construct()
     {
-        $this->itemOrderIngridients = new ArrayCollection();
+        $this->itemOrderIngredients = new ArrayCollection();
         $this->itemOrders = new ArrayCollection();
-        $this->itemOrderExtraIngridients = new ArrayCollection();
+        $this->itemOrderExtraIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,29 +128,29 @@ class ItemOrder
 
 
     /**
-     * @return Collection<int, ItemOrderIngridient>
+     * @return Collection<int, ItemOrderIngredient>
      */
-    public function getItemOrderIngridients(): Collection
+    public function getItemOrderIngredients(): Collection
     {
-        return $this->itemOrderIngridients;
+        return $this->itemOrderIngredients;
     }
 
-    public function addItemOrderIngridient(ItemOrderIngridient $itemOrderIngridient): self
+    public function addItemOrderIngredient(ItemOrderIngredient $itemOrderIngredient): self
     {
-        if (!$this->itemOrderIngridients->contains($itemOrderIngridient)) {
-            $this->itemOrderIngridients->add($itemOrderIngridient);
-            $itemOrderIngridient->setItemOrderId($this);
+        if (!$this->itemOrderIngredients->contains($itemOrderIngredient)) {
+            $this->itemOrderIngredients->add($itemOrderIngredient);
+            $itemOrderIngredient->setItemOrderId($this);
         }
 
         return $this;
     }
 
-    public function removeItemOrderIngridient(ItemOrderIngridient $itemOrderIngridient): self
+    public function removeItemOrderIngredient(ItemOrderIngredient $itemOrderIngredient): self
     {
-        if ($this->itemOrderIngridients->removeElement($itemOrderIngridient)) {
+        if ($this->itemOrderIngredients->removeElement($itemOrderIngredient)) {
             // set the owning side to null (unless already changed)
-            if ($itemOrderIngridient->getItemOrderId() === $this) {
-                $itemOrderIngridient->setItemOrderId(null);
+            if ($itemOrderIngredient->getItemOrderId() === $this) {
+                $itemOrderIngredient->setItemOrderId(null);
             }
         }
 
@@ -158,29 +158,29 @@ class ItemOrder
     }
 
     /**
-     * @return Collection<int, ItemOrderExtraIngridient>
+     * @return Collection<int, ItemOrderExtraIngredient>
      */
-    public function getItemOrderExtraIngridients(): Collection
+    public function getItemOrderExtraIngredients(): Collection
     {
-        return $this->itemOrderExtraIngridients;
+        return $this->itemOrderExtraIngredients;
     }
 
-    public function addItemOrderExtraIngridient(ItemOrderExtraIngridient $itemOrderExtraIngridient): self
+    public function addItemOrderExtraIngredient(ItemOrderExtraIngredient $itemOrderExtraIngredient): self
     {
-        if (!$this->itemOrderExtraIngridients->contains($itemOrderExtraIngridient)) {
-            $this->itemOrderExtraIngridients->add($itemOrderExtraIngridient);
-            $itemOrderExtraIngridient->setItemOrderId($this);
+        if (!$this->itemOrderExtraIngredients->contains($itemOrderExtraIngredient)) {
+            $this->itemOrderExtraIngredients->add($itemOrderExtraIngredient);
+            $itemOrderExtraIngredient->setItemOrderId($this);
         }
 
         return $this;
     }
 
-    public function removeItemOrderExtraIngridient(ItemOrderExtraIngridient $itemOrderExtraIngridient): self
+    public function removeItemOrderExtraIngredient(ItemOrderExtraIngredient $itemOrderExtraIngredient): self
     {
-        if ($this->itemOrderExtraIngridients->removeElement($itemOrderExtraIngridient)) {
+        if ($this->itemOrderExtraIngredients->removeElement($itemOrderExtraIngredient)) {
             // set the owning side to null (unless already changed)
-            if ($itemOrderExtraIngridient->getItemOrderId() === $this) {
-                $itemOrderExtraIngridient->setItemOrderId(null);
+            if ($itemOrderExtraIngredient->getItemOrderId() === $this) {
+                $itemOrderExtraIngredient->setItemOrderId(null);
             }
         }
 
