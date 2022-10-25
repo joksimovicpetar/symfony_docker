@@ -12,23 +12,23 @@
         <div class="row">
             <div class="col s4">
                 <p class="text-bowl">
-                    Temperature is important - the base of your poke bowl should be warm and the other ingridients should be cold.
+                    Temperature is important - the base of your poke bowl should be warm and the other ingredients should be cold.
                 <p/>
             </div>
         </div>
         <div class="row" id="base-rows">
+            {% set currentOrder = current_order() %}
+            {{ dump (currentOrder) }}
             {% for base in bases %}
+                {% set activeBase = base.id == currentOrder.base.id %}
                 <div class="col s4">
-                    {% include 'base/base-component.html.twig' with {'base': base} %}
+                    {% include 'base/base-component.html.twig' with {'base': base, 'isActive': activeBase} %}
                 </div>
             {% endfor %}
         </div>
     </div>
 {% endblock %}
-{% block javascriptsBody %}
-    <script src="{{ asset('js/active-function.js') }}"></script>
-    <script src="{{ asset('js/base.js') }}"></script>
-{% endblock %}
+
 {% block footer %}
     <div class="container">
         <div class="row">
@@ -38,7 +38,7 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/size">Back</a>
-                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/sauce">Next</a>
+                <a class="waves-effect waves-light btn btn-next" id="base-next">Next</a>
 
             </div>
         </div>
@@ -50,5 +50,9 @@
             </div>
         </div>
     </div>
-
 {%endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/update-function.js') }}"></script>
+    <script src="{{ asset('js/base.js') }}"></script>
+{% endblock %}

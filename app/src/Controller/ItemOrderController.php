@@ -7,6 +7,7 @@ use App\Form\ItemOrderType;
 use App\Repository\ItemOrderRepository;
 use App\Service\BowlService;
 use App\Service\ItemOrderService;
+use App\Service\SizeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class ItemOrderController extends AbstractController
     public function new(Request $request, ItemOrderRepository $itemOrderRepository, ItemOrderService $service, BowlService $bowlService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $bowl = $bowlService->find($parameters['bowlId']);
+        $bowl = $bowlService->find($parameters['valueId']);
         $itemOrder = new ItemOrder();
 
         $current = $service ->findItemOrderIdStatus();
@@ -43,9 +44,13 @@ class ItemOrderController extends AbstractController
             $response->setStatusCode(Response::HTTP_OK);
             $response->send();
         } else {
-            $current -> setBowl($bowl);
+            $current->setBowl($bowl);
             $current->setOrderStep(1);
             $service->save($current);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
         }
 //        return $this->redirectToRoute('app_size');
 
@@ -59,23 +64,6 @@ class ItemOrderController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_item_order_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ItemOrder $itemOrder, ItemOrderRepository $itemOrderRepository): Response
-    {
-        $form = $this->createForm(ItemOrderType::class, $itemOrder);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $itemOrderRepository->save($itemOrder, true);
-
-            return $this->redirectToRoute('app_item_order_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('item_order/edit.html.twig', [
-            'item_order' => $itemOrder,
-            'form' => $form,
-        ]);
-    }
 
     #[Route('/{id}', name: 'app_item_order_delete', methods: ['POST'])]
     public function delete(Request $request, ItemOrder $itemOrder, ItemOrderRepository $itemOrderRepository): Response

@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Size;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Service\ItemOrderService;
+use App\Service\SizeService;
 
 /**
  * @extends ServiceEntityRepository<Size>
@@ -46,14 +48,21 @@ class SizeRepository extends ServiceEntityRepository
 
     public function findSizes()
     {
-
-
         return $this->createQueryBuilder('size')
             ->orderBy('size.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
 
+    public function updateSize($parameters, ItemOrderService $service, SizeService $sizeService)
+    {
+        $size = $sizeService->find($parameters['valueId']);
+        $current = $service->findItemOrderIdStatus();
 
+        $current->setSize($size);
+        $current->setOrderStep(2);
+
+        return $current;
     }
 
 //    /**

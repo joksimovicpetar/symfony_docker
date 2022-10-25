@@ -36,6 +36,13 @@ class BaseService
 
     function findBases(){
         return $this->repository->findBases();
+    }
 
+    function find($id){
+        return $this->repository->find($id);
+    }
+
+    function updateBase($parameters, ItemOrderService $service, BaseService $baseService){
+        return $this->repository->updateBase($parameters, $service, $baseService);
     }
 }

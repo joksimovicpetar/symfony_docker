@@ -290,7 +290,7 @@ footer{
     border-width: 1px;
 }
 
-.card-extra-ingridient{
+.card-extra-ingredient{
     box-shadow: 0 3px 10px 0 #aaa;
     cursor: pointer;
     position: relative;
@@ -300,7 +300,7 @@ footer{
     padding: 1px;
 }
 
-.card-extra-ingridient:hover{
+.card-extra-ingredient:hover{
     border-width: 1px;
     border-color: #B0413E;
     border-style: solid;

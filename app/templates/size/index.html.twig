@@ -10,9 +10,12 @@
             </div>
         </div>
         <div class="row" id="size-rows">
+            {% set currentOrder = current_order() %}
+            {{ dump (currentOrder) }}
             {% for size in sizes %}
+                {% set activeSize = size.id == currentOrder.size.id %}
                 <div class="col s4">
-                    {% include 'size/size-component.html.twig' with {'size': size} %}
+                    {% include 'size/size-component.html.twig' with {'size': size, 'isActive': activeSize} %}
                 </div>
             {% endfor %}
         </div>
@@ -27,7 +30,7 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/bowl">Back</a>
-                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/base">Next</a>
+                <a class="waves-effect waves-light btn btn-next" id="size-next">Next</a>
 
             </div>
         </div>
@@ -43,5 +46,6 @@
 {%endblock %}
 {% block javascriptsBody %}
     <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/update-function.js') }}"></script>
     <script src="{{ asset('js/size.js') }}"></script>
 {% endblock %}

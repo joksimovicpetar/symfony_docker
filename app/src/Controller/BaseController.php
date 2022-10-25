@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Service\BaseService;
+use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,5 +19,18 @@ class BaseController extends AbstractController
         return $this->render('base/index.html.twig', [
             'bases' => $bases,
         ]);
+    }
+
+    #[Route('/base/edit', name: 'app_base_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, ItemOrderService $service, BaseService $baseService)
+    {
+        $parameters = json_decode($request->getContent(), true);
+        $current = $baseService->updateBase($parameters, $service, $baseService);
+        $service->save($current);
+
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
+
     }
 }

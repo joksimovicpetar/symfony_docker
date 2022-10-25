@@ -16,7 +16,7 @@
                 <p/>
             </div>
         </div>
-        <div class="row" id="extra-ingredient-rows">
+        <div class="row" id="extra-ingredient">
             {% for extraIngridient in extraIngridients %}
                 <div class="col s12">
                     {% include 'extra_ingridient/extra-ingridient-component.html.twig' with {'extraIngridient': extraIngridient} %}
@@ -24,9 +24,6 @@
             {% endfor %}
         </div>
     </div>
-{% endblock %}
-{% block javascriptsBody %}
-    <script src="{{ asset('js/extra_ingridient.js') }}"></script>
 {% endblock %}
 {% block footer %}
     <div class="container">
@@ -51,3 +48,7 @@
     </div>
 
 {%endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/active-function.js') }}"></script>
+    <script src="{{ asset('js/extra_ingridient.js') }}"></script>
+{% endblock %}

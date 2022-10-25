@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Base;
+use App\Service\BaseService;
+use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -50,6 +52,17 @@ class BaseRepository extends ServiceEntityRepository
             ->getResult();
 
 
+    }
+
+    public function updateBase($parameters, ItemOrderService $service, BaseService $baseService)
+    {
+        $base = $baseService->find($parameters['valueId']);
+        $current = $service->findItemOrderIdStatus();
+
+        $current->setBase($base);
+        $current->setOrderStep(3);
+
+        return $current;
     }
 
 //    /**

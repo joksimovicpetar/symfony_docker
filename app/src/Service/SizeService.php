@@ -37,6 +37,13 @@ class SizeService
     function findSizes()
     {
         return $this->repository->findSizes();
+    }
 
+    function find($id){
+        return $this->repository->find($id);
+    }
+
+    function updateSize($parameters, ItemOrderService $service, SizeService $sizeService){
+        return $this->repository->updateSize($parameters, $service, $sizeService);
     }
 }

@@ -1,4 +1,4 @@
-<div class="card card-base">
+<div class="card card-base {{ isActive ? 'active' : '' }}" data-id="{{ base.id }}">
     <img src="{{ asset(base.image.imagePath) }}" alt="{{ base.image.imagePath }}" class="card-img-top" draggable="false">
     <div class="card-body">
         <h2 class="card-title">{{ base.name }}</h2>
