@@ -20,10 +20,15 @@
             {% set currentOrder = current_order() %}
             {{ dump(currentOrder) }}
             {% for bowl in bowls %}
-                {% set activeBowl = bowl.id == currentOrder.bowl.id %}
+                {% if currentOrder %}
+                    {% set activeBowl = bowl.id == currentOrder.bowl.id %}
+                {% else %}
+                    {% set activeBowl = null %}
+                {% endif %}
                 <div class="col s3 bowl-item-js">
                     {% include 'bowl/bowl-component.html.twig' with {'bowl': bowl, 'isActive': activeBowl} %}
                 </div>
+
             {% endfor %}
         </div>
     </div>
@@ -37,7 +42,6 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-next" id="bowl-next">Next</a>
-{#                <a class="waves-effect waves-light btn btn-next" href="{{ path('app_item_order_new') }}">Next</a>#}
 
             </div>
         </div>

@@ -64,11 +64,11 @@ class BowlRepository extends ServiceEntityRepository
     public function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService)
     {
         $bowl = $bowlService->find($parameters['valueId']);
-        $itemOrder = new ItemOrder();
 
         $current = $service ->findItemOrderIdStatus();
 
-        if ($current->getOrderStep()==6) {
+        if ($current == null || $current->getOrderStep()==6) {
+            $itemOrder = new ItemOrder();
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
             $service->save($itemOrder);
