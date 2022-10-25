@@ -1,1 +1,1 @@
-active("extra-ingredient", "card-extra-ingredient")
+activeMultiple("extra-ingredient", "card-extra-ingredient")
