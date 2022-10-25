@@ -39,12 +39,14 @@ class BowlService
 
     function findBowls(){
         return $this->repository->findBowls();
-
     }
 
     function find($id){
         return $this->repository->find($id);
+    }
 
+    function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService){
+        return $this->repository->updateBowl($parameters, $service, $bowlService);
     }
 
 }

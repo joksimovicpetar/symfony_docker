@@ -29,30 +29,7 @@ class ItemOrderController extends AbstractController
 
     public function new(Request $request, ItemOrderRepository $itemOrderRepository, ItemOrderService $service, BowlService $bowlService)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $bowl = $bowlService->find($parameters['valueId']);
-        $itemOrder = new ItemOrder();
 
-        $current = $service ->findItemOrderIdStatus();
-
-        if ($current->getOrderStep()==6) {
-            $itemOrder->setBowl($bowl);
-            $itemOrder->setOrderStep(1);
-            $service->save($itemOrder);
-
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
-        } else {
-            $current->setBowl($bowl);
-            $current->setOrderStep(1);
-            $service->save($current);
-
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
-        }
-//        return $this->redirectToRoute('app_size');
 
     }
 

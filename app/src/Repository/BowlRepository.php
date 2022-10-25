@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Bowl;
+use App\Entity\ItemOrder;
+use App\Service\BowlService;
+use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @extends ServiceEntityRepository<Bowl>
@@ -48,8 +52,6 @@ class BowlRepository extends ServiceEntityRepository
 
     public function findBowls()
     {
-
-
         return $this->createQueryBuilder('bowl')
 
             ->select('bowl', 'i')
@@ -57,8 +59,32 @@ class BowlRepository extends ServiceEntityRepository
             ->orderBy('bowl.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
 
+    public function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService)
+    {
+        $bowl = $bowlService->find($parameters['valueId']);
+        $itemOrder = new ItemOrder();
 
+        $current = $service ->findItemOrderIdStatus();
+
+        if ($current->getOrderStep()==6) {
+            $itemOrder->setBowl($bowl);
+            $itemOrder->setOrderStep(1);
+            $service->save($itemOrder);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
+        } else {
+            $current->setBowl($bowl);
+            $current->setOrderStep(1);
+            $service->save($current);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
+        }
     }
 
 

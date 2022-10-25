@@ -18,6 +18,7 @@
         </div>
         <div class="row" id="card-rows">
             {% set currentOrder = current_order() %}
+            {{ dump(currentOrder) }}
             {% for bowl in bowls %}
                 {% set activeBowl = bowl.id == currentOrder.bowl.id %}
                 <div class="col s3 bowl-item-js">
