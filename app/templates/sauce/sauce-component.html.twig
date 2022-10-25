@@ -1,5 +1,5 @@
-<div class="card card-sauce">
-    <div class="card-body">
+<div class="card card-sauce {{ isActive ? 'active' : '' }}" data-id="{{ sauce.id }}">
+    <div class="card-body" >
         <h2 class="card-title">{{ sauce.name }}</h2>
         <p id="card-text">
             {{ sauce.description }}

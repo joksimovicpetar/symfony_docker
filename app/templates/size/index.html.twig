@@ -11,7 +11,6 @@
         </div>
         <div class="row" id="size-rows">
             {% set currentOrder = current_order() %}
-            {{ dump (currentOrder) }}
             {% for size in sizes %}
                 {% set activeSize = size.id == currentOrder.size.id %}
                 <div class="col s4">

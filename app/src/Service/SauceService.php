@@ -37,7 +37,14 @@ class SauceService
     function findSauces()
     {
         return $this->repository->findSauces();
+    }
 
+    function find($id){
+        return $this->repository->find($id);
+    }
+
+    function updateSauce($parameters, ItemOrderService $service, SauceService $sauceService){
+        return $this->repository->updateSauce($parameters, $service, $sauceService);
     }
 
 }

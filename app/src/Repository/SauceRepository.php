@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Sauce;
+use App\Service\ItemOrderService;
+use App\Service\SauceService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -46,14 +48,21 @@ class SauceRepository extends ServiceEntityRepository
 
     public function findSauces()
     {
-
-
         return $this->createQueryBuilder('sauce')
             ->orderBy('sauce.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
 
+    public function updateSauce($parameters, ItemOrderService $service, SauceService $sauceService)
+    {
+        $sauce = $sauceService->find($parameters['valueId']);
+        $current = $service->findItemOrderIdStatus();
 
+        $current->setSauce($sauce);
+        $current->setOrderStep(4);
+
+        return $current;
     }
 
 //    /**

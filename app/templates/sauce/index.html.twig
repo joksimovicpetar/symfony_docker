@@ -11,22 +11,20 @@
       </div>
       <div class="row">
          <div class="col s4">
-            <p class="text-bowl">Most sauces mix well with the base of the poke bowl. Make sure to read their ingridients and pick one that's right for you
+            <p class="text-bowl">Most sauces mix well with the base of the poke bowl. Make sure to read their ingredients and pick one that's right for you
             <p/>
          </div>
       </div>
       <div class="row" id="sauce-rows">
+         {% set currentOrder = current_order() %}
          {% for sauce in sauces %}
+            {% set activeSauce = sauce.id == currentOrder.sauce.id %}
             <div class="col s6">
-               {% include 'sauce/sauce-component.html.twig' with {'sauce': sauce} %}
+               {% include 'sauce/sauce-component.html.twig' with {'sauce': sauce, 'isActive': activeSauce} %}
             </div>
          {% endfor %}
       </div>
    </div>
-{% endblock %}
-{% block javascriptsBody %}
-   <script src="{{ asset('js/active-function.js') }}"></script>
-   <script src="{{ asset('js/sauce.js') }}"></script>
 {% endblock %}
 {% block footer %}
    <div class="container">
@@ -37,7 +35,7 @@
          <div class="col s4">
 
             <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/base">Back</a>
-            <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/ingridient">Next</a>
+            <a class="waves-effect waves-light btn btn-next" id="sauce-next">Next</a>
 
          </div>
       </div>
@@ -49,5 +47,9 @@
          </div>
       </div>
    </div>
-
 {%endblock %}
+{% block javascriptsBody %}
+   <script src="{{ asset('js/active-function.js') }}"></script>
+   <script src="{{ asset('js/update-function.js') }}"></script>
+   <script src="{{ asset('js/sauce.js') }}"></script>
+{% endblock %}
