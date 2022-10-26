@@ -1,13 +1,18 @@
 async function updateMultiple(routeEdit,routeNext) {
-    let active_cards = document.getElementsByClassName("active");
+    let activeCards = document.getElementsByClassName("active");
 
-    let attribute = active_cards.getAttribute("data-id");
+    const dataIds = [];
+
+    for (const activeCard of activeCards) {
+        dataIds.push(activeCard.getAttribute("data-id"))
+    }
+    // alert(dataIds)
 
     try{
         await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: attribute}),
+            body: JSON.stringify({valueId: dataIds}),
         });
 
         window.location.href = routeNext
