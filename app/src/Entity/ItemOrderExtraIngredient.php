@@ -6,7 +6,7 @@ use App\Repository\ItemOrderExtraIngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemOrderExtraIngredientRepository::class)]
-class ItemOrderExtraIngredient
+class ItemOrderExtraIngredient extends \App\Repository\ItemOrderExtraIngredientRepository
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

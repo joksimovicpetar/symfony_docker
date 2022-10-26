@@ -12,7 +12,11 @@
         <div class="row" id="size-rows">
             {% set currentOrder = current_order() %}
             {% for size in sizes %}
-                {% set activeSize = size.id == currentOrder.size.id %}
+                {% if currentOrder.size %}
+                    {% set activeSize = size.id == currentOrder.size.id %}
+                {% else %}
+                    {% set activeSize = null %}
+                {% endif %}
                 <div class="col s4">
                     {% include 'size/size-component.html.twig' with {'size': size, 'isActive': activeSize} %}
                 </div>

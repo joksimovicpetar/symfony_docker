@@ -64,7 +64,6 @@ class BowlRepository extends ServiceEntityRepository
     public function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService)
     {
         $bowl = $bowlService->find($parameters['valueId']);
-
         $current = $service ->findItemOrderIdStatus();
 
         if ($current == null || $current->getOrderStep()==6) {

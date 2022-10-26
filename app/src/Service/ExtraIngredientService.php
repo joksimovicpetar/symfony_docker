@@ -33,9 +33,13 @@ class ExtraIngredientService
         return $extraIngredients;
     }
 
-    function findExtraIngredients(){
+    function findExtraIngredients()
+    {
         return $this->repository->findExtraIngredients();
+    }
 
+    function find($id){
+        return $this->repository->find($id);
     }
 
 }

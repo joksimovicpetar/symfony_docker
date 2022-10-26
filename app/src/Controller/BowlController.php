@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Service\BaseService;
 use App\Service\BowlService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

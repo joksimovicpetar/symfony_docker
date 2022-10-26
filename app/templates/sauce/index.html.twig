@@ -18,7 +18,11 @@
       <div class="row" id="sauce-rows">
          {% set currentOrder = current_order() %}
          {% for sauce in sauces %}
-            {% set activeSauce = sauce.id == currentOrder.sauce.id %}
+            {% if currentOrder.sauce %}
+               {% set activeSauce = sauce.id == currentOrder.sauce.id %}
+            {% else %}
+               {% set activeSauce = null %}
+            {% endif %}
             <div class="col s6">
                {% include 'sauce/sauce-component.html.twig' with {'sauce': sauce, 'isActive': activeSauce} %}
             </div>

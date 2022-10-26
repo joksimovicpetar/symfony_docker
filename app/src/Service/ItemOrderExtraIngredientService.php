@@ -3,7 +3,7 @@
 namespace App\Service;
 use App\Repository\ItemOrderExtraIngredientRepository;
 
-class ItemOrderExtraIngridentService
+class ItemOrderExtraIngredientService
 {
     private $repository;
 
@@ -35,8 +35,19 @@ class ItemOrderExtraIngridentService
     }
 
     function findItemOrderExtraIngredient(){
-
         return $this->repository->findItemOrderExtraIngredient();
+    }
 
+    function findLastItemOrderExtraIngredient(){
+        return $this->repository->findLastItemOrderExtraIngredient();
+    }
+
+    function find($id){
+        return $this->repository->find($id);
+    }
+
+    function updateExtraIngredient($param, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    {
+        return $this->repository->updateExtraIngredient($param, $service, $itemOrderExtraIngredientService, $extraIngredientService);
     }
 }

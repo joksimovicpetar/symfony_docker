@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\ItemOrderExtraIngredient;
+use App\Service\ExtraIngredientService;
+use App\Service\ItemOrderExtraIngredientService;
+use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @extends ServiceEntityRepository<ItemOrderExtraIngredient>
@@ -21,13 +25,11 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, ItemOrderExtraIngredient::class);
     }
 
-    public function save(ItemOrderExtraIngredient $entity, bool $flush = false): void
+    public function save(ItemOrderExtraIngredient $itemOrderExtraIngredient): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->persist($itemOrderExtraIngredient);
+        $this->getEntityManager()->flush();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
     public function remove(ItemOrderExtraIngredient $entity, bool $flush = false): void
@@ -41,13 +43,49 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
 
     public function findItemOrderExtraIngredient()
     {
-
-
         return $this->createQueryBuilder('itemOrderExtraIngredients')
-
             ->orderBy('itemOrderExtraIngredients.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findLastItemOrderExtraIngredient()
+    {
+        return $this->createQueryBuilder('item_order_extra_ingredient')
+            ->select('item_order_extra_ingredient')
+            ->orderBy('item_order_extra_ingredient.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function updateExtraIngredient($param, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    {
+        $extraIngredient = $extraIngredientService->find($param);
+        $current = $service->findItemOrderIdStatus();
+        $currentExtraIngredient = $itemOrderExtraIngredientService->findLastItemOrderExtraIngredient();
+
+
+        if ($currentExtraIngredient == null ) {
+            $itemOrderExtraIngredient = new ItemOrderExtraIngredient();
+            $itemOrderExtraIngredient->setExtraIngredient($extraIngredient);
+            $itemOrderExtraIngredient->setItemOrder($current);
+            $current->setOrderStep(6);
+            $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
+        }
+        else {
+            $currentExtraIngredient->setExtraIngredient($extraIngredient);
+            $currentExtraIngredient->setItemOrder($current);
+            $itemOrderExtraIngredientService->save($currentExtraIngredient);
+
+            $response = new Response();
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->send();
+        }
 
 
     }

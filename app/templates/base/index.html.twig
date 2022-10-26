@@ -18,9 +18,12 @@
         </div>
         <div class="row" id="base-rows">
             {% set currentOrder = current_order() %}
-            {{ dump (currentOrder) }}
             {% for base in bases %}
-                {% set activeBase = base.id == currentOrder.base.id %}
+                {% if currentOrder.base %}
+                    {% set activeBase = base.id == currentOrder.base.id %}
+                {% else %}
+                    {% set activeBase = null %}
+                {% endif %}
                 <div class="col s4">
                     {% include 'base/base-component.html.twig' with {'base': base, 'isActive': activeBase} %}
                 </div>
