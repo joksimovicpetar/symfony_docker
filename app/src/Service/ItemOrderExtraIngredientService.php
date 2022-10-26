@@ -46,8 +46,8 @@ class ItemOrderExtraIngredientService
         return $this->repository->find($id);
     }
 
-    function updateExtraIngredient($param, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    function updateExtraIngredient($extraIngredientId, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
     {
-        return $this->repository->updateExtraIngredient($param, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+        return $this->repository->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
     }
 }

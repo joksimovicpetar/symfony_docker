@@ -59,9 +59,9 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function updateExtraIngredient($param, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    public function updateExtraIngredient($extraIngredientId, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
     {
-        $extraIngredient = $extraIngredientService->find($param);
+        $extraIngredient = $extraIngredientService->find($extraIngredientId);
         $current = $service->findItemOrderIdStatus();
 
         $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
