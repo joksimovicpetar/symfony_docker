@@ -21,6 +21,17 @@ class ItemOrderExtraIngredient extends \App\Repository\ItemOrderExtraIngredientR
     ORM\JoinColumn(name: 'extra_ingredient_id', referencedColumnName: 'id')]
     private ?ExtraIngredient $extraIngredient = null;
 
+    /**
+     * @param ItemOrder|null $itemOrder
+     * @param ExtraIngredient|null $extraIngredient
+     */
+    public function __construct(?ItemOrder $itemOrder, ?ExtraIngredient $extraIngredient)
+    {
+        $this->itemOrder = $itemOrder;
+        $this->extraIngredient = $extraIngredient;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

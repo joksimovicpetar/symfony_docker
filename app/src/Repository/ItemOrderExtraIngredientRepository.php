@@ -63,32 +63,14 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
     {
         $extraIngredient = $extraIngredientService->find($param);
         $current = $service->findItemOrderIdStatus();
-        $currentExtraIngredient = $itemOrderExtraIngredientService->findLastItemOrderExtraIngredient();
 
+        $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
+        $current->setOrderStep(6);
+        $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
 
-        if ($currentExtraIngredient == null ) {
-            $itemOrderExtraIngredient = new ItemOrderExtraIngredient();
-//            $itemOrderExtraIngredient->setItemOrder($current);
-//            $itemOrderExtraIngredient->setExtraIngredient($extraIngredient);
-
-            $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
-
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
-        }
-        else {
-            $currentExtraIngredient->setExtraIngredient($extraIngredient);
-            $currentExtraIngredient->setItemOrder($current);
-            $current->setOrderStep(6);
-
-            $itemOrderExtraIngredientService->save($currentExtraIngredient);
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
-        }
-
-
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
     }
 
 //    /**
