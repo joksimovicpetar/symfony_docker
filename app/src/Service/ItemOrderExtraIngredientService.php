@@ -13,7 +13,7 @@ class ItemOrderExtraIngredientService
     }
 
 
-    function save(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
+    function save( $itemOrderExtraIngredient): void
     {
         $this->repository->save($itemOrderExtraIngredient);
     }

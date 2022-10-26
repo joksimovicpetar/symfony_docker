@@ -25,11 +25,8 @@ class ItemOrderExtraIngredientController extends AbstractController
     #[Route('/item_order_extra_ingredient/edit', name: 'app_ext_ingredient_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
     {
-
-        $parameters = json_decode($request->getContent());
- //       $parameters = json_decode($request->getContent(), true);
+        $parameters = json_decode($request->getContent(), true);
         $param = $parameters['valueId'];
-        var_dump($parameters);
         $itemOrderExtraIngredientService->updateExtraIngredient($param, $service, $itemOrderExtraIngredientService, $extraIngredientService);
 
     }

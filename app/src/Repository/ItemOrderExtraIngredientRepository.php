@@ -68,9 +68,9 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
 
         if ($currentExtraIngredient == null ) {
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient();
-            $itemOrderExtraIngredient->setExtraIngredient($extraIngredient);
-            $itemOrderExtraIngredient->setItemOrder($current);
-            $current->setOrderStep(6);
+//            $itemOrderExtraIngredient->setItemOrder($current);
+//            $itemOrderExtraIngredient->setExtraIngredient($extraIngredient);
+
             $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
 
             $response = new Response();
@@ -80,8 +80,9 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
         else {
             $currentExtraIngredient->setExtraIngredient($extraIngredient);
             $currentExtraIngredient->setItemOrder($current);
-            $itemOrderExtraIngredientService->save($currentExtraIngredient);
+            $current->setOrderStep(6);
 
+            $itemOrderExtraIngredientService->save($currentExtraIngredient);
             $response = new Response();
             $response->setStatusCode(Response::HTTP_OK);
             $response->send();
