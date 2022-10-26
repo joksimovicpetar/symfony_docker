@@ -27,7 +27,9 @@ class ItemOrderExtraIngredientController extends AbstractController
     {
         $parameters = json_decode($request->getContent(), true);
         $param = $parameters['valueId'];
-        $itemOrderExtraIngredientService->updateExtraIngredient($param, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+        foreach ($param as $extraIngredientId) {
+            $itemOrderExtraIngredientService->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+        }
 
     }
 }
