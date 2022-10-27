@@ -80,9 +80,7 @@ class BowlRepository extends ServiceEntityRepository
             $current->setOrderStep(1);
             $service->save($current);
 
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
+
         }
     }
 

@@ -27,5 +27,9 @@ class BowlController extends AbstractController
         $parameters = json_decode($request->getContent(), true);
         $bowlService->updateBowl($parameters, $service, $bowlService);
 
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
+
     }
 }

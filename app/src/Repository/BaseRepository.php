@@ -62,7 +62,7 @@ class BaseRepository extends ServiceEntityRepository
         $current->setBase($base);
         $current->setOrderStep(3);
 
-        return $current;
+        $service->save($current);
     }
 
 //    /**

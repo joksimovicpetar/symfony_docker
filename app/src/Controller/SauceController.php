@@ -28,8 +28,7 @@ class SauceController extends AbstractController
     public function edit(Request $request, ItemOrderService $service, SauceService $sauceService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $current = $sauceService->updateSauce($parameters, $service, $sauceService);
-        $service->save($current);
+        $sauceService->updateSauce($parameters, $service, $sauceService);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

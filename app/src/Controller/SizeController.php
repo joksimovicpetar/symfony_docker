@@ -25,8 +25,7 @@ class SizeController extends AbstractController
     public function edit(Request $request, ItemOrderService $service, SizeService $sizeService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $current = $sizeService->updateSize($parameters, $service, $sizeService);
-        $service->save($current);
+        $sizeService->updateSize($parameters, $service, $sizeService);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

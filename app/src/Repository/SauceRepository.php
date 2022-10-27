@@ -62,7 +62,7 @@ class SauceRepository extends ServiceEntityRepository
         $current->setSauce($sauce);
         $current->setOrderStep(4);
 
-        return $current;
+        $service->save($current);
     }
 
 //    /**

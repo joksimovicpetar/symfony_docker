@@ -62,7 +62,7 @@ class SizeRepository extends ServiceEntityRepository
         $current->setSize($size);
         $current->setOrderStep(2);
 
-        return $current;
+        $service->save($current);
     }
 
 //    /**

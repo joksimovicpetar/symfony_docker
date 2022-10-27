@@ -46,7 +46,7 @@ class BowlService
     }
 
     function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService){
-        return $this->repository->updateBowl($parameters, $service, $bowlService);
+        $this->repository->updateBowl($parameters, $service, $bowlService);
     }
 
 }

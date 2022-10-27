@@ -44,7 +44,7 @@ class SauceService
     }
 
     function updateSauce($parameters, ItemOrderService $service, SauceService $sauceService){
-        return $this->repository->updateSauce($parameters, $service, $sauceService);
+        $this->repository->updateSauce($parameters, $service, $sauceService);
     }
 
 }

@@ -43,6 +43,6 @@ class BaseService
     }
 
     function updateBase($parameters, ItemOrderService $service, BaseService $baseService){
-        return $this->repository->updateBase($parameters, $service, $baseService);
+        $this->repository->updateBase($parameters, $service, $baseService);
     }
 }
