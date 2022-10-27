@@ -32,12 +32,13 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function deleteOnId($id, ItemOrderIngredientService $itemOrderIngredientService): void
+    public function deleteOnId( ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service): void
     {
+        $current = $service->findItemOrderIdStatus();
         $itemOrderIngredients = $itemOrderIngredientService->findItemOrderIngredient();
 
         foreach ($itemOrderIngredients as $itemOrderIngredient){
-            if ($itemOrderIngredient->getItemOrder()->getId() == $id){
+            if ($itemOrderIngredient->getItemOrder()->getId() == $current->getId()){
                 $this->getEntityManager()->remove($itemOrderIngredient);
                 $this->getEntityManager()->flush();
             }
@@ -53,7 +54,7 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService)
+    public function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService) :void
     {
         $ingredient = $ingredientService->find($ingredientId);
 //        VarDumper::dump($ingredient);exit;
@@ -63,10 +64,14 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
 //        VarDumper::dump($itemOrderIngredient);exit;
         $current->setOrderStep(5);
         $itemOrderIngredientService->save($itemOrderIngredient);
+    }
 
-        $response = new Response();
-        $response->setStatusCode(Response::HTTP_OK);
-        $response->send();
+    public function update($parameters,ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service, IngredientService $ingredientService)
+    {
+        $param = $parameters['valueId'];
+        foreach ($param as $ingredientId) {
+            $itemOrderIngredientService->updateIngredient($ingredientId, $service, $itemOrderIngredientService, $ingredientService);
+        }
     }
 
 
