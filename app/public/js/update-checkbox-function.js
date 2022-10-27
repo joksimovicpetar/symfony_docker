@@ -7,8 +7,7 @@ async function updateCheckBox(routeEdit,routeNext) {
             dataIds.push(checkBox.getAttribute("data-id"))
         }
     }
-     alert(dataIds)
-
+    // alert(dataIds)
     try{
         await fetch(routeEdit, {
             method: 'POST',
@@ -21,6 +20,5 @@ async function updateCheckBox(routeEdit,routeNext) {
     catch (e) {
         console.error('Error while creating item order')
     }
-
-};
+}
 
