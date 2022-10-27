@@ -57,19 +57,16 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
     public function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService) :void
     {
         $ingredient = $ingredientService->find($ingredientId);
-//        VarDumper::dump($ingredient);exit;
         $current = $service->findItemOrderIdStatus();
-//        VarDumper::dump($current);exit;
         $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
-//        VarDumper::dump($itemOrderIngredient);exit;
         $current->setOrderStep(5);
         $itemOrderIngredientService->save($itemOrderIngredient);
     }
 
     public function update($parameters,ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service, IngredientService $ingredientService)
     {
-        $param = $parameters['valueId'];
-        foreach ($param as $ingredientId) {
+        $ingredientsId = $parameters['valueId'];
+        foreach ($ingredientsId as $ingredientId) {
             $itemOrderIngredientService->updateIngredient($ingredientId, $service, $itemOrderIngredientService, $ingredientService);
         }
     }
