@@ -9,6 +9,7 @@ use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @extends ServiceEntityRepository<ItemOrderExtraIngredient>
@@ -32,12 +33,15 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
 
     }
 
-    public function remove(ItemOrderExtraIngredient $entity, bool $flush = false): void
+    public function deleteOnId($id, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
     {
-        $this->getEntityManager()->remove($entity);
+        $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient){
+            if ($itemOrderExtraIngredient->getItemOrder()->getId() == $id){
+                $this->getEntityManager()->remove($itemOrderExtraIngredient);
+                $this->getEntityManager()->flush();
+            }
         }
     }
 

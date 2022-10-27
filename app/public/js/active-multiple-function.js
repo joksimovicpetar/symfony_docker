@@ -4,8 +4,6 @@ function activeMultiple(elementID,classNames) {
     const cards = cardContainer.getElementsByClassName(classNames);
     const CLASS_ACTIVE = 'active';
 
-
-    console.log(cards);
     for (let card of cards) {
 
         card.addEventListener("click", function () {

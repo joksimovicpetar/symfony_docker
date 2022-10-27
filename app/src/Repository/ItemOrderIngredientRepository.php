@@ -3,8 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\ItemOrderIngredient;
+use App\Service\IngredientService;
+use App\Service\ItemOrderIngredientService;
+use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @extends ServiceEntityRepository<ItemOrderIngredient>
@@ -21,35 +26,47 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, ItemOrderIngredient::class);
     }
 
-    public function save(ItemOrderIngredient $entity, bool $flush = false): void
+    public function save(ItemOrderIngredient $itemOrderIngredient): void
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->getEntityManager()->persist($itemOrderIngredient);
+        $this->getEntityManager()->flush();
     }
 
-    public function remove(ItemOrderIngredient $entity, bool $flush = false): void
+    public function deleteOnId($id, ItemOrderIngredientService $itemOrderIngredientService): void
     {
-        $this->getEntityManager()->remove($entity);
+        $itemOrderIngredients = $itemOrderIngredientService->findItemOrderIngredient();
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        foreach ($itemOrderIngredients as $itemOrderIngredient){
+            if ($itemOrderIngredient->getItemOrder()->getId() == $id){
+                $this->getEntityManager()->remove($itemOrderIngredient);
+                $this->getEntityManager()->flush();
+            }
         }
     }
 
     public function findItemOrderIngredient()
     {
-
-
         return $this->createQueryBuilder('itemOrderIngredients')
 
             ->orderBy('itemOrderIngredients.id', 'ASC')
             ->getQuery()
             ->getResult();
+    }
 
+    public function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService)
+    {
+        $ingredient = $ingredientService->find($ingredientId);
+//        VarDumper::dump($ingredient);exit;
+        $current = $service->findItemOrderIdStatus();
+//        VarDumper::dump($current);exit;
+        $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
+//        VarDumper::dump($itemOrderIngredient);exit;
+        $current->setOrderStep(5);
+        $itemOrderIngredientService->save($itemOrderIngredient);
 
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
     }
 
 

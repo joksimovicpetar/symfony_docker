@@ -13,7 +13,7 @@ class ItemOrderExtraIngredientService
     }
 
 
-    function save( $itemOrderExtraIngredient): void
+    function save($itemOrderExtraIngredient): void
     {
         $this->repository->save($itemOrderExtraIngredient);
     }
@@ -23,9 +23,9 @@ class ItemOrderExtraIngredientService
         $this->repository->update($itemOrderExtraIngredient);
     }
 
-    function delete(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
+    function deleteOnId($id, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
     {
-        $this->repository->delete($itemOrderExtraIngredient);
+        $this->repository->deleteOnId($id, $itemOrderExtraIngredientService);
     }
 
     function findAll()

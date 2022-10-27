@@ -21,6 +21,17 @@ class ItemOrderIngredient
     ORM\JoinColumn(name: 'ingredient_id', referencedColumnName: 'id')]
     private ?Ingredient $ingredient = null;
 
+    /**
+     * @param itemOrder|null $itemOrder
+     * @param Ingredient|null $ingredient
+     */
+    public function __construct(?itemOrder $itemOrder, ?Ingredient $ingredient)
+    {
+        $this->itemOrder = $itemOrder;
+        $this->ingredient = $ingredient;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

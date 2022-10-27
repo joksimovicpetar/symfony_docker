@@ -18,7 +18,6 @@
         </div>
         <div class="row" id="extra-ingredient-rows">
             {% set currentOrder = current_extra_ingredient() %}
-            {{ dump(currentOrder) }}
             {% for extraIngredient in extraIngredients %}
                 <div class="col s12">
                     {% include 'extra_ingredient/extra-ingredient-component.html.twig' with {'extraIngredient': extraIngredient} %}

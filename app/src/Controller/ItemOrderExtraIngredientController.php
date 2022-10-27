@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
+
 
 class ItemOrderExtraIngredientController extends AbstractController
 {
@@ -27,6 +29,10 @@ class ItemOrderExtraIngredientController extends AbstractController
     {
         $parameters = json_decode($request->getContent(), true);
         $param = $parameters['valueId'];
+
+        $current = $service->findItemOrderIdStatus();
+        $itemOrderExtraIngredientService->deleteOnId($current->getId(), $itemOrderExtraIngredientService);
+
         foreach ($param as $extraIngredientId) {
             $itemOrderExtraIngredientService->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
         }

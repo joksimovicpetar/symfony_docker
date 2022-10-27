@@ -3,6 +3,8 @@ async function update(routeEdit,routeNext) {
 
     let attribute = active_card.getAttribute("data-id");
 
+    console.log("active_card");
+
     try{
         await fetch(routeEdit, {
             method: 'POST',
@@ -16,4 +18,4 @@ async function update(routeEdit,routeNext) {
         console.error('Error while creating item order')
     }
 
-};
+}

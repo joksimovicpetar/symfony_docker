@@ -267,8 +267,11 @@ footer{
     height: 20px;
     border: red;
     background-color: lightcoral;
-    color: #B0413E;
+    color: black;
     z-index: 0;
+}
+#label-checkbox{
+    color: black;
 }
 
 .btn-add-to-cart{

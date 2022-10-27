@@ -36,6 +36,9 @@ class IngredientService
 
     function findIngredients(){
         return $this->repository->findIngredients();
+    }
 
+    function find($id){
+        return $this->repository->find($id);
     }
 }

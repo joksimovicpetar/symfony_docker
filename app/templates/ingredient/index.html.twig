@@ -20,8 +20,8 @@
             {% for ingredient in ingredients %}
                 <div class="col s3 " id="list-ingredient">
                     <p>
-                        <label>
-                            <input type="checkbox" class="filled-in"  />
+                        <label id="label-checkbox"  >
+                            <input type="checkbox" id="test" name="test" class="filled-in" data-id="{{ ingredient.id }}" />
                             <span>{{ ingredient.name }}</span>
                         </label>
                     </p>
@@ -39,7 +39,7 @@
             <div class="col s4">
 
                 <a class="waves-effect waves-light btn btn-previous" href="http://localhost:8080/sauce">Back</a>
-                <a class="waves-effect waves-light btn btn-next" href="http://localhost:8080/extra_ingredient">Next</a>
+                <a class="waves-effect waves-light btn btn-next" id="ingredient-next">Next</a>
 
             </div>
         </div>
@@ -51,5 +51,8 @@
             </div>
         </div>
     </div>
-
 {%endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/update-checkbox-function.js') }}"></script>
+    <script src="{{ asset('js/ingredient.js') }}"></script>
+{% endblock%}
