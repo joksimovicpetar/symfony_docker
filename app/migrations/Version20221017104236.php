@@ -77,30 +77,7 @@ final class Version20221017104236 extends AbstractMigration
                             INSERT INTO symfony_docker.extra_ingredient (id, name, currency, price) VALUES (7, 'Shiitake mushrooms', '$', 0.49);
                             INSERT INTO symfony_docker.extra_ingredient (id, name, currency, price) VALUES (8, 'Tuna +50g', '$', 1.49);
                             INSERT INTO symfony_docker.extra_ingredient (id, name, currency, price) VALUES (9, 'Salmon +50g', '$', 1.49);
-                            INSERT INTO symfony_docker.extra_ingredient (id, name, currency, price) VALUES (10, 'Chicken +50g', '$', 0.49);
-                            
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (1, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (2, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (3, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (4, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (5, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (6, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (7, null, null, null, null);
-                            INSERT INTO symfony_docker.item_order (id, bowl_id, size_id, base_id, sauce_id) VALUES (8, null, null, null, null);
-
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (1, 1, 1);
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (2, 1, 2);
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (3, 1, 3);
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (4, 2, 1);
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (5, 2, 2);
-                            INSERT INTO symfony_docker.item_order_extra_ingredient (id, item_order_id, extra_ingredient_id) VALUES (6, 2, 3);
-                                                      
-                            INSERT INTO symfony_docker.item_order_ingredient (id, item_order_id, ingredient_id) VALUES (3, 1, 1);
-                            INSERT INTO symfony_docker.item_order_ingredient (id, item_order_id, ingredient_id) VALUES (4, 1, 2);
-                            INSERT INTO symfony_docker.item_order_ingredient (id, item_order_id, ingredient_id) VALUES (5, 2, 3);
-                            INSERT INTO symfony_docker.item_order_ingredient (id, item_order_id, ingredient_id) VALUES (6, 2, 4);
-                            INSERT INTO symfony_docker.item_order_ingredient (id, item_order_id, ingredient_id) VALUES (7, 2, 5);
-                                                      
+                            INSERT INTO symfony_docker.extra_ingredient (id, name, currency, price) VALUES (10, 'Chicken +50g', '$', 0.49);                           
         ");
 
     }
