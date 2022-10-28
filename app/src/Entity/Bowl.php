@@ -23,8 +23,6 @@ class Bowl
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-
-
     #[ORM\OneToMany(mappedBy: 'bowl', targetEntity: ItemOrder::class)]
     private Collection $itemOrders;
 

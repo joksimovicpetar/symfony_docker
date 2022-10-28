@@ -15,7 +15,8 @@ class UserOrder
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'userOrder', targetEntity: ItemOrder::class)]
+    #[ORM\OneToMany(mappedBy: 'userOrder', targetEntity: ItemOrder::class),
+    ORM\JoinColumn(name: 'item_order_id', referencedColumnName: 'id')]
     private Collection $itemOrder;
 
     public function __construct()

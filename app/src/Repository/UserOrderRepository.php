@@ -39,6 +39,17 @@ class UserOrderRepository extends ServiceEntityRepository
         }
     }
 
+    public function findUserOrders()
+    {
+        return $this->createQueryBuilder('user_order')
+
+            ->select('user_order', 'item')
+            ->leftJoin('user_order.itemOrder', 'item')
+            ->orderBy('user_order.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return UserOrder[] Returns an array of UserOrder objects
 //     */

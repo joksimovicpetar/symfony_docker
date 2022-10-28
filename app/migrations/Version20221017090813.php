@@ -70,7 +70,7 @@ final class Version20221017090813 extends AbstractMigration
 
                             CREATE Table user_order(
                                                   id INT PRIMARY KEY AUTO_INCREMENT
-                            
+                                                  item_order_id int null;
                             );
                             
                             CREATE Table item_order(
