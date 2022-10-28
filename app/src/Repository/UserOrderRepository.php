@@ -44,10 +44,10 @@ class UserOrderRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('user_order')
 
             ->select('user_order', 'item')
-            ->leftJoin('user_order.itemOrder', 'item')
+            ->leftJoin('user_order.itemOrders', 'item')
             ->orderBy('user_order.id', 'ASC')
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
 //    /**

@@ -3,6 +3,9 @@
 {% block title %}Hello UserOrderController!{% endblock %}
 
 {% block body %}
+    {% for itemOrder in userOrder.itemOrders %}
+            {{ dump(itemOrder) }}
+    {% endfor %}
     <table id="user_order" class="table table-striped">
         <thead>
         <tr>
@@ -11,11 +14,11 @@
         </tr>
         </thead>
         <tbody>
-        {% for user_order in user_orders %}
+        {% for itemOrder in userOrder.itemOrders %}
             <tr>
-                <td>{{ user_order.id }}</td>
-                <td>{{ user_order.itemOrder.id }}</td>
-
+{#                <td>{{ userOrder.id }}</td>#}
+{#                <td>{{ userOrder. }}</td>#}
+{{ dump(itemOrder) }}
             </tr>
         {% endfor %}
         </tbody>

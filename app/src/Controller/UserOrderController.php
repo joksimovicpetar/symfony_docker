@@ -12,10 +12,9 @@ class UserOrderController extends AbstractController
     #[Route('/user_order', name: 'order_list')]
     public function findUserOrders(UserOrderService $service): Response
     {
-        $userOrders = $service->findUserOrders();
 
         return $this->render('user_order/index.html.twig', [
-            'user_orders' => $userOrders,
+            'userOrder' => $service->findUserOrders(),
         ]);
     }
 }

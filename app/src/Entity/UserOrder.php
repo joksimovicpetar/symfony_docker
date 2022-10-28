@@ -17,11 +17,11 @@ class UserOrder
 
     #[ORM\OneToMany(mappedBy: 'userOrder', targetEntity: ItemOrder::class),
     ORM\JoinColumn(name: 'item_order_id', referencedColumnName: 'id')]
-    private Collection $itemOrder;
+    private Collection $itemOrders;
 
     public function __construct()
     {
-        $this->itemOrder = new ArrayCollection();
+        $this->itemOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,24 +34,24 @@ class UserOrder
     /**
      * @return Collection<int, ItemOrder>
      */
-    public function getItemOrder(): Collection
+    public function getItemOrders(): Collection
     {
-        return $this->itemOrder;
+        return $this->itemOrders;
     }
 
-    public function addItemOrder(ItemOrder $itemOrder): self
+    public function addItemOrders(ItemOrder $itemOrder): self
     {
-        if (!$this->itemOrder->contains($itemOrder)) {
-            $this->itemOrder->add($itemOrder);
+        if (!$this->itemOrders->contains($itemOrder)) {
+            $this->itemOrders->add($itemOrder);
             $itemOrder->setUserOrder($this);
         }
 
         return $this;
     }
 
-    public function removeItemOrder(ItemOrder $itemOrder): self
+    public function removeItemOrders(ItemOrder $itemOrder): self
     {
-        if ($this->itemOrder->removeElement($itemOrder)) {
+        if ($this->itemOrders->removeElement($itemOrder)) {
             // set the owning side to null (unless already changed)
             if ($itemOrder->getUserOrder() === $this) {
                 $itemOrder->setUserOrder(null);
