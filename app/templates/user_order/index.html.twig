@@ -3,22 +3,31 @@
 {% block title %}Hello UserOrderController!{% endblock %}
 
 {% block body %}
-    {% for itemOrder in userOrder.itemOrders %}
-            {{ dump(itemOrder) }}
-    {% endfor %}
     <table id="user_order" class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Item Order</th>
+            <th></th>
+            <th>Item</th>
+            <th>Base</th>
+            <th>Sauce</th>
+            <th>Ingredients</th>
+            <th>Extras</th>
+            <th>Quantity</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for itemOrder in userOrder.itemOrders %}
             <tr>
-{#                <td>{{ userOrder.id }}</td>#}
-{#                <td>{{ userOrder. }}</td>#}
-{{ dump(itemOrder) }}
+                {{ dump(itemOrder) }}
+                <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
+                <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
+                <th>{{ itemOrder.base.name }}</th>
+                <th>{{ itemOrder.sauce.name }}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         {% endfor %}
         </tbody>
