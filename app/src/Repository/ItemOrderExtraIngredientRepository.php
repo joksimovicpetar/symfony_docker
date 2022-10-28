@@ -33,12 +33,13 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
 
     }
 
-    public function deleteOnId($id, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
+    public function deleteOnId(ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service): void
     {
+        $current = $service->findItemOrderIdStatus();
         $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
 
         foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient){
-            if ($itemOrderExtraIngredient->getItemOrder()->getId() == $id){
+            if ($itemOrderExtraIngredient->getItemOrder()->getId() == $current->getId()){
                 $this->getEntityManager()->remove($itemOrderExtraIngredient);
                 $this->getEntityManager()->flush();
             }
@@ -67,14 +68,17 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
     {
         $extraIngredient = $extraIngredientService->find($extraIngredientId);
         $current = $service->findItemOrderIdStatus();
-
         $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
         $current->setOrderStep(6);
         $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
+    }
 
-        $response = new Response();
-        $response->setStatusCode(Response::HTTP_OK);
-        $response->send();
+    public function update($parameters,ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service, ExtraIngredientService $extraIngredientService)
+    {
+        $extraIngredientsId = $parameters['valueId'];
+        foreach ($extraIngredientsId as $extraIngredientId) {
+            $itemOrderExtraIngredientService->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+        }
     }
 
 //    /**

@@ -8,8 +8,7 @@ use App\Service\ItemOrderIngredientService;
 use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 /**
  * @extends ServiceEntityRepository<ItemOrderIngredient>

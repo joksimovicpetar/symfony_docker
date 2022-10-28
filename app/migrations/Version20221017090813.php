@@ -67,6 +67,11 @@ final class Version20221017090813 extends AbstractMigration
                                                  currency varchar(100),
                                                  price double
                             );
+
+                            CREATE Table user_order(
+                                                  id INT PRIMARY KEY AUTO_INCREMENT
+                            
+                            );
                             
                             CREATE Table item_order(
                                                   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,10 +79,13 @@ final class Version20221017090813 extends AbstractMigration
                                                   size_id INT,
                                                   base_id INT,
                                                   sauce_id INT,
+                                                  order_step INT,
+                                                  user_order_id INT,
                                                   FOREIGN KEY (bowl_id) REFERENCES bowl(id),
                                                   FOREIGN KEY (size_id) REFERENCES size(id),
                                                   FOREIGN KEY (base_id) REFERENCES base(id),
                                                   FOREIGN KEY (sauce_id) REFERENCES sauce(id)
+                                                  FOREIGN KEY (user_order_id) REFERENCES user_order(id)
                             );
                             
                             CREATE Table item_order_ingredient(

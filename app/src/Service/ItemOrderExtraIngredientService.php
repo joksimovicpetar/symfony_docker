@@ -18,14 +18,9 @@ class ItemOrderExtraIngredientService
         $this->repository->save($itemOrderExtraIngredient);
     }
 
-    function update(ItemOrderExtraIngredientRepository $itemOrderExtraIngredient): void
+    function deleteOnId(ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service): void
     {
-        $this->repository->update($itemOrderExtraIngredient);
-    }
-
-    function deleteOnId($id, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
-    {
-        $this->repository->deleteOnId($id, $itemOrderExtraIngredientService);
+        $this->repository->deleteOnId($itemOrderExtraIngredientService, $service);
     }
 
     function findAll()
@@ -48,6 +43,11 @@ class ItemOrderExtraIngredientService
 
     function updateExtraIngredient($extraIngredientId, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
     {
-        return $this->repository->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+        $this->repository->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
+    }
+
+    public function update($parameters,ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service, ExtraIngredientService $extraIngredientService)
+    {
+        $this->repository->update($parameters,  $itemOrderExtraIngredientService,  $service,  $extraIngredientService);
     }
 }

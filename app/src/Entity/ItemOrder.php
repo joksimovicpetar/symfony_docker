@@ -40,6 +40,9 @@ class ItemOrder
     #[ORM\Column]
     private ?int $orderStep = 1;
 
+    #[ORM\ManyToOne(inversedBy: 'itemOrder')]
+    private ?UserOrder $userOrder = null;
+
 
     public function __construct()
     {
@@ -195,6 +198,18 @@ class ItemOrder
     public function setOrderStep(int $orderStep): self
     {
         $this->orderStep = $orderStep;
+
+        return $this;
+    }
+
+    public function getUserOrder(): ?UserOrder
+    {
+        return $this->userOrder;
+    }
+
+    public function setUserOrder(?UserOrder $userOrder): self
+    {
+        $this->userOrder = $userOrder;
 
         return $this;
     }
