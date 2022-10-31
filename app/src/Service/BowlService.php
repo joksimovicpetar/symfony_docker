@@ -2,7 +2,10 @@
 
 namespace App\Service;
 use App\Entity\Bowl;
+use App\Entity\ItemOrder;
 use App\Repository\BowlRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\VarDumper\VarDumper;
 
 class BowlService
 {
@@ -10,9 +13,11 @@ class BowlService
 
     private $repository;
 
-    public function  __construct(BowlRepository $repository)
+    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
+
     }
 
 
@@ -45,8 +50,21 @@ class BowlService
         return $this->repository->find($id);
     }
 
-    function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService){
-        $this->repository->updateBowl($parameters, $service, $bowlService);
+    function updateBowl($parameters){
+        $bowl = $this->find($parameters['valueId']);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+
+        if ($current == null || $current->getOrderStep()==6) {
+            $itemOrder = new ItemOrder();
+            $itemOrder->setBowl($bowl);
+            $itemOrder->setOrderStep(1);
+            $this->itemOrderService->save($itemOrder);
+
+        } else {
+            $current->setBowl($bowl);
+            $current->setOrderStep(1);
+            $this->itemOrderService->save($current);
+        }
     }
 
 }

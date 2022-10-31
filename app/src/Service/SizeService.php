@@ -8,9 +8,10 @@ class SizeService
 {
     private $repository;
 
-    public function __construct(SizeRepository $repository)
+    public function __construct(SizeRepository $repository, ItemOrderService $itemOrderService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
     }
 
     function save($size)
@@ -43,7 +44,13 @@ class SizeService
         return $this->repository->find($id);
     }
 
-    function updateSize($parameters, ItemOrderService $service, SizeService $sizeService){
-        return $this->repository->updateSize($parameters, $service, $sizeService);
+    function updateSize($parameters){
+        $size = $this->find($parameters['valueId']);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+
+        $current->setSize($size);
+        $current->setOrderStep(2);
+
+        $this->itemOrderService->save($current);
     }
 }

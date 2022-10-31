@@ -54,16 +54,6 @@ class SauceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function updateSauce($parameters, ItemOrderService $service, SauceService $sauceService)
-    {
-        $sauce = $sauceService->find($parameters['valueId']);
-        $current = $service->findItemOrderIdStatus();
-
-        $current->setSauce($sauce);
-        $current->setOrderStep(4);
-
-        $service->save($current);
-    }
 
 //    /**
 //     * @return Sauce[] Returns an array of Sauce objects

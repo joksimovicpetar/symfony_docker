@@ -28,8 +28,8 @@ class ItemOrderExtraIngredientController extends AbstractController
     public function edit(Request $request, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $itemOrderExtraIngredientService->deleteOnId($itemOrderExtraIngredientService, $service);
-        $itemOrderExtraIngredientService->update($parameters,  $itemOrderExtraIngredientService,  $service,  $extraIngredientService);
+        $itemOrderExtraIngredientService->deleteOnId();
+        $itemOrderExtraIngredientService->update($parameters);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

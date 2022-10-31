@@ -8,9 +8,10 @@ class SauceService
 {
     private $repository;
 
-    public function  __construct(SauceRepository $repository)
+    public function  __construct(SauceRepository $repository, ItemOrderService $itemOrderService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
     }
 
     function save($sauce)
@@ -43,8 +44,14 @@ class SauceService
         return $this->repository->find($id);
     }
 
-    function updateSauce($parameters, ItemOrderService $service, SauceService $sauceService){
-        $this->repository->updateSauce($parameters, $service, $sauceService);
+    function updateSauce($parameters){
+        $sauce = $this->find($parameters['valueId']);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+
+        $current->setSauce($sauce);
+        $current->setOrderStep(4);
+
+        $this->itemOrderService->save($current);
     }
 
 }

@@ -33,17 +33,11 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
 
     }
 
-    public function deleteOnId(ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service): void
+    public function delete(ItemOrderExtraIngredient $itemOrderExtraIngredient): void
     {
-        $current = $service->findItemOrderIdStatus();
-        $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
+        $this->getEntityManager()->remove($itemOrderExtraIngredient);
+        $this->getEntityManager()->flush();
 
-        foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient){
-            if ($itemOrderExtraIngredient->getItemOrder()->getId() == $current->getId()){
-                $this->getEntityManager()->remove($itemOrderExtraIngredient);
-                $this->getEntityManager()->flush();
-            }
-        }
     }
 
     public function findItemOrderExtraIngredient()
@@ -64,22 +58,6 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function updateExtraIngredient($extraIngredientId, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
-    {
-        $extraIngredient = $extraIngredientService->find($extraIngredientId);
-        $current = $service->findItemOrderIdStatus();
-        $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
-        $current->setOrderStep(6);
-        $itemOrderExtraIngredientService->save($itemOrderExtraIngredient);
-    }
-
-    public function update($parameters,ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service, ExtraIngredientService $extraIngredientService)
-    {
-        $extraIngredientsId = $parameters['valueId'];
-        foreach ($extraIngredientsId as $extraIngredientId) {
-            $itemOrderExtraIngredientService->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
-        }
-    }
 
 //    /**
 //     * @return ItemOrderExtraIngredient[] Returns an array of ItemOrderExtraIngredient objects

@@ -61,28 +61,7 @@ class BowlRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function updateBowl($parameters, ItemOrderService $service, BowlService $bowlService)
-    {
-        $bowl = $bowlService->find($parameters['valueId']);
-        $current = $service ->findItemOrderIdStatus();
 
-        if ($current == null || $current->getOrderStep()==6) {
-            $itemOrder = new ItemOrder();
-            $itemOrder->setBowl($bowl);
-            $itemOrder->setOrderStep(1);
-            $service->save($itemOrder);
-
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->send();
-        } else {
-            $current->setBowl($bowl);
-            $current->setOrderStep(1);
-            $service->save($current);
-
-
-        }
-    }
 
 
 //    /**

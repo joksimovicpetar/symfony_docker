@@ -13,17 +13,17 @@ class IngredientService
         $this->repository = $repository;
     }
 
-    function save($ingredient)
+    function save($ingredient): void
     {
         $this->repository->save($ingredient);
     }
 
-    function update($ingredient)
+    function update($ingredient): void
     {
         $this->repository->update($ingredient);
     }
 
-    function delete($ingredient)
+    function delete($ingredient): void
     {
         $this->repository->delete($ingredient);
     }

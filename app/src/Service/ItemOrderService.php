@@ -40,4 +40,10 @@ class ItemOrderService
     {
         return $this->repository->findItemOrderIdStatus();
     }
+
+    function calculatePrice()
+    {
+        $price = $this->repository->calculatePrice();
+        return $price;
+    }
 }

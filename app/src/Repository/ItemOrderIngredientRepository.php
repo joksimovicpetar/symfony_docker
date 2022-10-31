@@ -31,17 +31,11 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function deleteOnId( ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service): void
+    public function delete(ItemOrderIngredient $itemOrderIngredient): void
     {
-        $current = $service->findItemOrderIdStatus();
-        $itemOrderIngredients = $itemOrderIngredientService->findItemOrderIngredient();
+        $this->getEntityManager()->remove($itemOrderIngredient);
+        $this->getEntityManager()->flush();
 
-        foreach ($itemOrderIngredients as $itemOrderIngredient){
-            if ($itemOrderIngredient->getItemOrder()->getId() == $current->getId()){
-                $this->getEntityManager()->remove($itemOrderIngredient);
-                $this->getEntityManager()->flush();
-            }
-        }
     }
 
     public function findItemOrderIngredient()
@@ -53,22 +47,6 @@ class ItemOrderIngredientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService) :void
-    {
-        $ingredient = $ingredientService->find($ingredientId);
-        $current = $service->findItemOrderIdStatus();
-        $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
-        $current->setOrderStep(5);
-        $itemOrderIngredientService->save($itemOrderIngredient);
-    }
-
-    public function update($parameters,ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service, IngredientService $ingredientService)
-    {
-        $ingredientsId = $parameters['valueId'];
-        foreach ($ingredientsId as $ingredientId) {
-            $itemOrderIngredientService->updateIngredient($ingredientId, $service, $itemOrderIngredientService, $ingredientService);
-        }
-    }
 
 
 

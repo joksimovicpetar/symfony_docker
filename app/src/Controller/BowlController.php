@@ -22,10 +22,10 @@ class BowlController extends AbstractController
     }
 
     #[Route('/bowl/new', name: 'app_bowl_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ItemOrderService $service, BowlService $bowlService)
+    public function edit(Request $request, BowlService $bowlService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $bowlService->updateBowl($parameters, $service, $bowlService);
+        $bowlService->updateBowl($parameters);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

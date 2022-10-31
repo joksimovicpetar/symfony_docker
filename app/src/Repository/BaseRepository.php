@@ -54,16 +54,6 @@ class BaseRepository extends ServiceEntityRepository
 
     }
 
-    public function updateBase($parameters, ItemOrderService $service, BaseService $baseService)
-    {
-        $base = $baseService->find($parameters['valueId']);
-        $current = $service->findItemOrderIdStatus();
-
-        $current->setBase($base);
-        $current->setOrderStep(3);
-
-        $service->save($current);
-    }
 
 //    /**
 //     * @return Base[] Returns an array of Base objects

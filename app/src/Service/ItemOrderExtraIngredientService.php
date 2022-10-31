@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Service;
+use App\Entity\ItemOrderExtraIngredient;
 use App\Repository\ItemOrderExtraIngredientRepository;
 
 class ItemOrderExtraIngredientService
 {
     private $repository;
 
-    public function  __construct(ItemOrderExtraIngredientRepository $repository)
+    public function  __construct(ItemOrderExtraIngredientRepository $repository, ItemOrderService $itemOrderService, ExtraIngredientService $extraIngredientService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
+        $this->extraIngredientService = $extraIngredientService;
     }
 
 
@@ -18,9 +21,16 @@ class ItemOrderExtraIngredientService
         $this->repository->save($itemOrderExtraIngredient);
     }
 
-    function deleteOnId(ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service): void
+    function deleteOnId(): void
     {
-        $this->repository->deleteOnId($itemOrderExtraIngredientService, $service);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+        $itemOrderExtraIngredients = $this->findItemOrderExtraIngredient();
+
+        foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient){
+            if ($itemOrderExtraIngredient->getItemOrder()->getId() == $current->getId()){
+                $this->repository->delete($itemOrderExtraIngredient);
+            }
+        }
     }
 
     function findAll()
@@ -41,13 +51,15 @@ class ItemOrderExtraIngredientService
         return $this->repository->find($id);
     }
 
-    function updateExtraIngredient($extraIngredientId, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    public function update($parameters)
     {
-        $this->repository->updateExtraIngredient($extraIngredientId, $service, $itemOrderExtraIngredientService, $extraIngredientService);
-    }
-
-    public function update($parameters,ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ItemOrderService $service, ExtraIngredientService $extraIngredientService)
-    {
-        $this->repository->update($parameters,  $itemOrderExtraIngredientService,  $service,  $extraIngredientService);
+        $extraIngredientsId = $parameters['valueId'];
+        foreach ($extraIngredientsId as $extraIngredientId) {
+            $extraIngredient = $this->extraIngredientService->find($extraIngredientId);
+            $current = $this->itemOrderService->findItemOrderIdStatus();
+            $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
+            $current->setOrderStep(6);
+            $this->save($itemOrderExtraIngredient);
+        }
     }
 }

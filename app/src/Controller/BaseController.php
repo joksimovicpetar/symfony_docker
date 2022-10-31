@@ -25,7 +25,7 @@ class BaseController extends AbstractController
     public function edit(Request $request, ItemOrderService $service, BaseService $baseService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $baseService->updateBase($parameters, $service, $baseService);
+        $baseService->updateBase($parameters);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

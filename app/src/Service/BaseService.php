@@ -7,23 +7,24 @@ class BaseService
 {
     private $repository;
 
-    public function  __construct(BaseRepository $repository)
+    public function  __construct(BaseRepository $repository,ItemOrderService $itemOrderService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
     }
 
 
-    function save(Base $base): void
+    function save( $base): void
     {
         $this->repository->save($base);
     }
 
-    function update(Base $base): void
+    function update( $base): void
     {
         $this->repository->update($base);
     }
 
-    function delete(Base $base): void
+    function delete( $base): void
     {
         $this->repository->delete($base);
     }
@@ -42,7 +43,13 @@ class BaseService
         return $this->repository->find($id);
     }
 
-    function updateBase($parameters, ItemOrderService $service, BaseService $baseService){
-        $this->repository->updateBase($parameters, $service, $baseService);
+    function updateBase($parameters){
+        $base = $this->find($parameters['valueId']);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+
+        $current->setBase($base);
+        $current->setOrderStep(3);
+
+        $this->itemOrderService->save($current);
     }
 }

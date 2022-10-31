@@ -47,6 +47,11 @@ class ItemOrderRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+//    public function calculatePrice()
+//    {
+//        $pri
+//    }
+
 //    /**
 //     * @return ItemOrder[] Returns an array of ItemOrder objects
 //     */
@@ -71,4 +76,5 @@ class ItemOrderRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

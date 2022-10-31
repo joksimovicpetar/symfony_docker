@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Service;
+use App\Entity\ItemOrderIngredient;
 use App\Repository\ItemOrderIngredientRepository;
 
 class ItemOrderIngredientService
 {
     private $repository;
 
-    public function  __construct(ItemOrderIngredientRepository $repository)
+    public function  __construct(ItemOrderIngredientRepository $repository, ItemOrderService $itemOrderService,  IngredientService $ingredientService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
+        $this->ingredientService = $ingredientService;
     }
 
 
@@ -18,9 +21,16 @@ class ItemOrderIngredientService
         $this->repository->save($itemOrderIngredient);
     }
 
-    function deleteOnId(ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service): void
+    function deleteOnId(): void
     {
-        $this->repository->deleteOnId($itemOrderIngredientService, $service);
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+        $itemOrderIngredients = $this->findItemOrderIngredient();
+
+        foreach ($itemOrderIngredients as $itemOrderIngredient){
+            if ($itemOrderIngredient->getItemOrder()->getId() == $current->getId()){
+                $this->repository->delete($itemOrderIngredient);
+            }
+        }
     }
 
     function findAll()
@@ -39,13 +49,15 @@ class ItemOrderIngredientService
         return $this->repository->find($id);
     }
 
-    function updateIngredient($ingredientId, ItemOrderService $service, ItemOrderIngredientService $itemOrderIngredientService, IngredientService $ingredientService)
+    public function update($parameters)
     {
-        $this->repository->updateIngredient($ingredientId, $service, $itemOrderIngredientService, $ingredientService);
-    }
-
-    public function update($parameters,ItemOrderIngredientService $itemOrderIngredientService, ItemOrderService $service, IngredientService $ingredientService)
-    {
-        $this->repository->update($parameters,  $itemOrderIngredientService,  $service,  $ingredientService);
+        $ingredientsId = $parameters['valueId'];
+        foreach ($ingredientsId as $ingredientId) {
+            $ingredient = $this->ingredientService->find($ingredientId);
+            $current = $this->itemOrderService->findItemOrderIdStatus();
+            $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
+            $current->setOrderStep(5);
+            $this->save($itemOrderIngredient);
+        }
     }
 }

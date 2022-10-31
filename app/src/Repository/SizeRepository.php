@@ -54,16 +54,6 @@ class SizeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function updateSize($parameters, ItemOrderService $service, SizeService $sizeService)
-    {
-        $size = $sizeService->find($parameters['valueId']);
-        $current = $service->findItemOrderIdStatus();
-
-        $current->setSize($size);
-        $current->setOrderStep(2);
-
-        $service->save($current);
-    }
 
 //    /**
 //     * @return Size[] Returns an array of Size objects
