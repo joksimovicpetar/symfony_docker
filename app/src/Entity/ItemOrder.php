@@ -16,22 +16,22 @@ class ItemOrder
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: 'Bowl', inversedBy: 'itemOrders'),
-    ORM\JoinColumn(name: 'bowl_id', referencedColumnName: 'id')]
+        ORM\JoinColumn(name: 'bowl_id', referencedColumnName: 'id')]
     private ?Bowl $bowl = null;
 
     #[ORM\ManyToOne(targetEntity: 'Size', inversedBy: 'itemOrders'),
-    ORM\JoinColumn(name: 'size_id', referencedColumnName: 'id')]
+        ORM\JoinColumn(name: 'size_id', referencedColumnName: 'id')]
     private ?Size $size = null;
 
     #[ORM\ManyToOne(targetEntity: 'Base', inversedBy: 'itemOrders'),
-    ORM\JoinColumn(name: 'base_id', referencedColumnName: 'id')]
+        ORM\JoinColumn(name: 'base_id', referencedColumnName: 'id')]
     private ?Base $base = null;
 
     #[ORM\ManyToOne(targetEntity: 'Sauce', inversedBy: 'itemOrders'),
-    ORM\JoinColumn(name: 'sauce_id', referencedColumnName: 'id')]
+        ORM\JoinColumn(name: 'sauce_id', referencedColumnName: 'id')]
     private ?Sauce $sauce = null;
 
-    #[ORM\OneToMany(mappedBy: 'itemOrder' , targetEntity: ItemOrderIngredient::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: ItemOrderIngredient::class, orphanRemoval: true)]
     private Collection $itemOrderIngredients;
 
     #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: ItemOrderExtraIngredient::class, orphanRemoval: true)]
@@ -41,7 +41,7 @@ class ItemOrder
     private ?int $orderStep = 1;
 
     #[ORM\ManyToOne(targetEntity: UserOrder::class, inversedBy: 'itemOrders'),
-    ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
+        ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
     private ?UserOrder $userOrder = null;
 
 
@@ -130,7 +130,6 @@ class ItemOrder
     }
 
 
-
     /**
      * @return Collection<int, ItemOrderIngredient>
      */
@@ -214,6 +213,5 @@ class ItemOrder
 
         return $this;
     }
-
 
 }

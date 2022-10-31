@@ -3,9 +3,13 @@
 {% block title %}Hello UserOrderController!{% endblock %}
 
 {% block body %}
+    <h1 class="checkout-heading">Checkout</h1>
+
     <table id="user_order" class="table table-striped">
         <thead>
         <tr>
+            <th></th>
+            <th></th>
             <th></th>
             <th>Item</th>
             <th>Base</th>
@@ -19,14 +23,24 @@
         <tbody>
         {% for itemOrder in userOrder.itemOrders %}
             <tr>
-                {{ dump(itemOrder) }}
+{#                {{ dump(itemOrder) }}#}
+                <th></th>
+                <th><button class="btn-delete-order-item "><i class="material-icons">delete</i></button></th>
                 <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
                 <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
                 <th>{{ itemOrder.base.name }}</th>
                 <th>{{ itemOrder.sauce.name }}</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>
+                    {% for itemOrderIngredients in itemOrder.itemOrderIngredients %}
+                        {{ itemOrderIngredients.ingredient.name }} <br>
+                    {% endfor %}
+                </th>
+                <th>
+                    {% for itemOrderExtraIngredients in itemOrder.itemOrderExtraIngredients %}
+                        {{ itemOrderExtraIngredients.extraIngredient.name }} <br>
+                    {% endfor %}
+                </th>
+                <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="1"></th>
                 <th></th>
             </tr>
         {% endfor %}

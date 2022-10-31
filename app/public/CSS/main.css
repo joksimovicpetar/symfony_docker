@@ -318,3 +318,33 @@ footer{
 .links{
     color: black;
 }
+
+.checkout-heading{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    padding-left: 100px;
+}
+
+.btn-delete-order-item {
+    background-color: #dfdfdf;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.btn-delete-order-item:hover{
+    background-color: darkgrey;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+input[type=number]:not(.browser-default) {
+    width: 35px;
+    border-bottom: #B0413E;
+}
