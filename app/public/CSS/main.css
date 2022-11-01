@@ -128,7 +128,7 @@
 
 body {
     background-color: #f7f8fa;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 }
 
 .caption-bowl{
@@ -408,7 +408,7 @@ input[type=number]:not(.browser-default) {
     border-width: 1px;
     text-transform: none;
     height: 35px;
-    line-height: 28px;
+    line-height: 29px;
     width: 80px;
     font-size: 12px;
     padding: 1px;
@@ -425,7 +425,7 @@ input[type=number]:not(.browser-default) {
     border-width: 1px;
     text-transform: none;
     height: 35px;
-    line-height: 28px;
+    line-height: 29px;
     width: 100%;
     font-size: 12px;
     padding: 1px;

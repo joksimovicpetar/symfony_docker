@@ -19,7 +19,7 @@
         <tr>
             {% set totalOrderPrice = totalOrderPrice + item_order_price(itemOrder) %}
             <th></th>
-            <th><button class="btn-delete-order-item "><i class="material-icons">delete</i></button></th>
+            <th><button class="btn-delete-order-item" data-id="{{ itemOrder.id }}"><i class="material-icons">delete</i></button></th>
             <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
             <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
             <th>{{ itemOrder.base.name }}</th>
