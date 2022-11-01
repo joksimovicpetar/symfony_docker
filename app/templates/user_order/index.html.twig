@@ -4,46 +4,127 @@
 
 {% block body %}
     <h1 class="checkout-heading">Checkout</h1>
-
-    <table id="user_order" class="table table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>Item</th>
-            <th>Base</th>
-            <th>Sauce</th>
-            <th>Ingredients</th>
-            <th>Extras</th>
-            <th>Quantity</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for itemOrder in userOrder.itemOrders %}
+    <div>
+        <table id="user_order" class="table table-striped">
+            <thead>
             <tr>
-{#                {{ dump(itemOrder) }}#}
                 <th></th>
-                <th><button class="btn-delete-order-item "><i class="material-icons">delete</i></button></th>
-                <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
-                <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
-                <th>{{ itemOrder.base.name }}</th>
-                <th>{{ itemOrder.sauce.name }}</th>
-                <th>
-                    {% for itemOrderIngredients in itemOrder.itemOrderIngredients %}
-                        {{ itemOrderIngredients.ingredient.name }} <br>
-                    {% endfor %}
-                </th>
-                <th>
-                    {% for itemOrderExtraIngredients in itemOrder.itemOrderExtraIngredients %}
-                        {{ itemOrderExtraIngredients.extraIngredient.name }} <br>
-                    {% endfor %}
-                </th>
-                <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="1"></th>
+                <th></th>
+                <th></th>
+                <th>Item</th>
+                <th>Base</th>
+                <th>Sauce</th>
+                <th>Ingredients</th>
+                <th>Extras</th>
+                <th>Quantity</th>
                 <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% set totalPrice = 0 %}
+            {% for itemOrder in userOrder.itemOrders %}
+                <tr>
+                    {% set totalPrice = totalPrice + item_order_price(itemOrder) %}
+
+                    {#{{ dump(itemOrder.id) }}#}
+                    <th></th>
+                    <th><button class="btn-delete-order-item "><i class="material-icons">delete</i></button></th>
+                    <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
+                    <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
+                    <th>{{ itemOrder.base.name }}</th>
+                    <th>{{ itemOrder.sauce.name }}</th>
+                    <th>
+                        {% for itemOrderIngredients in itemOrder.itemOrderIngredients %}
+                            {{ itemOrderIngredients.ingredient.name }} <br>
+                        {% endfor %}
+                    </th>
+                    <th>
+                        {% for itemOrderExtraIngredients in itemOrder.itemOrderExtraIngredients %}
+                            {{ itemOrderExtraIngredients.extraIngredient.name }} <br>
+                        {% endfor %}
+                    </th>
+                    <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="1"></th>
+                    <th>
+                        {% set currentPrice = item_order_price(itemOrder) %}
+                        {{ itemOrder.size.currency }} {{ currentPrice }}
+                    </th>
+                </tr>
+            {% endfor %}
+            {#{{ dump(totalPrice) }}#}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1">
+            <p class="subtotal">Subtotal</p>
+        </div>
+        <div class="col s1">
+            <p class="subtotal-price">${{ totalPrice }}</p>
+        </div>
+        <div class="col s1"></div>
+    </div>
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1">
+            <p class="delivery">Delivery fee</p>
+        </div>
+        <div class="col s1">
+            <p class="delivery-price">$0</p>
+        </div>
+        <div class="col s1"></div>
+    </div>
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1">
+            <p class="total">Total</p>
+        </div>
+        <div class="col s1">
+            <p class="total-price">${{ totalPrice }}</p>
+        </div>
+        <div class="col s1"></div>
+    </div>
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1"></div>
+        <div class="col s1">
+            <a class="waves-effect waves-light btn btn-new-item" href="http://localhost:8080/bowl">Order more</a>
+        </div>
+        <div class="col s1">
+            <a class="waves-effect waves-light btn btn-checkout" href="http://localhost:8080">Proceed to checkout</a>
+        <div class="col s1"></div>
+    </div>
 {% endblock %}
+{% block footer %}
+{%endblock %}

@@ -56,7 +56,10 @@ class ItemOrderIngredientService
             $ingredient = $this->ingredientService->find($ingredientId);
             $current = $this->itemOrderService->findItemOrderIdStatus();
             $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
-            $current->setOrderStep(5);
+            if ($current->getOrderStep()<=5)
+            {
+                $current->setOrderStep(5);
+            }
             $this->save($itemOrderIngredient);
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\ItemOrder;
 use App\Entity\UserOrder;
 use App\Repository\UserOrderRepository;
 
@@ -9,9 +10,11 @@ class UserOrderService
 {
     private $repository;
 
-    public function __construct(UserOrderRepository $repository)
+    public function __construct(UserOrderRepository $repository, ItemOrderService $itemOrderService, ItemOrderExtraIngredientService $itemOrderExtraIngredientService)
     {
         $this->repository = $repository;
+        $this->itemOrderService = $itemOrderService;
+        $this->itemOrderExtraIngredientService = $itemOrderExtraIngredientService;
     }
 
     function save($userOrder)
@@ -41,6 +44,28 @@ class UserOrderService
 
     function find($id){
         return $this->repository->find($id);
+    }
+
+    function findLastUserOrder(){
+        return $this->repository->findLastUserOrder();
+    }
+
+    /**
+     * @param ItemOrder $itemOrder
+     * @return float
+     */
+    function findPrice($itemOrder) : float
+    {
+        $sum = $itemOrder->getSize()->getPrice();
+        $extraIngredientsList = $this->itemOrderExtraIngredientService->findItemOrderExtraIngredient();
+
+        foreach ($extraIngredientsList as $extraIngredient)
+        {
+            if ($extraIngredient->getItemOrder()->getId() == $itemOrder->getId()){
+                $sum += $extraIngredient->getExtraIngredient()->getPrice();
+            }
+        }
+        return $sum;
     }
 
 }

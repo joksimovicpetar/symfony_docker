@@ -49,8 +49,10 @@ class SizeService
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setSize($size);
-        $current->setOrderStep(2);
-
+        if ($current->getOrderStep()<=2)
+        {
+            $current->setOrderStep(2);
+        }
         $this->itemOrderService->save($current);
     }
 }

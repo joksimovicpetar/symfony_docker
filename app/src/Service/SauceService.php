@@ -49,8 +49,10 @@ class SauceService
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setSauce($sauce);
-        $current->setOrderStep(4);
-
+        if ($current->getOrderStep()<=4)
+        {
+            $current->setOrderStep(4);
+        }
         $this->itemOrderService->save($current);
     }
 

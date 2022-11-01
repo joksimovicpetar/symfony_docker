@@ -43,9 +43,25 @@ class UserOrderRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('user_order')
 
-            ->select('user_order', 'item')
+            ->select('user_order', 'item', 'bowl', 'size', 'base', 'sauce', 'ingredients', 'extraIngredients')
             ->leftJoin('user_order.itemOrders', 'item')
+            ->leftJoin('item.bowl', 'bowl')
+            ->leftJoin('item.size', 'size')
+            ->leftJoin('item.base', 'base')
+            ->leftJoin('item.sauce', 'sauce')
+            ->leftJoin('item.itemOrderIngredients', 'ingredients')
+            ->leftJoin('item.itemOrderExtraIngredients', 'extraIngredients')
             ->orderBy('user_order.id', 'ASC')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findLastUserOrder()
+    {
+        return $this->createQueryBuilder('user_order')
+            ->select('user_order')
+            ->orderBy('user_order.id', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }

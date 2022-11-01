@@ -48,8 +48,10 @@ class BaseService
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setBase($base);
-        $current->setOrderStep(3);
-
+        if ($current->getOrderStep()<=3)
+        {
+            $current->setOrderStep(3);
+        }
         $this->itemOrderService->save($current);
     }
 }

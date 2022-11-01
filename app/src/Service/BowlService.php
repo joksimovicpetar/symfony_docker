@@ -13,11 +13,11 @@ class BowlService
 
     private $repository;
 
-    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService)
+    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService)
     {
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
-
+        $this->userOrderService = $userOrderService;
     }
 
 
@@ -53,16 +53,21 @@ class BowlService
     function updateBowl($parameters){
         $bowl = $this->find($parameters['valueId']);
         $current = $this->itemOrderService->findItemOrderIdStatus();
+        $currentUserOrder = $this->userOrderService->findLastUserOrder();
 
         if ($current == null || $current->getOrderStep()==6) {
             $itemOrder = new ItemOrder();
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
+            $itemOrder->setUserOrder($currentUserOrder);
             $this->itemOrderService->save($itemOrder);
 
         } else {
             $current->setBowl($bowl);
-            $current->setOrderStep(1);
+            if ($current->getOrderStep()<=1)
+            {
+                $current->setOrderStep(1);
+            }
             $this->itemOrderService->save($current);
         }
     }
