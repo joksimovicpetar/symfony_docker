@@ -412,7 +412,7 @@ input[type=number]:not(.browser-default) {
     width: 80px;
     font-size: 12px;
     padding: 1px;
-    z-index: 2;
+    z-index: 0;
 }
 
 .btn-checkout{
@@ -429,7 +429,7 @@ input[type=number]:not(.browser-default) {
     width: 100%;
     font-size: 12px;
     padding: 1px;
-    z-index: 2;
+    z-index: 0;
 }
 
 .btn-new-item:hover {
