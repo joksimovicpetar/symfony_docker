@@ -12,6 +12,8 @@
         {% include 'user_order/user-order-table.html.twig' %}
     </div>
 {% endblock %}
-
 {% block footer %}
 {%endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/user-order-delete.js') }}"></script>
+{% endblock%}

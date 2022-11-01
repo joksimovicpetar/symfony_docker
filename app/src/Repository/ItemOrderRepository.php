@@ -28,13 +28,10 @@ class ItemOrderRepository extends ServiceEntityRepository
 
     }
 
-    public function remove(ItemOrder $entity, bool $flush = false): void
+    public function delete(ItemOrder $itemOrder): void
     {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->getEntityManager()->remove($itemOrder);
+        $this->getEntityManager()->flush();
     }
 
     public function findItemOrderIdStatus()
