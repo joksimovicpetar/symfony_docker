@@ -19,7 +19,7 @@ async function updateOrderItem(routeEdit, dataId) {
         console.log(e)
     }
 }
-async function updateItem(){
+function updateItem(){
     const btns = document.getElementsByName("quantity");
     for (const btn of btns) {
         btn.addEventListener('change', (event) => {

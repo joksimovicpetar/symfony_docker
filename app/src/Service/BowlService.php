@@ -42,15 +42,18 @@ class BowlService
         return $bowls;
     }
 
-    function findBowls(){
+    function findBowls()
+    {
         return $this->repository->findBowls();
     }
 
-    function find($id){
+    function find($id)
+    {
         return $this->repository->find($id);
     }
 
-    function updateBowl($parameters){
+    function updateBowl($parameters)
+    {
         $bowl = $this->find($parameters['valueId']);
         $current = $this->itemOrderService->findItemOrderIdStatus();
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
@@ -71,5 +74,6 @@ class BowlService
             $this->itemOrderService->save($current);
         }
     }
+
 
 }
