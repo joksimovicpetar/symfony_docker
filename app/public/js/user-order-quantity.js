@@ -1,5 +1,5 @@
-async function deleteOrderItem(routeEdit, dataId) {
-    console.log(dataId);
+async function updateOrderItem(routeEdit, dataId) {
+
     try{
         const deleteResponse = await fetch(routeEdit, {
             method: 'POST',
@@ -11,7 +11,7 @@ async function deleteOrderItem(routeEdit, dataId) {
         const response = await deleteResponse.json();
         // console.log(JSON.stringify(response))
         document.getElementById("user_order_table").innerHTML = response.html;
-        deleteItem()
+        updateItem()
 
     }
     catch (e) {
@@ -19,16 +19,16 @@ async function deleteOrderItem(routeEdit, dataId) {
         console.log(e)
     }
 }
-async function deleteItem(){
-    const btns = document.getElementsByClassName("btn-delete-order-item");
+async function updateItem(){
+    const btns = document.getElementsByName("quantity");
     for (const btn of btns) {
-        btn.addEventListener('click', () => {
-                // alert('clicked')
+        btn.addEventListener('change', (event) => {
+                console.log(event)
                 const dataId = btn.getAttribute("data-id");
-                deleteOrderItem('http://localhost:8080/user_order/delete', dataId)
+                updateOrderItem('http://localhost:8080/user_order/update', dataId)
             }
             , false);
     }
 }
 
-deleteItem()
+updateItem()

@@ -3,6 +3,7 @@
 namespace App\Service;
 use App\Entity\ItemOrder;
 use App\Repository\ItemOrderRepository;
+use Symfony\Component\VarDumper\VarDumper;
 
 
 class ItemOrderService
@@ -20,9 +21,20 @@ class ItemOrderService
         $this->repository->save($itemOrder);
     }
 
-    function update(ItemOrder $itemOrder): void
+    function update($parameters, $multiplier,ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
     {
-        $this->repository->update($itemOrder);
+        $itemOrderId = $parameters['valueId'];
+        $itemOrder = $this->find($itemOrderId);
+        $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
+        $itemOrder->getSize()->setPrice($itemOrder->getSize()->getPrice()*$multiplier);
+
+        foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient)
+        {
+            if ($itemOrderExtraIngredient->getItemOrder()->getId()==$itemOrder->getId())
+            {
+                $itemOrderExtraIngredient->getExtraIngredient()->setPrice($itemOrderExtraIngredient->getExtraIngredient()->getPrice()*$multiplier);
+            }
+        }
     }
 
     function delete(ItemOrder $itemOrder): void

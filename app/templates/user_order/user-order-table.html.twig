@@ -37,7 +37,7 @@
                     {{ itemOrderExtraIngredients.extraIngredient.name }} <br>
                 {% endfor %}
             </th>
-            <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="1"></th>
+            <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="1" data-id="{{ itemOrder.id }}"></th>
             <th>
                 {% set orderPrice = item_order_price(itemOrder) %}
                 {{ itemOrder.size.currency }} {{ orderPrice }}
