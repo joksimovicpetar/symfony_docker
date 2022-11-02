@@ -4,11 +4,8 @@
 
 {% block body %}
     <h1 class="checkout-heading">Checkout</h1>
-    {% set deliveryPrice = 0 %}
-    {% set orderPrice = 0 %}
-    {% set totalOrderPrice = 0 %}
-    {% set totalPrice = 0 %}
-    <div>
+
+    <div id="user_order_table">
         {% include 'user_order/user-order-table.html.twig' %}
     </div>
 {% endblock %}
