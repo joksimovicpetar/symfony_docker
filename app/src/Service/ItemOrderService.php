@@ -58,6 +58,10 @@ class ItemOrderService
     }
 
 
-
+    function priceCalculator()
+    {
+        $current = $this->findItemOrderIdStatus();
+        $current->setPrice();
+    }
 
 }

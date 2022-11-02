@@ -60,6 +60,7 @@ class ItemOrderExtraIngredientService
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
             $current->setOrderStep(6);
             $this->save($itemOrderExtraIngredient);
+            $this->itemOrderService->priceCalculator();
         }
     }
 }

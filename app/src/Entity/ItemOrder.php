@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ItemOrderRepository;
+use App\Service\ItemOrderService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,6 +44,9 @@ class ItemOrder
     #[ORM\ManyToOne(targetEntity: UserOrder::class, inversedBy: 'itemOrders'),
         ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
     private ?UserOrder $userOrder = null;
+
+    #[ORM\Column]
+    private ?float $price = null;
 
 
     public function __construct()
@@ -214,5 +218,16 @@ class ItemOrder
         return $this;
     }
 
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
 
 }
