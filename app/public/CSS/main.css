@@ -452,3 +452,67 @@ button:focus {
     outline: none;
     background-color: lightcoral;
 }
+
+.name-paragraph{
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.price-paragraph{
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-right: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.size-paragraph{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+.base-paragraph{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+.sauce-paragraph{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+.ingredient-paragraph-head{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 15px;
+}
+
+.ingredient-paragraph-body{
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 25px;
+}
+
+.summary-rows{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.card-summary{
+    display: inline;
+    align-items: normal;
+    justify-content: normal;
+    border-radius: 7px;
+}
