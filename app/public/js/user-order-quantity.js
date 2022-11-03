@@ -1,21 +1,20 @@
-async function updateOrderItem(routeEdit, dataId) {
+async function updateOrderItem(routeEdit, dataId, quantity) {
 
     try{
         const updateResponse = await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: dataId}),
+            body: JSON.stringify({valueId: dataId, quantity: quantity})
+
+
         });
-        // console.log(deleteResponse)
-        // console.log(deleteResponse.body)
         const response = await updateResponse.json();
-        // console.log(JSON.stringify(response))
-        // document.getElementById("user_order_table").innerHTML = response.html;
+        document.getElementById("user_order_table").innerHTML = response.html;
         updateItem()
 
     }
     catch (e) {
-        console.error('Error while deleting item order')
+        console.error('Error while updating item order')
         console.log(e)
     }
 }
@@ -23,9 +22,11 @@ function updateItem(){
     const btns = document.getElementsByName("quantity");
     for (const btn of btns) {
         btn.addEventListener('change', (event) => {
-                console.log(event)
+                // console.log(event)
+                // console.log(event.target.value)
+                const quantity = event.target.value;
                 const dataId = btn.getAttribute("data-id");
-                updateOrderItem('http://localhost:8080/user_order/update', dataId)
+                updateOrderItem('http://localhost:8080/user_order/update', dataId, quantity)
             }
             , false);
     }

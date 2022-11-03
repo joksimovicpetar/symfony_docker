@@ -62,6 +62,7 @@ class BowlService
             $itemOrder = new ItemOrder();
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
+            $itemOrder->setQuantity(1);
             $itemOrder->setUserOrder($currentUserOrder);
             $this->itemOrderService->save($itemOrder);
 

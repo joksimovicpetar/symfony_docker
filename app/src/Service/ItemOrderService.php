@@ -21,12 +21,15 @@ class ItemOrderService
         $this->repository->save($itemOrder);
     }
 
-    function update($parameters, $multiplier): void
+    function update($parameters): void
     {
+        $quantity = $parameters['quantity'];
         $itemOrderId = $parameters['valueId'];
         $itemOrder = $this->find($itemOrderId);
-        $itemOrder->setPrice($itemOrder->getPrice()*$multiplier);
-//        VarDumper::dump($itemOrder);exit;
+        $itemOrder->setQuantity($quantity);
+        $this->save($itemOrder);
+        $itemOrder->setPrice($itemOrder->getPrice()*$itemOrder->getQuantity());
+
 
     }
 

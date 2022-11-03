@@ -45,8 +45,7 @@ class UserOrderController extends AbstractController
     public function update(Request $request, ItemOrderService $itemOrderService, UserOrderService $service)
     {
         $parameters = json_decode($request->getContent(), true);
-        $multiplier = 2;
-        $itemOrderService->update($parameters, $multiplier);
+        $itemOrderService->update($parameters);
 
 
         $render = $this->renderView('user_order/user-order-table.html.twig', [
