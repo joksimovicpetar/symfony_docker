@@ -41,19 +41,19 @@ class UserOrderController extends AbstractController
 
     }
 
-//    #[Route('/user_order/update', name: 'order_list_update', methods: [ 'POST'])]
-//    public function update(Request $request, ItemOrderService $itemOrderService, UserOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService)
-//    {
-//        $parameters = json_decode($request->getContent(), true);
-//        $multiplier = 2;
-//        $itemOrderService->update($parameters, $multiplier, $itemOrderExtraIngredientService);
+    #[Route('/user_order/update', name: 'order_list_update', methods: [ 'POST'])]
+    public function update(Request $request, ItemOrderService $itemOrderService, UserOrderService $service)
+    {
+        $parameters = json_decode($request->getContent(), true);
+        $multiplier = 2;
+        $itemOrderService->update($parameters, $multiplier);
+
+
+        $render = $this->renderView('user_order/user-order-table.html.twig', [
+            'userOrder' => $service->findUserOrders(),
+        ]);
 //
-//
-//        $render = $this->renderView('user_order/user-order-table.html.twig', [
-//            'userOrder' => $service->findUserOrders(),
-//        ]);
-////        VarDumper::dump($render);
-//        return new JsonResponse(['html' => $render]);
-//
-//    }
+        return new JsonResponse(['html' => $render]);
+
+    }
 }

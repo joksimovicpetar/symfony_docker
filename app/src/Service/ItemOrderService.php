@@ -21,21 +21,14 @@ class ItemOrderService
         $this->repository->save($itemOrder);
     }
 
-//    function update($parameters, $multiplier,ItemOrderExtraIngredientService $itemOrderExtraIngredientService): void
-//    {
-//        $itemOrderId = $parameters['valueId'];
-//        $itemOrder = $this->find($itemOrderId);
-//        $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
-//        $itemOrder->getSize()->setPrice($itemOrder->getSize()->getPrice()*$multiplier);
-//
-//        foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient)
-//        {
-//            if ($itemOrderExtraIngredient->getItemOrder()->getId()==$itemOrder->getId())
-//            {
-//                $itemOrderExtraIngredient->getExtraIngredient()->setPrice($itemOrderExtraIngredient->getExtraIngredient()->getPrice()*$multiplier);
-//            }
-//        }
-//    }
+    function update($parameters, $multiplier): void
+    {
+        $itemOrderId = $parameters['valueId'];
+        $itemOrder = $this->find($itemOrderId);
+        $itemOrder->setPrice($itemOrder->getPrice()*$multiplier);
+//        VarDumper::dump($itemOrder);exit;
+
+    }
 
     function delete(ItemOrder $itemOrder): void
     {

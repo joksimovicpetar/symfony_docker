@@ -1,16 +1,16 @@
 async function updateOrderItem(routeEdit, dataId) {
 
     try{
-        const deleteResponse = await fetch(routeEdit, {
+        const updateResponse = await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({valueId: dataId}),
         });
         // console.log(deleteResponse)
         // console.log(deleteResponse.body)
-        const response = await deleteResponse.json();
+        const response = await updateResponse.json();
         // console.log(JSON.stringify(response))
-        document.getElementById("user_order_table").innerHTML = response.html;
+        // document.getElementById("user_order_table").innerHTML = response.html;
         updateItem()
 
     }

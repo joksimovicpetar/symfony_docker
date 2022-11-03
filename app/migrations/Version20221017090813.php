@@ -92,16 +92,20 @@ final class Version20221017090813 extends AbstractMigration
                                                  id INT PRIMARY KEY AUTO_INCREMENT,
                                                  item_order_id INT,
                                                  ingredient_id INT,
-                                                 FOREIGN KEY (item_order_id) REFERENCES item_order(id),
-                                                 FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
+                                                 FOREIGN KEY (item_order_id) REFERENCES item_order(id) ON DELETE CASCADE,
+                                                 FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) 
                             );
                             
                             CREATE TABLE item_order_extra_ingredient (
                                                   id INT PRIMARY KEY AUTO_INCREMENT,
                                                   item_order_id int NOT NULL,
                                                   extra_ingredient_id int NOT NULL,
-                                                  FOREIGN KEY (item_order_id) REFERENCES item_order(id),
+                                                  FOREIGN KEY (item_order_id) REFERENCES item_order(id) ON DELETE CASCADE,
                                                   FOREIGN KEY (extra_ingredient_id) REFERENCES extra_ingredient(id)
+                            );
+                            CREATE Table user_order(
+                                                       id INT PRIMARY KEY AUTO_INCREMENT
+                            
                             );
         ');
     }
