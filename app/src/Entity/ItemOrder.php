@@ -49,7 +49,10 @@ class ItemOrder
     private ?float $price = null;
 
     #[ORM\Column]
-    private ?int $Quantity = null;
+    private ?int $quantity = null;
+
+    #[ORM\Column]
+    private ?float $totalPrice = null;
 
 
     public function __construct()
@@ -235,12 +238,24 @@ class ItemOrder
 
     public function getQuantity(): ?int
     {
-        return $this->Quantity;
+        return $this->quantity;
     }
 
-    public function setQuantity(int $Quantity): self
+    public function setQuantity(int $quantity): self
     {
-        $this->Quantity = $Quantity;
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(float $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }

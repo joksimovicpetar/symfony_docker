@@ -27,10 +27,8 @@ class ItemOrderService
         $itemOrderId = $parameters['valueId'];
         $itemOrder = $this->find($itemOrderId);
         $itemOrder->setQuantity($quantity);
+        $itemOrder->setTotalPrice($itemOrder->getPrice()*$itemOrder->getQuantity());
         $this->save($itemOrder);
-        $itemOrder->setPrice($itemOrder->getPrice()*$itemOrder->getQuantity());
-
-
     }
 
     function delete(ItemOrder $itemOrder): void

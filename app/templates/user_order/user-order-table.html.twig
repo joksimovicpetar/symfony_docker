@@ -15,12 +15,11 @@
     </thead>
     <tbody>
     {% set deliveryPrice = 0 %}
-    {% set orderPrice = 0 %}
     {% set totalOrderPrice = 0 %}
     {% set totalPrice = 0 %}
     {% for itemOrder in userOrder.itemOrders %}
         <tr>
-            {% set totalOrderPrice = totalOrderPrice + item_order_price(itemOrder) %}
+            {% set totalOrderPrice = totalOrderPrice + itemOrder.totalPrice %}
 
             <th><button class="btn-delete-order-item" data-id="{{ itemOrder.id }}"><i class="material-icons">delete</i></button></th>
             <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
@@ -39,8 +38,8 @@
             </th>
             <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="{{ itemOrder.quantity }}" data-id="{{ itemOrder.id }}"></th>
             <th>
-                {% set orderPrice = itemOrder.price %}
-                {{ itemOrder.size.currency }} {{ itemOrder.price }}
+
+                {{ itemOrder.size.currency }} {{ itemOrder.totalPrice }}
             </th>
         </tr>
     {% endfor %}

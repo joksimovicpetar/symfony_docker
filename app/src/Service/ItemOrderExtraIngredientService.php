@@ -3,6 +3,7 @@
 namespace App\Service;
 use App\Entity\ItemOrderExtraIngredient;
 use App\Repository\ItemOrderExtraIngredientRepository;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ItemOrderExtraIngredientService
 {
@@ -60,19 +61,20 @@ class ItemOrderExtraIngredientService
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
             $current->setOrderStep(6);
             $this->save($itemOrderExtraIngredient);
-            $total = $this->priceCalculator($current);
-            $current->setPrice($total);
-            $this->itemOrderService->save($current);
-
 
         }
+        $total = $this->priceCalculator($current);
+        $current->setPrice($total);
+        $current->setTotalPrice($total*$current->getQuantity());
+        $this->itemOrderService->save($current);
     }
 
     function priceCalculator($current): float
     {
         $sum = 0.0;
         $itemOrderExtraIngredients = $this->findItemOrderExtraIngredient();
-        $sum = $sum + $current->getSize()->getPrice();
+
+//        VarDumper::dump($sum);exit;
         foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient)
         {
             if ($itemOrderExtraIngredient->getItemOrder()->getId() == $current->getId())
@@ -80,6 +82,8 @@ class ItemOrderExtraIngredientService
                 $sum = $sum + $itemOrderExtraIngredient->getExtraIngredient()->getPrice();
             }
         }
+        $sum = $sum + $current->getSize()->getPrice();
+//        VarDumper::dump($sum);exit;
         return $sum;
     }
 }
