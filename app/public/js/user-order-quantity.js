@@ -11,6 +11,7 @@ async function updateOrderItem(routeEdit, dataId, quantity) {
         const response = await updateResponse.json();
         document.getElementById("user_order_table").innerHTML = response.html;
         updateItem()
+        deleteItem()
 
     }
     catch (e) {

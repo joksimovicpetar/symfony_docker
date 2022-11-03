@@ -12,6 +12,7 @@ async function deleteOrderItem(routeEdit, dataId) {
         // console.log(JSON.stringify(response))
         document.getElementById("user_order_table").innerHTML = response.html;
         deleteItem()
+        updateItem()
 
     }
     catch (e) {
@@ -19,7 +20,7 @@ async function deleteOrderItem(routeEdit, dataId) {
         console.log(e)
     }
 }
-async function deleteItem(){
+function deleteItem(){
     const btns = document.getElementsByClassName("btn-delete-order-item");
     for (const btn of btns) {
         btn.addEventListener('click', () => {

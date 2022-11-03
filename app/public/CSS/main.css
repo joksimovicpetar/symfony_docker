@@ -442,3 +442,13 @@ input[type=number]:not(.browser-default) {
     border-color: #B0413E;
     background-color: white;
 }
+
+input[type=number]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid lightcoral;
+    webkit-box-shadow: 0 1px 0 0 lightcoral;
+    box-shadow: 0 1px 0 0 lightcoral;
+}
+button:focus {
+    outline: none;
+    background-color: lightcoral;
+}
