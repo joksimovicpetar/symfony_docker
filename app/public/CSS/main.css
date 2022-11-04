@@ -607,3 +607,53 @@ button:focus {
     padding-right: 0;
     color: lightcoral;
 }
+
+.btn-back-cart{
+    color: #B0413E;
+    border-color: #B0413E;
+    background-color: white;
+    float: left;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    text-transform: none;
+    height: 35px;
+    line-height: 29px;
+    width: 150px;
+    font-size: 15px;
+    padding: 1px;
+    z-index: 0;
+    margin-top: 30px;
+}
+
+.btn-place-order{
+    color: white;
+    border-color: lightcoral;
+    background-color: lightcoral;
+    float: left;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    text-transform: none;
+    height: 35px;
+    line-height: 29px;
+    width: 150px;
+    font-size: 15px;
+    padding: 1px;
+    z-index: 0;
+    margin-left: 20px;
+    margin-top: 30px;
+
+}
+
+.btn-back-cart:hover {
+    color: white;
+    background-color: lightcoral;
+    border-color: lightcoral;
+}
+
+.btn-place-order:hover {
+    color: #B0413E;
+    border-color: #B0413E;
+    background-color: white;
+}
