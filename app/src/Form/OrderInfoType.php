@@ -19,7 +19,6 @@ class OrderInfoType extends AbstractType
             ->add('payment')
             ->add('orderDate')
             ->add('note')
-            ->add('userOrderId')
         ;
     }
 
