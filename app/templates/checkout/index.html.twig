@@ -11,21 +11,36 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s6"></div>
-            <div class="col s1"></div>
+            <div class="col s8">sdfsf</div>
+            <div class="col s4"></div>
             <div class="card card-summary col s4">
-                <div class="row summary-rows"><p class="head-paragraph">Order summary</p></div>
-                <div class="row summary-rows"><p class="size-paragraph">{{ currentOrder.size.name }} size</p></div>
-                <div class="row summary-rows"><p class="base-paragraph">{{ currentOrder.base.name }}</p></div>
-                <div class="row summary-rows"><p class="sauce-paragraph">{{ currentOrder.sauce.name }}</p></div>
-                <div class="row summary-rows"><p class="ingredient-paragraph-head">Added ingredients:</p></div>
-                {#                {{ dump(currentOrder.itemOrderExtraIngredients) }}#}
-                {% for itemOrderIngredients in currentOrder.itemOrderIngredients %}
-                    <div class="row summary-rows"><p class="ingredient-paragraph-body">{{ itemOrderIngredients.ingredient.name }}<br></p></div>
+                <div class="row summary-rows"><p class="summary-paragraph">Order summary</p></div>
+                {% set totalOrderPrice = 0 %}
+                {% for itemOrder in userOrder.itemOrders %}
+                    {% if itemOrder.userOrder.id == 1 %}
+                        <div class="row summary-rows">
+                            <div class="col s7"><p class="summary-paragraph-name">{{ itemOrder.bowl.name }}</p></div>
+                            <div class="col s1"><p class="summary-paragraph-quantity">x{{ itemOrder.quantity }}</p></div>
+                            <div class="col s4 price-col"><p class="summary-paragraph-price">{{ itemOrder.size.currency }}{{ itemOrder.totalPrice }}</p></div>
+                        </div>
+                        {% if itemOrder.itemOrderExtraIngredients != null %}
+                            <div class="row summary-rows-with"><p class="with">with:</p></div>
+                            {% for itemOrderExtraIngredients in itemOrder.itemOrderExtraIngredients %}
+                                <div class="row summary-rows">
+                                    <div class="col s6"><p class="summary-paragraph-ingredients">x{{ itemOrderExtraIngredients.extraIngredient.name }}</p></div>
+                                    <div class="col s6"><p class="summary-paragraph-price-ingredients">{{ itemOrderExtraIngredients.extraIngredient.currency }}{{ itemOrderExtraIngredients.extraIngredient.price }}</p></div>
+                                </div>
+                            {% endfor %}
+                        {% endif%}
+                    {% endif %}
+                    {% set totalOrderPrice = totalOrderPrice + itemOrder.totalprice %}
                 {% endfor %}
+                <div class="row summary-rows"><p class="delivery-paragraph">Free delivery</p></div>
+                <div class="row summary-rows">
+                    <div class="col s6"><p class="total-paragraph">Total</p></div>
+                    <div class="col s6"><p class="total-paragraph-price">${{ totalOrderPrice }}</p></div>
+                </div>
             </div>
-            <div class="col s1"></div>
-
         </div>
     </div>
 {% endblock %}

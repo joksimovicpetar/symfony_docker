@@ -516,3 +516,94 @@ button:focus {
     justify-content: normal;
     border-radius: 7px;
 }
+
+.summary-paragraph{
+    float: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.summary-paragraph-name{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.summary-paragraph-quantity{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.summary-paragraph-price{
+    float: right;
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 5px 15px;
+    display: inline;
+    align-items: normal;
+    justify-content: normal;
+    padding-right: 0px;
+}
+
+.price-col{
+    display: inline;
+    align-items: normal;
+    justify-content: normal;
+    padding-right: 0px;
+}
+
+.summary-paragraph-ingredients{
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 25px;
+}
+
+.with{
+    float: left;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    margin-left: 35px;
+}
+
+.summary-paragraph-price-ingredients{
+    float: right;
+    margin: 2px 15px 2px 25px;
+}
+
+.delivery-paragraph{
+    float: right;
+    margin: 2px 15px 2px 25px;
+}
+
+.total-paragraph{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: lightcoral;
+}
+
+.total-paragraph-price{
+    float: right;
+    font-size: 30px;
+    font-weight: bolder;
+    margin: 5px 15px;
+    display: inline;
+    align-items: normal;
+    justify-content: normal;
+    padding-right: 0;
+    color: lightcoral;
+}
