@@ -5,16 +5,19 @@ namespace App\Service;
 
 
 use App\Entity\OrderInfo;
+use App\Entity\UserOrder;
 use App\Repository\OrderInfoRepository;
+use App\Repository\UserOrderRepository;
 
 class CheckoutService
 {
     private $repository;
 
-    public function __construct(OrderInfoRepository $repository, UserOrderService $userOrderService)
+    public function __construct(OrderInfoRepository $repository, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository)
     {
         $this->repository = $repository;
         $this->userOrderService = $userOrderService;
+        $this->userOrderRepository = $userOrderRepository;
     }
 
     function save($parameters)
@@ -40,6 +43,8 @@ class CheckoutService
         $orderInfo->setUserOrderId($currentUserOrder);
 
         $this->repository->save($orderInfo);
+//        $userOrder = new UserOrder();
+//        $this->userOrderRepository->save($userOrder);
     }
 
     function update($userOrder)

@@ -24,10 +24,7 @@ class UserOrderRepository extends ServiceEntityRepository
     public function save(UserOrder $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->getEntityManager()->flush();
     }
 
     public function remove(UserOrder $entity, bool $flush = false): void

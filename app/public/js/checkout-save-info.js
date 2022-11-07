@@ -16,7 +16,7 @@ async function sendData(routeEdit, routeNext) {
 
 
         });
-        // window.location.href = routeNext
+        window.location.href = routeNext
     }
     catch (e) {
         console.error('Error while updating item order')
@@ -31,7 +31,7 @@ async function sendData(routeEdit, routeNext) {
 function saveInfo(){
     const btn = document.getElementById("place-order");
     btn.addEventListener('click', () => {
-            sendData('http://localhost:8080/checkout/save','http://localhost:8080/sauce')
+            sendData('http://localhost:8080/checkout/save','http://localhost:8080/bowl')
         }
         , false);
 }
