@@ -21,13 +21,10 @@ class OrderInfoRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderInfo::class);
     }
 
-    public function save(OrderInfo $entity, bool $flush = false): void
+    public function save(OrderInfo $orderInfo): void
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        $this->getEntityManager()->persist($orderInfo);
+        $this->getEntityManager()->flush();
     }
 
     public function remove(OrderInfo $entity, bool $flush = false): void

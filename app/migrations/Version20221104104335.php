@@ -24,7 +24,7 @@ final class Version20221104104335 extends AbstractMigration
                                                   full_name text,
                                                   address text,
                                                   phone_number text,
-                                                  deliver_time text,
+                                                  delivery_time text,
                                                   payment text,
                                                   order_date text,
                                                   note text,

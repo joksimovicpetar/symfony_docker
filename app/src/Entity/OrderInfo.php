@@ -34,7 +34,8 @@ class OrderInfo
     #[ORM\Column(length: 255)]
     private ?string $note = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove']),
+    ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
     private ?UserOrder $userOrderId = null;
 
     public function getId(): ?int

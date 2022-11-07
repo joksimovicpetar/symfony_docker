@@ -4,8 +4,7 @@ namespace App\Service;
 use App\Entity\Bowl;
 use App\Entity\ItemOrder;
 use App\Repository\BowlRepository;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 class BowlService
 {
