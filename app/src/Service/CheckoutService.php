@@ -31,6 +31,7 @@ class CheckoutService
         $date = $parameters['date'];
         $note = $parameters['note'];
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
+        $id = $currentUserOrder->getId();
 
         $orderInfo = new OrderInfo();
         $orderInfo->setFullName($fullName);
@@ -43,8 +44,9 @@ class CheckoutService
         $orderInfo->setUserOrderId($currentUserOrder);
 
         $this->repository->save($orderInfo);
+        $this->userOrderRepository->find($id)->setStatus('completed');
 //        $userOrder = new UserOrder();
-//        $this->userOrderRepository->save($userOrder);
+        $this->userOrderRepository->save($currentUserOrder);
     }
 
     function update($userOrder)

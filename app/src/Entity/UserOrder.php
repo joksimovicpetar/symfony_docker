@@ -19,6 +19,9 @@ class UserOrder
     ORM\JoinColumn(name: 'item_order_id', referencedColumnName: 'id')]
     private Collection $itemOrders;
 
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->itemOrders = new ArrayCollection();
@@ -57,6 +60,18 @@ class UserOrder
                 $itemOrder->setUserOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -104,8 +104,8 @@ final class Version20221017090813 extends AbstractMigration
                                                   FOREIGN KEY (extra_ingredient_id) REFERENCES extra_ingredient(id)
                             );
                             CREATE Table user_order(
-                                                       id INT PRIMARY KEY AUTO_INCREMENT
-                            
+                                                       id INT PRIMARY KEY AUTO_INCREMENT,
+                                                       status VARCHAR(255)
                             );
         ');
     }
