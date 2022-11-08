@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col s4"></div>
         <div class="col s4 ">
-            <form id="form-log-in" class="card card-log-in" method="post" action="http://localhost:8080/register/write">
+            <div class="card card-log-in" >
                 <h1 class="log-in-heading">Please register</h1>
                 <label class="log-in-labels" for="inputUsername">Username</label>
                 <input type="text" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
@@ -27,9 +27,12 @@
                 #}
                 <button class="btn btn-lg btn-sign-in" type="submit" id="register">Register</button>
 
-            </form>
+            </div>
         </div>
         <div class="col s4"></div>
     </div>
     </div>
+{% endblock %}
+{% block javascriptsBody %}
+    <script src="{{ asset('js/register.js') }}"></script>
 {% endblock %}

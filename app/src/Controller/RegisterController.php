@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,9 +34,14 @@ class RegisterController extends AbstractController
         ]);
     }
 
-    #[Route('/register/write', name: 'app_register')]
-    public function write(): Response
+    #[Route('/register/write', name: 'register_update', methods: [ 'GET'])]
+    public function write(Request $request, UserService $userService)
     {
-       return $this->redirectToRoute('bowl_list');
+        $parameters = json_decode($request->getContent(), true);
+        $userService->write($parameters);
+
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
     }
 }
