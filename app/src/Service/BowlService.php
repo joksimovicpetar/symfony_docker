@@ -3,7 +3,9 @@
 namespace App\Service;
 use App\Entity\Bowl;
 use App\Entity\ItemOrder;
+use App\Entity\UserOrder;
 use App\Repository\BowlRepository;
+use App\Repository\UserOrderRepository;
 
 
 class BowlService
@@ -12,11 +14,12 @@ class BowlService
 
     private $repository;
 
-    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService)
+    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository)
     {
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->userOrderService = $userOrderService;
+        $this->userOrderRepository = $userOrderRepository;
     }
 
 
@@ -62,8 +65,16 @@ class BowlService
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
             $itemOrder->setQuantity(1);
-            $itemOrder->setUserOrder($currentUserOrder);
-            $this->itemOrderService->save($itemOrder);
+            if($currentUserOrder->getStatus()=='completed'){
+                $userOrder = new UserOrder();
+                $userOrder->setStatus('in_progress');
+                $this->userOrderRepository->save($userOrder);
+                $itemOrder->setUserOrder($userOrder);
+                $this->itemOrderService->save($itemOrder);
+            } else {
+                $itemOrder->setUserOrder($currentUserOrder);
+                $this->itemOrderService->save($itemOrder);
+            }
 
         } else {
             $current->setBowl($bowl);

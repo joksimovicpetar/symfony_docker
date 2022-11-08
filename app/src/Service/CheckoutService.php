@@ -45,9 +45,8 @@ class CheckoutService
 
         $this->repository->save($orderInfo);
         $this->userOrderRepository->find($id)->setStatus('completed');
-        $userOrder = new UserOrder();
         $this->userOrderRepository->save($currentUserOrder);
-        $this->userOrderRepository->save($userOrder);
+
     }
 
     function update($userOrder)

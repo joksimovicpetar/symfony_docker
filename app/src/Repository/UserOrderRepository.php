@@ -49,6 +49,8 @@ class UserOrderRepository extends ServiceEntityRepository
             ->leftJoin('item.itemOrderIngredients', 'ingredients')
             ->leftJoin('item.itemOrderExtraIngredients', 'extraIngredients')
             ->orderBy('user_order.id', 'ASC')
+            ->setParameter('in_progress','in_progress')
+            ->where('user_order.status LIKE :in_progress')
             ->getQuery()
             ->getOneOrNullResult();
     }

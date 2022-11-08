@@ -50,11 +50,7 @@ class UserOrderService
         return $this->repository->findLastUserOrder();
     }
 
-    /**
-     * @param ItemOrder $itemOrder
-     * @return float
-     */
-    function findPrice($itemOrder) : float
+    function findPrice(ItemOrder $itemOrder) : float
     {
         $sum = $itemOrder->getSize()->getPrice();
         $extraIngredientsList = $this->itemOrderExtraIngredientService->findItemOrderExtraIngredient();

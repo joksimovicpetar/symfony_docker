@@ -55,15 +55,16 @@ class ItemOrderExtraIngredientService
     public function update($parameters)
     {
         $extraIngredientsId = $parameters['valueId'];
+        $current = $this->itemOrderService->findItemOrderIdStatus();
         foreach ($extraIngredientsId as $extraIngredientId) {
             $extraIngredient = $this->extraIngredientService->find($extraIngredientId);
             $current = $this->itemOrderService->findItemOrderIdStatus();
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
-            $current->setOrderStep(6);
             $this->save($itemOrderExtraIngredient);
 
         }
         $total = $this->priceCalculator($current);
+        $current->setOrderStep(6);
         $current->setPrice($total);
         $current->setTotalPrice($total*$current->getQuantity());
         $this->itemOrderService->save($current);

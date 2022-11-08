@@ -725,3 +725,22 @@ textarea:invalid {
     border: 2px solid lime;
 }
 
+#form-log-in{
+    width: 400px;
+}
+
+.card-log-in{
+    border-radius: 7px;
+    padding: 20px;
+    float: none;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.log-in-heading{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 50px;
+    font-weight: bolder;
+}
