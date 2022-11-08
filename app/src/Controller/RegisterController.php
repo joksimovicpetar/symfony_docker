@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Service\UserService;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -11,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\VarDumper\VarDumper;
 
 class RegisterController extends AbstractController
 {
@@ -34,14 +38,21 @@ class RegisterController extends AbstractController
         ]);
     }
 
-    #[Route('/register/write', name: 'register_update', methods: [ 'GET'])]
+    #[Route('/register/write', name: 'register_update', methods: [ 'POST'])]
     public function write(Request $request, UserService $userService)
     {
         $parameters = json_decode($request->getContent(), true);
-        $userService->write($parameters);
+        try {
+            $userService->write($parameters);
+            return new JsonResponse(["message"=>"Great success!"], 200);
 
-        $response = new Response();
-        $response->setStatusCode(Response::HTTP_OK);
-        $response->send();
+        } catch (UniqueConstraintViolationException $e) {
+            return new JsonResponse(["message"=>"Username taken"], 202);
+        }
+        catch (Exception $e) {
+            return new JsonResponse(["message"=>"Username taken"], 500);
+        }
+
+
     }
 }

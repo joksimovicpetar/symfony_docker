@@ -9,21 +9,26 @@ async function registerUser(routeEdit, routeNext) {
     if (password !== '' && username !== '') {
         if (password === repeatPassword) {
             try {
-                response = await fetch(routeEdit, {
+                const response = await fetch(routeEdit, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({username: username, password: password, repeatPassword: repeatPassword})
                 });
 
-                alert(JSON.stringify(response))
-                // window.location.href = routeNext
+                if (response.status == 202) {
+                    alert('Username already exists!')
+                    return
+                }
+
+                // console.log(response.status)
+                // alert(JSON.stringify(response.status))
+                window.location.href = routeNext
             } catch (e) {
                 console.error('Error while updating item order')
-                alert('ohyeah')
                 console.log(e)
             }
         } else {
-            alert("Pass doesnt match")
+            alert("Passwords don't match!")
 
         }
     } else {
@@ -35,7 +40,7 @@ async function registerUser(routeEdit, routeNext) {
 function register(){
     const btn = document.getElementById("register");
     btn.addEventListener('click', () => {
-            registerUser('http://localhost:8080/register/write','http://localhost:8080/login')
+            registerUser('http://localhost:8080/register/write','http://localhost:8080/login?registered=true')
         }
         , false);
 }

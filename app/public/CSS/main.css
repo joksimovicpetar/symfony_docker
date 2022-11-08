@@ -787,3 +787,10 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
     text-align: center;
     background-color: lightcoral;
 }
+
+.success-message{
+    background-color: green;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+}

@@ -11,6 +11,7 @@ use App\Repository\UserOrderRepository;
 use App\Repository\UserRepository;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use function PHPUnit\Framework\throwException;
 
 class UserService
 {
@@ -45,17 +46,16 @@ class UserService
     function write($parameters){
         $username = $parameters['username'];
         $password = $parameters['password'];
-        $users = $this->repository->findAll();
-        foreach ($users as $user){
-            if ($user->getUsername()==$username){
-                return new JsonResponse(["message"=>"error"],202);
-            }
-        }
+//        $users = $this->repository->findAll();
+//        foreach ($users as $user){
+//            if ($user->getUsername()==$username){
+//                return new JsonResponse(["message"=>"error"],202);
+//            }
+//        }
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($password);
         $this->repository->save($user);
-
     }
 
 }
