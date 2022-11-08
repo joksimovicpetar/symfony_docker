@@ -45,7 +45,7 @@ class UserService
 
     function write($parameters){
         $username = $parameters['username'];
-        $password = $parameters['password'];
+        $hashed = hash('sha512',$parameters['password']);
 //        $users = $this->repository->findAll();
 //        foreach ($users as $user){
 //            if ($user->getUsername()==$username){
@@ -54,7 +54,7 @@ class UserService
 //        }
         $user = new User();
         $user->setUsername($username);
-        $user->setPassword($password);
+        $user->setPassword($hashed);
         $this->repository->save($user);
     }
 
