@@ -721,9 +721,6 @@ input[type=date]:not(.browser-default):focus:not([readonly]){
     box-sizing: border-box;
     background-color: #f7f8fa;
 }
-textarea:invalid {
-    border: 2px solid lime;
-}
 
 #form-log-in{
     width: 400px;
@@ -733,8 +730,7 @@ textarea:invalid {
     border-radius: 7px;
     padding: 20px;
     float: none;
-    margin: auto;
-    margin-top: 100px;
+    margin: 100px auto auto;
 }
 
 .log-in-heading{
@@ -743,4 +739,51 @@ textarea:invalid {
     margin-bottom: 20px;
     font-size: 50px;
     font-weight: bolder;
+}
+
+.btn-sign-in{
+    color: white;
+    border-color: lightcoral;
+    background-color: lightcoral;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 13px;
+}
+
+.btn-sign-in:hover{
+    color: lightcoral;
+    border-color: lightcoral;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid lightcoral;
+    -webkit-box-shadow: 0 1px 0 0 lightcoral;
+    box-shadow: 0 1px 0 0 lightcoral;
+}
+
+input[type=password]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid lightcoral;
+    -webkit-box-shadow: 0 1px 0 0 lightcoral;
+    box-shadow: 0 1px 0 0 lightcoral;
+}
+input[type=text]:not(.browser-default):focus:not([readonly])+label{
+    color: #9e9e9e;
+}
+
+input[type=password]:not(.browser-default):focus:not([readonly])+label{
+    color: #9e9e9e;
+}
+
+.log-in-labels{
+    border: none;
+}
+
+.alert{
+    color: white;
+    text-align: center;
+    background-color: lightcoral;
 }

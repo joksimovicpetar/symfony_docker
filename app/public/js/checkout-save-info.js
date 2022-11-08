@@ -13,8 +13,6 @@ async function sendData(routeEdit, routeNext) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({fullName: fullName, address: address, phoneNumber: phoneNumber, time: time, payment: payment, date: date, note: note})
-
-
         });
         window.location.href = routeNext
     }
@@ -23,10 +21,6 @@ async function sendData(routeEdit, routeNext) {
         console.log(e)
     }
 }
-
-
-
-
 
 function saveInfo(){
     const btn = document.getElementById("place-order");
