@@ -11,17 +11,20 @@ use App\Repository\UserOrderRepository;
 use App\Repository\UserRepository;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use function PHPUnit\Framework\throwException;
 
 class UserService
 {
     private $repository;
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(UserRepository $repository, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository)
+    public function __construct(UserRepository $repository, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, UserPasswordHasherInterface $passwordHasher)
     {
         $this->repository = $repository;
         $this->userOrderService = $userOrderService;
         $this->userOrderRepository = $userOrderRepository;
+        $this->passwordHasher = $passwordHasher;
     }
 
     function save($user)
@@ -45,16 +48,20 @@ class UserService
 
     function write($parameters){
         $username = $parameters['username'];
-        $hashed = hash('sha512',$parameters['password']);
+        $user = new User();
+        $user->setUsername($username);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $user,
+            $parameters['password']
+        );
 //        $users = $this->repository->findAll();
 //        foreach ($users as $user){
 //            if ($user->getUsername()==$username){
 //                return new JsonResponse(["message"=>"error"],202);
 //            }
 //        }
-        $user = new User();
-        $user->setUsername($username);
-        $user->setPassword($hashed);
+
+        $user->setPassword($hashedPassword);
         $this->repository->save($user);
     }
 

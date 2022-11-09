@@ -785,7 +785,8 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 .alert{
     color: white;
     text-align: center;
-    background-color: lightcoral;
+    background-color: red;
+    border-radius: 7px;
 }
 
 .success-message{
@@ -793,4 +794,5 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
     font-weight: bolder;
     color: white;
     text-align: center;
+    border-radius: 7px;
 }

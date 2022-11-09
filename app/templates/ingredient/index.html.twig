@@ -3,6 +3,8 @@
 {% block title %}Pick ingredients{% endblock %}
 
 {% block body %}
+    {%set current = current_order() %}
+{#    {% if current. %}#}
     <div class="container">
         <div class="row">
             <div class="col s4">
@@ -11,8 +13,15 @@
         </div>
         <div class="row">
             <div class="col s4">
+                    <p class="text-bowl">
+                        This is what it's all about. Pick added ingredients to make your poke bowl perfectly to your taste.
+                    <p/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
                 <p class="text-bowl">
-                    This is what it's all about. Pick added ingredients to make your poke bowl perfectly to your taste.
+                    You can choose  ingredients.
                 <p/>
             </div>
         </div>

@@ -15,7 +15,7 @@ async function registerUser(routeEdit, routeNext) {
                     body: JSON.stringify({username: username, password: password, repeatPassword: repeatPassword})
                 });
 
-                if (response.status == 202) {
+                if (response.status === 202) {
                     alert('Username already exists!')
                     return
                 }
