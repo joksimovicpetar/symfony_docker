@@ -3,8 +3,15 @@
 {% block title %}Pick ingredients{% endblock %}
 
 {% block body %}
-    {%set current = current_order() %}
-{#    {% if current. %}#}
+    {% set current = current_order() %}
+    {% set limit = 0 %}
+    {% if current.size.name == 'Small'%}
+        {% set limit = 5 %}
+    {% elseif current.size.name == 'Medium' %}
+        {% set limit = 8 %}
+    {% elseif current.size.name == 'Large' %}
+        {% set limit = 10 %}
+    {% endif %}
     <div class="container">
         <div class="row">
             <div class="col s4">
@@ -21,11 +28,11 @@
         <div class="row">
             <div class="col s4">
                 <p class="text-bowl">
-                    You can choose  ingredients.
+                    You can choose {{ limit }} ingredients.
                 <p/>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="elements">
             {% for ingredient in ingredients %}
                 <div class="col s3 " id="list-ingredient">
                     <p>
@@ -64,4 +71,5 @@
 {% block javascriptsBody %}
     <script src="{{ asset('js/update-checkbox-function.js') }}"></script>
     <script src="{{ asset('js/ingredient.js') }}"></script>
+{#    <script src="{{ asset('js/ingredient-limit.js') }}">onlyOneCheckBox()</script>#}
 {% endblock%}

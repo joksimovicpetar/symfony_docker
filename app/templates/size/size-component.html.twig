@@ -1,12 +1,23 @@
 <div class="card card-size {{ isActive ? 'active' : '' }}" data-id="{{ size.id }}">
 
-    <div class="card-body">
-        <h2 class="card-title">{{ size.name }}</h2>
-        <p id="size-text">
-            {{ size.description }}
-        </p>
-        <p id="size-price">
-            {{ size.currency }}{{ size.price }}
-        </p>
+    <div class="col s1 "></div>
+    <div class="col s3 big-letter">
+        {{ size.name|first }}
+    </div>
+    <div class="col s1 "></div>
+    <div class="col s7">
+        <div class="card-body">
+            <h2 class="card-title size-title">{{ size.name }}</h2>
+            <div class="row">
+                <p id="size-text">
+                    {{ size.description }}
+                </p>
+            </div>
+            <div class="row">
+                <p id="size-price">
+                    {{ size.currency }}{{ size.price }}
+                </p>
+            </div>
+        </div>
     </div>
 </div>

@@ -6,6 +6,8 @@ use App\Entity\ItemOrder;
 use App\Entity\UserOrder;
 use App\Repository\BowlRepository;
 use App\Repository\UserOrderRepository;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\VarDumper\VarDumper;
 
 
 class BowlService
@@ -14,12 +16,13 @@ class BowlService
 
     private $repository;
 
-    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository)
+    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, Security $security)
     {
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->userOrderService = $userOrderService;
         $this->userOrderRepository = $userOrderRepository;
+        $this->security = $security;
     }
 
 
@@ -68,6 +71,9 @@ class BowlService
             if($currentUserOrder->getStatus()=='completed'){
                 $userOrder = new UserOrder();
                 $userOrder->setStatus('in_progress');
+                $user = $this->security->getUser();
+//                VarDumper::dump($user);exit;
+                $userOrder->setUser($user);
                 $this->userOrderRepository->save($userOrder);
                 $itemOrder->setUserOrder($userOrder);
                 $this->itemOrderService->save($itemOrder);
