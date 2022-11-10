@@ -60,26 +60,37 @@ class BowlService
     function updateBowl($parameters)
     {
         $bowl = $this->find($parameters['valueId']);
-        $current = $this->itemOrderService->findItemOrderIdStatus();
-        $currentUserOrder = $this->userOrderService->findLastUserOrder();
 
+        $currentUserOrder = $this->userOrderService->findLastUserOrder();
+        $current = $this->itemOrderService->findItemOrderIdStatus();
+//        VarDumper::dump($currentUserOrder);exit;
         if ($current == null || $current->getOrderStep()==6) {
             $itemOrder = new ItemOrder();
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
             $itemOrder->setQuantity(1);
-            if($currentUserOrder->getStatus()=='completed'){
+            if ($currentUserOrder == null){
                 $userOrder = new UserOrder();
                 $userOrder->setStatus('in_progress');
                 $user = $this->security->getUser();
-//                VarDumper::dump($user);exit;
+                //                VarDumper::dump($user);exit;
                 $userOrder->setUser($user);
                 $this->userOrderRepository->save($userOrder);
                 $itemOrder->setUserOrder($userOrder);
                 $this->itemOrderService->save($itemOrder);
+            } elseif ($currentUserOrder->getStatus()=='completed'){
+
+                    $userOrder = new UserOrder();
+                    $userOrder->setStatus('in_progress');
+                    $user = $this->security->getUser();
+                    //                VarDumper::dump($user);exit;
+                    $userOrder->setUser($user);
+                    $this->userOrderRepository->save($userOrder);
+                    $itemOrder->setUserOrder($userOrder);
+                    $this->itemOrderService->save($itemOrder);
             } else {
-                $itemOrder->setUserOrder($currentUserOrder);
-                $this->itemOrderService->save($itemOrder);
+                    $itemOrder->setUserOrder($currentUserOrder);
+                    $this->itemOrderService->save($itemOrder);
             }
 
         } else {

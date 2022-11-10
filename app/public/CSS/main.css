@@ -61,7 +61,7 @@
 .card .card-title{
     font-size: 24px;
     font-weight: bolder;
-    padding-top: 15px;
+    margin-top: 10px;
 
 }
 
@@ -120,6 +120,13 @@
 }
 
 .s4{
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 0px;
+}
+
+.col-size {
     display: flex;
     align-items: center;
 
@@ -227,7 +234,7 @@ footer{
 .card-base{
     box-shadow: 0 3px 10px 0 #aaa;
     cursor: pointer;
-    height: 350px;
+    height: 400px;
     position: relative;
     width: 300px;
     border-radius: 7px;

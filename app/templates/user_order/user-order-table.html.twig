@@ -17,7 +17,10 @@
     {% set deliveryPrice = 0 %}
     {% set totalOrderPrice = 0 %}
     {% set totalPrice = 0 %}
+    {% set current = current_user_order() %}
     {% for itemOrder in userOrder.itemOrders %}
+{#                        {{ dump(current) }}#}
+
         <tr>
             {% set totalOrderPrice = totalOrderPrice + itemOrder.totalPrice %}
 

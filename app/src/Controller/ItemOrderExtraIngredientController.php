@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\ExtraIngredientService;
 use App\Service\ItemOrderExtraIngredientService;
+use App\Service\ItemOrderIngredientService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +20,10 @@ class ItemOrderExtraIngredientController extends AbstractController
     {
         $itemOrderExtraIngredients = $service->findItemOrderExtraIngredient();
 
+
         return $this->render('item_order_extra_ingredient/index.html.twig', [
             'itemOrderExtraIngredients' => $itemOrderExtraIngredients,
+
         ]);
     }
 

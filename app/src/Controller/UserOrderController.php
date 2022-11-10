@@ -16,11 +16,13 @@ use Symfony\Component\VarDumper\VarDumper;
 class UserOrderController extends AbstractController
 {
     #[Route('/user_order', name: 'order_list')]
-    public function findUserOrders(UserOrderService $service): Response
+    public function findUserOrders(UserOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): Response
     {
-
+        $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
+//VarDumper::dump($service->findUserOrders());exit;
         return $this->render('user_order/index.html.twig', [
             'userOrder' => $service->findUserOrders(),
+            'itemOrderExtraIngredients' => $itemOrderExtraIngredients,
         ]);
     }
 

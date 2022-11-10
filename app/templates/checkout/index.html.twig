@@ -4,6 +4,7 @@
 
 {% block body %}
     {% set currentOrder = current_order() %}
+    {% set currentUserOrder = current_user_order() %}
 {#    {{ dump(currentOrder) }}#}
     <div class="container">
         <div class="row">
@@ -66,8 +67,9 @@
             <div class="card card-summary col s4">
                 <div class="row summary-rows"><p class="summary-paragraph">Order summary</p></div>
                 {% set totalOrderPrice = 0 %}
-                {% for itemOrder in userOrder.itemOrders %}
-                    {% if itemOrder.userOrder.id == currentOrder.userOrder.id %}
+                {% for itemOrder in currentUserOrder.itemOrders %}
+{#                        {{ dump(itemOrder) }}#}
+{#                    {% if itemOrder.userOrder.id == currentOrder.userOrder.id %}#}
                         <div class="row summary-rows">
                             <div class="col s7"><p class="summary-paragraph-name">{{ itemOrder.bowl.name }}</p></div>
                             <div class="col s1"><p class="summary-paragraph-quantity">x{{ itemOrder.quantity }}</p></div>
@@ -82,7 +84,7 @@
                                 </div>
                             {% endfor %}
                         {% endif%}
-                    {% endif %}
+{#                    {% endif %}#}
                     {% set totalOrderPrice = totalOrderPrice + itemOrder.totalprice %}
                 {% endfor %}
                 <div class="row summary-rows"><p class="delivery-paragraph">Free delivery</p></div>

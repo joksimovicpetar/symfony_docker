@@ -19,6 +19,7 @@
         <div class="row" id="extra-ingredient-rows">
             <div class="col s6">
                 {% set currentOrder = current_order() %}
+{#                {{ dump(currentOrder) }}#}
                 {% for extraIngredient in extraIngredients %}
                     <div class="col s12 extra-col-left">
                         {% include 'extra_ingredient/extra-ingredient-component.html.twig' with {'extraIngredient': extraIngredient} %}
@@ -32,10 +33,13 @@
                 <div class="row summary-rows"><p class="base-paragraph">{{ currentOrder.base.name }}</p></div>
                 <div class="row summary-rows"><p class="sauce-paragraph">{{ currentOrder.sauce.name }}</p></div>
                 <div class="row summary-rows"><p class="ingredient-paragraph-head">Added ingredients:</p></div>
-{#                {{ dump(currentOrder.itemOrderExtraIngredients) }}#}
-                {% for itemOrderIngredients in currentOrder.itemOrderIngredients %}
-                    <div class="row summary-rows"><p class="ingredient-paragraph-body">{{ itemOrderIngredients.ingredient.name }}<br></p></div>
+                {% for itemOrderIngredient in itemOrderIngredients %}
+{#                    {{ dump(currentOrder.itemOrderIngredients) }}#}
+                    {% if itemOrderIngredient.itemOrder.id == currentOrder.id %}
+                    <div class="row summary-rows"><p class="ingredient-paragraph-body">{{ itemOrderIngredient.ingredient.name }}<br></p></div>
+                    {% endif %}
                 {% endfor %}
+
             </div>
             <div class="col s2"></div>
             <div class="col s3"></div>

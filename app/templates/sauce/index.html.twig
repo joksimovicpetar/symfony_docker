@@ -23,7 +23,7 @@
             {% else %}
                {% set activeSauce = null %}
             {% endif %}
-            <div class="col s6">
+            <div class="col s6 col-size">
                {% include 'sauce/sauce-component.html.twig' with {'sauce': sauce, 'isActive': activeSauce} %}
             </div>
          {% endfor %}
