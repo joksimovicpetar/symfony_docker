@@ -33,7 +33,6 @@ class CustomAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $username);
         $pass = $request->request->get('password', '');
 
-        $hashedPass = hash('sha512',$pass);
         return new Passport(
             new UserBadge($username),
 
