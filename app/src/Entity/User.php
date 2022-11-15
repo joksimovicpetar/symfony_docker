@@ -43,6 +43,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function getLala(): ?int
+    {
+        return $this->id;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;

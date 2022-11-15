@@ -59,9 +59,11 @@ class ItemOrderRepository extends ServiceEntityRepository
 
     public function findItemOrderIdStatus()
     {
-        $user = $this->security->getUser();
-        $userIdentifier = $user->getId();
+        $token = $this->security->getToken();
+        $user = $token ? $token->getUser() : null;
 
+//        $user = $this->security->getUser();
+        $userIdentifier = $user->getId();
 
         return $this->createQueryBuilder('item_order')
             ->select('item_order','itemIngredients', 'itemExtraIngredients', 'ingredients', 'extraIngredients')
@@ -72,7 +74,7 @@ class ItemOrderRepository extends ServiceEntityRepository
             ->leftJoin('itemIngredients.ingredient', 'ingredients')
             ->leftJoin('itemExtraIngredients.extraIngredient', 'extraIngredients')
             ->orderBy('item_order.id', 'DESC')
-            ->setParameter('user_check',$userIdentifier)
+            ->setParameter('user_check', $userIdentifier)
             ->where('user.id LIKE :user_check')
             ->andWhere('item_order.orderStep != 6')
 

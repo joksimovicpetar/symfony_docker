@@ -25,8 +25,28 @@ class RequestListener
     public function onKernelRequest(RequestEvent $event)
     {
         $stepName = substr($event->getRequest()->getPathinfo(), 1);
-        $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
+        $token = $this->security->getToken();
+//        $da = 'da';
+//        $ne = 'ne';
 
+//        if($token) {
+////            VarDumper::dump($da);
+////            $user = $token ? $token->getUser() : null;
+//            $user = $this->security->getUser();
+//            $userIdentifier = $user->getId();
+//
+//            $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
+//
+//        }
+//        else {
+////            VarDumper::dump($ne);
+//        }
+//        $user = $token ? $token->getUser() : null;
+
+//        $user = $this->security->getUser();
+//        $userIdentifier = $user->getId();
+//        VarDumper::dump( $stepName);exit;
+        $step = 0;
         switch ($stepName) {
             case 'login':
             case 'register':
@@ -52,15 +72,28 @@ class RequestListener
                 break;
             case 'checkout':
             case 'user_order':
+            case 'user_order/delete':
+            case 'user_order/update':
                 $step = 7;
                 break;
         }
-//        $user = $this->security->getUser();
-//        $userIdentifier = $user->getId();
-//        VarDumper::dump($userIdentifier);exit;
+//        VarDumper::dump($step);exit;
+        if($step == 0){
 
-        if ($step > $current + 2) {
-            $event->setResponse(new RedirectResponse('http://localhost:8080/login'));
+        }
+        elseif(($step != 7 ) && $this->repository->findItemOrderIdStatus() != null) {
+
+
+            $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
+
+
+////        $user = $this->security->getUser();
+////        $userIdentifier = $user->getId();
+////        VarDumper::dump($userIdentifier);exit;
+//
+            if ($step > $current + 2) {
+                $event->setResponse(new RedirectResponse('http://localhost:8080/login'));
+            }
         }
     }
 }
