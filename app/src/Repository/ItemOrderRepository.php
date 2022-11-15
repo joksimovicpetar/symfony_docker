@@ -62,6 +62,7 @@ class ItemOrderRepository extends ServiceEntityRepository
         $user = $this->security->getUser();
         $userIdentifier = $user->getId();
 
+
         return $this->createQueryBuilder('item_order')
             ->select('item_order','itemIngredients', 'itemExtraIngredients', 'ingredients', 'extraIngredients')
             ->leftJoin('item_order.userOrder', 'userOrder')

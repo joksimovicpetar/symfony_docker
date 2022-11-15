@@ -2,36 +2,65 @@
 
 namespace App\EventListener;
 
-use Symfony\Component\HttpFoundation\Response;
+use App\Controller\BowlController;
+
+use App\Repository\ItemOrderRepository;
+use PHPUnit\Util\Exception;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\VarDumper\VarDumper;
 
 class RequestListener
 {
-    public function onKernelRequest(RequestEvent $event){
-VarDumper::dump($event);exit;
-        $exception = $event->getThrowable();
-        $message = sprintf(
-            'My Error says: %s with code: %s',
-            $exception->getMessage(),
-            $exception->getCode()
-        );
 
-        // Customize your response object to display the exception details
-        $response = new Response();
-        $response->setContent($message);
+    public function __construct(ItemOrderRepository $repository, BowlController $controller, Security $security)
+    {
+        $this->repository = $repository;
+        $this->controller = $controller;
+        $this->security = $security;
+    }
 
-        // HttpExceptionInterface is a special type of exception that
-        // holds status code and header details
-        if ($exception instanceof HttpExceptionInterface) {
-            $response->setStatusCode($exception->getStatusCode());
-            $response->headers->replace($exception->getHeaders());
-        } else {
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+    public function onKernelRequest(RequestEvent $event)
+    {
+        $stepName = substr($event->getRequest()->getPathinfo(), 1);
+        $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
+
+        switch ($stepName) {
+            case 'login':
+            case 'register':
+                $step = 0;
+                break;
+            case 'bowl':
+                $step = 1;
+                break;
+            case 'size':
+                $step = 2;
+                break;
+            case 'base':
+                $step = 3;
+                break;
+            case 'sauce':
+                $step = 4;
+                break;
+            case 'ingredient':
+                $step = 5;
+                break;
+            case 'extra_ingredient':
+                $step = 6;
+                break;
+            case 'checkout':
+            case 'user_order':
+                $step = 7;
+                break;
         }
+//        $user = $this->security->getUser();
+//        $userIdentifier = $user->getId();
+//        VarDumper::dump($userIdentifier);exit;
 
-        // sends the modified response object to the event
-        $event->setResponse($response);
+        if ($step > $current + 2) {
+            $event->setResponse(new RedirectResponse('http://localhost:8080/login'));
+        }
     }
 }
