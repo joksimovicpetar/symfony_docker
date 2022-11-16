@@ -2,58 +2,55 @@
 
 namespace App\EventListener;
 
-use App\Controller\BowlController;
 
-use App\Repository\ItemOrderRepository;
 use App\Service\ItemOrderService;
+use App\Util\CheckoutUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\VarDumper\VarDumper;
+
 
 class RequestListener
 {
 
-    public function __construct(ItemOrderService $service, BowlController $controller, Security $security)
+    private ItemOrderService $service;
+    private UrlGeneratorInterface $urlGenerator;
+
+    public function __construct(ItemOrderService $service, UrlGeneratorInterface $urlGenerator)
     {
+
         $this->service = $service;
-        $this->controller = $controller;
-        $this->security = $security;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function onKernelRequest(RequestEvent $event)
     {
-        $stepName = substr($event->getRequest()->getPathinfo(), 1);
-//        $step = 0;
-        $steps = array(
-            'login'=>0,
-            'register'=>0,
-            'bowl'=>1,
-            'size'=>2,
-            'base'=>3,
-            'sauce'=>4,
-            'ingredient'=>5,
-            'extra_ingredient'=>6,
-            'checkout'=>7,
-            'user_order'=>7,
-            'user_order/delete'=>7,
-            'user_order/update'=>7);
-//        VarDumper::dump($event->getRequest()->getSchemeAndHttpHost().$stepName);exit;
-
-        if(isset($steps[$stepName]) && $steps[$stepName] == 0){
+//VarDumper::dump();exit;
+        $stepName = $event->getRequest()->get('_route');
+        if (!array_key_exists($stepName, CheckoutUtil::CHECKOUT_ROUTES)){
+            return;
         }
-        elseif(isset($steps[$stepName]) && $steps[$stepName] != 7  && $this->service->findItemOrderIdStatus() != null) {
 
-            $current = $this->service->findItemOrderIdStatus()->getOrderStep();
+        $itemOrder = $this->service->findItemOrderIdStatus();
+        $requestedStep = CheckoutUtil::CHECKOUT_ROUTES[$stepName];
 
-            if ($steps[$stepName] > $current + 1) {
-                $currentRoute = '/'.array_search($current+1, $steps);
-                $event->setResponse(new RedirectResponse($event->getRequest()->getSchemeAndHttpHost().$currentRoute));
+        if($requestedStep != 7  && $itemOrder) {
+
+            $current = $itemOrder->getOrderStep();
+
+            if ($requestedStep > $current + 1) {
+                $event->setResponse(new RedirectResponse($this->urlGenerator->generate( $this->getNextStep($current))));
             }
         }
-        elseif ($this->service->findItemOrderIdStatus()==null && isset($steps[$stepName]) && $steps[$stepName] != 1 && $steps[$stepName] != 7){
+        elseif (!$itemOrder && !in_array($requestedStep, [1,7,8])){
 
-            $event->setResponse(new RedirectResponse($event->getRequest()->getSchemeAndHttpHost().'/bowl'));
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('bowl_list')));
         }
+    }
+
+    private function getNextStep($step): string
+    {
+       return array_search($step+1, CheckoutUtil::CHECKOUT_ROUTES);
     }
 }

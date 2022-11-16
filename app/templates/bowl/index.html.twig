@@ -5,6 +5,14 @@
 {% block body %}
     <div class="container">
         <div class="row">
+            {% for message in app.flashes('message') %}
+                <div class="col s12 m12">
+                    <div class="card-panel teal">
+                        <span class="white-text">{{ message }}</span>
+                    </div>
+                </div>
+
+            {% endfor %}
             <div class="col s4">
                 <h2 class="caption-bowl">Make your own poke bowl</h2>
             </div>

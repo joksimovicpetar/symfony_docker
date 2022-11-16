@@ -31,6 +31,7 @@ class CheckoutController extends AbstractController
     {
         $parameters = json_decode($request->getContent(), true);
         $checkoutService->save($parameters);
+        $this->addFlash('message', 'Order successful');
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

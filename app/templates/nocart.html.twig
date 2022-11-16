@@ -18,7 +18,7 @@
     <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="http://localhost:8080/bowl" class="brand-logo" id="navbar">
+            <a href={{ path('bowl_list') }} class="brand-logo" id="navbar">
                 <img id="logo" alt="logo" src="{{ asset("uploads/logo.png") }}" draggable="false">
             </a>
             <a href="{{ path('app_logout') }}" class="waves-effect waves-light btn btn-card" >Logout</a>

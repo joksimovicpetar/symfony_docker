@@ -14,10 +14,15 @@ class BowlService
 {
 
 
-    private $repository;
+    private BowlRepository $repository;
+    private ItemOrderService $itemOrderService;
+    private UserOrderService $userOrderService;
+    private UserOrderRepository $userOrderRepository;
+    private Security $security;
 
     public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, Security $security)
     {
+
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->userOrderService = $userOrderService;

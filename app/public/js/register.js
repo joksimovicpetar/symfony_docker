@@ -40,7 +40,7 @@ async function registerUser(routeEdit, routeNext) {
 function register(){
     const btn = document.getElementById("register");
     btn.addEventListener('click', () => {
-            registerUser('http://localhost:8080/register/write','http://localhost:8080/login?registered=true')
+            registerUser('http://localhost:8080/register/write','http://localhost:8080/?registered=true')
         }
         , false);
 }
