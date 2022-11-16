@@ -3,6 +3,7 @@
 namespace App\Service;
 use App\Entity\ItemOrder;
 use App\Repository\ItemOrderRepository;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\VarDumper\VarDumper;
 
 
@@ -10,9 +11,10 @@ class ItemOrderService
 {
     private $repository;
 
-    public function  __construct(ItemOrderRepository $repository)
+    public function  __construct(ItemOrderRepository $repository, Security $security)
     {
         $this->repository = $repository;
+        $this->security = $security;
     }
 
 
@@ -44,7 +46,11 @@ class ItemOrderService
 
     function findItemOrderIdStatus()
     {
-        return $this->repository->findItemOrderIdStatus();
+        $token = $this->security->getToken();
+        $user = $token ? $token->getUser() : null;
+        if (!$user) return null;
+        $userIdentifier = $user->getId();
+        return $this->repository->findItemOrderIdStatus($userIdentifier);
     }
 
     function find($id){

@@ -5,7 +5,7 @@ namespace App\EventListener;
 use App\Controller\BowlController;
 
 use App\Repository\ItemOrderRepository;
-use PHPUnit\Util\Exception;
+use App\Service\ItemOrderService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Security;
@@ -14,86 +14,46 @@ use Symfony\Component\VarDumper\VarDumper;
 class RequestListener
 {
 
-    public function __construct(ItemOrderRepository $repository, BowlController $controller, Security $security)
+    public function __construct(ItemOrderService $service, BowlController $controller, Security $security)
     {
-        $this->repository = $repository;
+        $this->service = $service;
         $this->controller = $controller;
         $this->security = $security;
     }
 
-
     public function onKernelRequest(RequestEvent $event)
     {
         $stepName = substr($event->getRequest()->getPathinfo(), 1);
-        $token = $this->security->getToken();
-//        $da = 'da';
-//        $ne = 'ne';
+//        $step = 0;
+        $steps = array(
+            'login'=>0,
+            'register'=>0,
+            'bowl'=>1,
+            'size'=>2,
+            'base'=>3,
+            'sauce'=>4,
+            'ingredient'=>5,
+            'extra_ingredient'=>6,
+            'checkout'=>7,
+            'user_order'=>7,
+            'user_order/delete'=>7,
+            'user_order/update'=>7);
+//        VarDumper::dump($event->getRequest()->getSchemeAndHttpHost().$stepName);exit;
 
-//        if($token) {
-////            VarDumper::dump($da);
-////            $user = $token ? $token->getUser() : null;
-//            $user = $this->security->getUser();
-//            $userIdentifier = $user->getId();
-//
-//            $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
-//
-//        }
-//        else {
-////            VarDumper::dump($ne);
-//        }
-//        $user = $token ? $token->getUser() : null;
-
-//        $user = $this->security->getUser();
-//        $userIdentifier = $user->getId();
-//        VarDumper::dump( $stepName);exit;
-        $step = 0;
-        switch ($stepName) {
-            case 'login':
-            case 'register':
-                $step = 0;
-                break;
-            case 'bowl':
-                $step = 1;
-                break;
-            case 'size':
-                $step = 2;
-                break;
-            case 'base':
-                $step = 3;
-                break;
-            case 'sauce':
-                $step = 4;
-                break;
-            case 'ingredient':
-                $step = 5;
-                break;
-            case 'extra_ingredient':
-                $step = 6;
-                break;
-            case 'checkout':
-            case 'user_order':
-            case 'user_order/delete':
-            case 'user_order/update':
-                $step = 7;
-                break;
+        if(isset($steps[$stepName]) && $steps[$stepName] == 0){
         }
-//        VarDumper::dump($step);exit;
-        if($step == 0){
+        elseif(isset($steps[$stepName]) && $steps[$stepName] != 7  && $this->service->findItemOrderIdStatus() != null) {
 
-        }
-        elseif(($step != 7 ) && $this->repository->findItemOrderIdStatus() != null) {
+            $current = $this->service->findItemOrderIdStatus()->getOrderStep();
 
-
-            $current = $this->repository->findItemOrderIdStatus()->getOrderStep();
-
-
-////        $user = $this->security->getUser();
-////        $userIdentifier = $user->getId();
-////        VarDumper::dump($userIdentifier);exit;
-//
-            if ($step > $current + 2) {
-                $event->setResponse(new RedirectResponse('http://localhost:8080/login'));
+            if ($steps[$stepName] > $current + 1) {
+                $currentRoute = '/'.array_search($current+1, $steps);
+                $event->setResponse(new RedirectResponse($event->getRequest()->getSchemeAndHttpHost().$currentRoute));
             }
+        }
+        elseif ($this->service->findItemOrderIdStatus()==null && isset($steps[$stepName]) && $steps[$stepName] != 1 && $steps[$stepName] != 7){
+
+            $event->setResponse(new RedirectResponse($event->getRequest()->getSchemeAndHttpHost().'/bowl'));
         }
     }
 }

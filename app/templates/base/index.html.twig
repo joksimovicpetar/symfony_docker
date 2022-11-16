@@ -24,7 +24,7 @@
                 {% else %}
                     {% set activeBase = null %}
                 {% endif %}
-                <div class="col s4">
+                <div class="col l4 s6">
                     {% include 'base/base-component.html.twig' with {'base': base, 'isActive': activeBase} %}
                 </div>
             {% endfor %}

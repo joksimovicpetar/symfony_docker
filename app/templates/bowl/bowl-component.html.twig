@@ -1,9 +1,13 @@
 <div class="card card-bowl {{ isActive ? 'active' : '' }}" data-id="{{ bowl.id }}">
-    <img src="{{ asset(bowl.image.imagePath) }}" alt="{{ bowl.image.imagePath }}" class="card-img-top" draggable="false">
+    <div class="row">
+        <img src="{{ asset(bowl.image.imagePath) }}" alt="{{ bowl.image.imagePath }}" class="card-img-top" draggable="false">
+    </div>
+    <div class="row">
         <div class="card-body">
             <h2 class="card-title">{{ bowl.name }}</h2>
             <p id="card-text">
                 {{ bowl.description }}
             </p>
         </div>
+    </div>
 </div>

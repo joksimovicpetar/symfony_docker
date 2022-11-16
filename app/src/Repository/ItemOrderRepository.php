@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\ItemOrder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
@@ -18,10 +17,9 @@ use Symfony\Component\VarDumper\VarDumper;
  */
 class ItemOrderRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, Security $security)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ItemOrder::class);
-        $this->security = $security;
     }
 
     public function save(ItemOrder $itemOrder): void
@@ -57,14 +55,8 @@ class ItemOrderRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult();
 //    }
 
-    public function findItemOrderIdStatus()
+    public function findItemOrderIdStatus($userIdentifier)
     {
-        $token = $this->security->getToken();
-        $user = $token ? $token->getUser() : null;
-
-//        $user = $this->security->getUser();
-        $userIdentifier = $user->getId();
-
         return $this->createQueryBuilder('item_order')
             ->select('item_order','itemIngredients', 'itemExtraIngredients', 'ingredients', 'extraIngredients')
             ->leftJoin('item_order.userOrder', 'userOrder')

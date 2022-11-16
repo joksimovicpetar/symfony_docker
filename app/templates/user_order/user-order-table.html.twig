@@ -26,9 +26,22 @@
 
             <th><button class="btn-delete-order-item" data-id="{{ itemOrder.id }}"><i class="material-icons">delete</i></button></th>
             <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
-            <th>{{ itemOrder.bowl.name }} <br>{{ itemOrder.size.name }}</th>
-            <th>{{ itemOrder.base.name }}</th>
-            <th>{{ itemOrder.sauce.name }}</th>
+            <th>
+                {{ itemOrder.bowl.name }}
+                {% if itemOrder.size != null %}
+                    {{ itemOrder.size.name }}
+                {% endif %}
+            </th>
+            <th>
+                {% if itemOrder.base != null %}
+                    {{ itemOrder.base.name }}
+                {% endif %}
+            </th>
+            <th>
+                {% if itemOrder.sauce != null %}
+                    {{ itemOrder.sauce.name }}
+                {% endif %}
+            </th>
             <th>
                 {% for itemOrderIngredients in itemOrder.itemOrderIngredients %}
                     {{ itemOrderIngredients.ingredient.name }} <br>
@@ -41,84 +54,92 @@
             </th>
             <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="{{ itemOrder.quantity }}" data-id="{{ itemOrder.id }}"></th>
             <th>
-
-                {{ itemOrder.size.currency }} {{ itemOrder.totalPrice }}
+                {% if itemOrder.sauce != null %}
+                 {{ itemOrder.size.currency }} {{ itemOrder.totalPrice }}
+                {% endif %}
             </th>
         </tr>
     {% endfor %}
     {% set totalPrice = deliveryPrice + totalOrderPrice %}
     </tbody>
 </table>
-
 <div class="row">
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1">
-        <p class="subtotal">Subtotal</p>
-    </div>
-    <div class="col s1">
-        <p class="subtotal-price">${{ totalOrderPrice }}</p>
-    </div>
-    <div class="col s1"></div>
+<div class="card card-summary-total col l3 s12">
+    <div class="row summary-rows"><p class="subtotal">Subtotal</p> <p class="subtotal-price">${{ totalOrderPrice }}</p></div>
+    <div class="row summary-rows"><p class="delivery">Delivery fee</p> <p class="delivery-price">${{ deliveryPrice }}</p></div>
+    <div class="row summary-rows"><p class="total">Total</p> <p class="total-price">${{ totalPrice }}</p></div>
+    <div class="row summary-rows"> <a class="waves-effect waves-light btn btn-new-item" href="http://localhost:8080/bowl">Order more</a> <a class="waves-effect waves-light btn btn-checkout" href="http://localhost:8080/checkout">Proceed to checkout</a></div>
 </div>
-<div class="row">
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1">
-        <p class="delivery">Delivery fee</p>
-    </div>
-    <div class="col s1">
-        <p class="delivery-price">${{ deliveryPrice }}</p>
-    </div>
-    <div class="col s1"></div>
 </div>
-<div class="row">
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1">
-        <p class="total">Total</p>
-    </div>
-    <div class="col s1">
-        <p class="total-price">${{ totalPrice }}</p>
-    </div>
-    <div class="col s1"></div>
-</div>
-<div class="row">
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1"></div>
-    <div class="col s1">
-        <a class="waves-effect waves-light btn btn-new-item" href="http://localhost:8080/bowl">Order more</a>
-    </div>
-    <div class="col s1">
-        <a class="waves-effect waves-light btn btn-checkout" href="http://localhost:8080/checkout">Proceed to checkout</a>
-    </div>
-    <div class="col s1"></div>
-</div>
+{#<div class="row">#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1">#}
+{#        <p class="subtotal">Subtotal</p>#}
+{#    </div>#}
+{#    <div class="col s1">#}
+{#        <p class="subtotal-price">${{ totalOrderPrice }}</p>#}
+{#    </div>#}
+{#    <div class="col s1"></div>#}
+{#</div>#}
+{#<div class="row">#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1">#}
+{#        <p class="delivery">Delivery fee</p>#}
+{#    </div>#}
+{#    <div class="col s1">#}
+{#        <p class="delivery-price">${{ deliveryPrice }}</p>#}
+{#    </div>#}
+{#    <div class="col s1"></div>#}
+{#</div>#}
+{#<div class="row">#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1">#}
+{#        <p class="total">Total</p>#}
+{#    </div>#}
+{#    <div class="col s1">#}
+{#        <p class="total-price">${{ totalPrice }}</p>#}
+{#    </div>#}
+{#    <div class="col s1"></div>#}
+{#</div>#}
+{#<div class="row">#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1"></div>#}
+{#    <div class="col s1">#}
+{#        <a class="waves-effect waves-light btn btn-new-item" href="http://localhost:8080/bowl">Order more</a>#}
+{#    </div>#}
+{#    <div class="col s1">#}
+{#        <a class="waves-effect waves-light btn btn-checkout" href="http://localhost:8080/checkout">Proceed to checkout</a>#}
+{#    </div>#}
+{#    <div class="col s1"></div>#}
+{#</div>#}

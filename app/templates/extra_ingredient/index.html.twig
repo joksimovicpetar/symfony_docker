@@ -17,9 +17,8 @@
             </div>
         </div>
         <div class="row" id="extra-ingredient-rows">
-            <div class="col s6">
+            <div class="col l6 s12">
                 {% set currentOrder = current_order() %}
-{#                {{ dump(currentOrder) }}#}
                 {% for extraIngredient in extraIngredients %}
                     <div class="col s12 extra-col-left">
                         {% include 'extra_ingredient/extra-ingredient-component.html.twig' with {'extraIngredient': extraIngredient} %}
@@ -27,14 +26,13 @@
                 {% endfor %}
             </div>
             <div class="col s1"></div>
-            <div class="card card-summary col s3">
+            <div class="card card-summary col l3 s12">
                 <div class="row summary-rows"><p class="name-paragraph">{{ currentOrder.bowl.name }}</p> <p class="price-paragraph">{{ currentOrder.size.currency }}{{ currentOrder.size.price }}</p></div>
                 <div class="row summary-rows"><p class="size-paragraph">{{ currentOrder.size.name }} size</p></div>
                 <div class="row summary-rows"><p class="base-paragraph">{{ currentOrder.base.name }}</p></div>
                 <div class="row summary-rows"><p class="sauce-paragraph">{{ currentOrder.sauce.name }}</p></div>
                 <div class="row summary-rows"><p class="ingredient-paragraph-head">Added ingredients:</p></div>
                 {% for itemOrderIngredient in itemOrderIngredients %}
-{#                    {{ dump(currentOrder.itemOrderIngredients) }}#}
                     {% if itemOrderIngredient.itemOrder.id == currentOrder.id %}
                     <div class="row summary-rows"><p class="ingredient-paragraph-body">{{ itemOrderIngredient.ingredient.name }}<br></p></div>
                     {% endif %}
