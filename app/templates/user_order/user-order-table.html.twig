@@ -1,7 +1,6 @@
 <table class="table table-striped">
     <thead>
     <tr>
-
         <th></th>
         <th></th>
         <th>Item</th>
@@ -14,15 +13,13 @@
     </tr>
     </thead>
     <tbody>
-    {% set deliveryPrice = 0 %}
-    {% set totalOrderPrice = 0 %}
-    {% set totalPrice = 0 %}
+    {% set deliveryPrice = current_user_order_delivery_price() %}
+    {% set totalPrice = current_user_order_total_price() %}
     {% set current = current_user_order() %}
+    {% set totalOrderPrice = current_user_order_price() %}
     {% if userOrder != null %}
         {% for itemOrder in userOrder.itemOrders %}
             <tr>
-                {% set totalOrderPrice = totalOrderPrice + itemOrder.totalPrice %}
-
                 <th><button class="btn-delete-order-item" data-id="{{ itemOrder.id }}"><i class="material-icons">delete</i></button></th>
                 <th><img src="{{ asset(itemOrder.bowl.image.imagePath) }}" alt="{{ itemOrder.bowl.image.imagePath }}" draggable="false"></th>
                 <th>
@@ -53,14 +50,13 @@
                 </th>
                 <th><input type="number" id="quantity" name="quantity" min="1" max="20" value="{{ itemOrder.quantity }}" data-id="{{ itemOrder.id }}"></th>
                 <th>
-                    {% if itemOrder.sauce != null %}
+                    {% if itemOrder.size != null %}
                      {{ itemOrder.size.currency }} {{ itemOrder.totalPrice }}
                     {% endif %}
                 </th>
             </tr>
         {% endfor %}
     {% endif %}
-    {% set totalPrice = deliveryPrice + totalOrderPrice %}
     </tbody>
 </table>
 <div class="row">

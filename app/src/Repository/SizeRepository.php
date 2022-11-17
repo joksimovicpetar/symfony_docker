@@ -5,8 +5,7 @@ namespace App\Repository;
 use App\Entity\Size;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Service\ItemOrderService;
-use App\Service\SizeService;
+
 
 /**
  * @extends ServiceEntityRepository<Size>
@@ -53,30 +52,4 @@ class SizeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-
-//    /**
-//     * @return Size[] Returns an array of Size objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Size
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

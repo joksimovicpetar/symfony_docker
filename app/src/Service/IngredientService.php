@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entity\Ingredient;
+
 use App\Repository\IngredientRepository;
 
 class IngredientService

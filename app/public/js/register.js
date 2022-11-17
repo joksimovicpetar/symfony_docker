@@ -1,27 +1,25 @@
 async function registerUser(routeEdit, routeNext) {
 
     const username = document.getElementById('inputUsername').value;
-    // alert(username);
     const password = document.getElementById('inputPassword').value;
-    // alert(password);
     const repeatPassword = document.getElementById('inputRepeatPassword').value;
-    // alert(repeatPassword);
-    if (password !== '' && username !== '') {
+    const name = document.getElementById('inputName').value;
+    const address = document.getElementById('inputAddress').value;
+    const phone = document.getElementById('inputPhoneNumber').value;
+
+    if (password !== '' && username !== '' && name !== '' && address !== '' && phone !== '') {
         if (password === repeatPassword) {
             try {
                 const response = await fetch(routeEdit, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({username: username, password: password, repeatPassword: repeatPassword})
+                    body: JSON.stringify({username: username, password: password, repeatPassword: repeatPassword, name: name, address: address, phone: phone})
                 });
 
                 if (response.status === 202) {
                     alert('Username already exists!')
                     return
                 }
-
-                // console.log(response.status)
-                // alert(JSON.stringify(response.status))
                 window.location.href = routeNext
             } catch (e) {
                 console.error('Error while updating item order')
@@ -29,11 +27,9 @@ async function registerUser(routeEdit, routeNext) {
             }
         } else {
             alert("Passwords don't match!")
-
         }
     } else {
-        alert("Username and password are required fields!")
-
+        alert("You have to fill all required fields!")
     }
 }
 

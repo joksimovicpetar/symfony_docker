@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entity\Sauce;
+
 use App\Repository\SauceRepository;
 
 class SauceService

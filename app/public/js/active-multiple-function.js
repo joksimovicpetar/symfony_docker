@@ -1,11 +1,9 @@
 function activeMultiple(elementID,classNames) {
     const cardContainer = document.getElementById(elementID);
-
     const cards = cardContainer.getElementsByClassName(classNames);
     const CLASS_ACTIVE = 'active';
 
     for (let card of cards) {
-
         card.addEventListener("click", function () {
 
             if (this.classList.contains('active')) {

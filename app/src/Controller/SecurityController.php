@@ -6,14 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 class SecurityController extends AbstractController
 {
     #[Route(path: '/', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-//        VarDumper::dump(1);exit;
          if ($this->getUser()) {
              return $this->redirectToRoute('bowl_list');
          }

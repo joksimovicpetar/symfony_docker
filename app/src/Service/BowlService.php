@@ -7,7 +7,6 @@ use App\Entity\UserOrder;
 use App\Repository\BowlRepository;
 use App\Repository\UserOrderRepository;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\VarDumper\VarDumper;
 
 
 class BowlService
@@ -22,7 +21,6 @@ class BowlService
 
     public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, Security $security)
     {
-
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->userOrderService = $userOrderService;
@@ -65,30 +63,27 @@ class BowlService
     function updateBowl($parameters)
     {
         $bowl = $this->find($parameters['valueId']);
-
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
         $current = $this->itemOrderService->findItemOrderIdStatus();
-//        VarDumper::dump($currentUserOrder);exit;
+
         if ($current == null || $current->getOrderStep()==6) {
             $itemOrder = new ItemOrder();
             $itemOrder->setBowl($bowl);
             $itemOrder->setOrderStep(1);
             $itemOrder->setQuantity(1);
+
             if ($currentUserOrder == null){
                 $userOrder = new UserOrder();
                 $userOrder->setStatus('in_progress');
                 $user = $this->security->getUser();
-                //                VarDumper::dump($user);exit;
                 $userOrder->setUser($user);
                 $this->userOrderRepository->save($userOrder);
                 $itemOrder->setUserOrder($userOrder);
                 $this->itemOrderService->save($itemOrder);
             } elseif ($currentUserOrder->getStatus()=='completed'){
-
                     $userOrder = new UserOrder();
                     $userOrder->setStatus('in_progress');
                     $user = $this->security->getUser();
-                    //                VarDumper::dump($user);exit;
                     $userOrder->setUser($user);
                     $this->userOrderRepository->save($userOrder);
                     $itemOrder->setUserOrder($userOrder);
@@ -97,7 +92,6 @@ class BowlService
                     $itemOrder->setUserOrder($currentUserOrder);
                     $this->itemOrderService->save($itemOrder);
             }
-
         } else {
             $current->setBowl($bowl);
             if ($current->getOrderStep()<=1)
@@ -107,6 +101,4 @@ class BowlService
             $this->itemOrderService->save($current);
         }
     }
-
-
 }

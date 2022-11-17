@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Sauce;
 use App\Service\ItemOrderService;
 use App\Service\SauceService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 class SauceController extends AbstractController
 {

@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Sauce;
-use App\Service\ItemOrderService;
-use App\Service\SauceService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -53,30 +51,4 @@ class SauceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-
-//    /**
-//     * @return Sauce[] Returns an array of Sauce objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Sauce
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

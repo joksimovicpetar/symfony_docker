@@ -3,16 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\ItemOrder;
-use App\Form\ItemOrderType;
 use App\Repository\ItemOrderRepository;
 use App\Service\BowlService;
 use App\Service\ItemOrderService;
-use App\Service\SizeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Controller\SizeController;
 
 #[Route('/item_order')]
 class ItemOrderController extends AbstractController
@@ -40,7 +37,6 @@ class ItemOrderController extends AbstractController
             'item_order' => $itemOrder,
         ]);
     }
-
 
     #[Route('/{id}', name: 'app_item_order_delete', methods: ['POST'])]
     public function delete(Request $request, ItemOrder $itemOrder, ItemOrderRepository $itemOrderRepository): Response

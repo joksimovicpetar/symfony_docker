@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Service;
+
 use App\Entity\ItemOrderExtraIngredient;
 use App\Repository\ItemOrderExtraIngredientRepository;
-use Symfony\Component\VarDumper\VarDumper;
+
 
 class ItemOrderExtraIngredientService
 {
@@ -75,7 +76,6 @@ class ItemOrderExtraIngredientService
         $sum = 0.0;
         $itemOrderExtraIngredients = $this->findItemOrderExtraIngredient();
 
-//        VarDumper::dump($sum);exit;
         foreach ($itemOrderExtraIngredients as $itemOrderExtraIngredient)
         {
             if ($itemOrderExtraIngredient->getItemOrder()->getId() == $current->getId())
@@ -84,7 +84,6 @@ class ItemOrderExtraIngredientService
             }
         }
         $sum = $sum + $current->getSize()->getPrice();
-//        VarDumper::dump($sum);exit;
         return $sum;
     }
 }

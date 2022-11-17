@@ -3,13 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\ItemOrderExtraIngredient;
-use App\Service\ExtraIngredientService;
-use App\Service\ItemOrderExtraIngredientService;
-use App\Service\ItemOrderService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @extends ServiceEntityRepository<ItemOrderExtraIngredient>
@@ -57,32 +52,4 @@ class ItemOrderExtraIngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-
-
-
-//    /**
-//     * @return ItemOrderExtraIngredient[] Returns an array of ItemOrderExtraIngredient objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ItemOrderExtraIngredient
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

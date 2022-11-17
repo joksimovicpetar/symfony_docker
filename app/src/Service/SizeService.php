@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entity\Size;
+
 use App\Repository\SizeRepository;
 
 class SizeService

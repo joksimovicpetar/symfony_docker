@@ -9,11 +9,19 @@
             <div class="col s4 ">
 
                 <form id="form-log-in" class="card card-log-in" method="post">
-                    {% if  app.request.query.get('registered') %}
-                        <div class="success-message">
-                            Successful registration, you can now log in!
+{#                    {% if  app.request.query.get('registered') %}#}
+{#                        <div class="success-message">#}
+{#                            Successful registration, you can now log in!#}
+{#                        </div>#}
+{#                    {% endif %}#}
+                    {% for message in app.flashes('messageSuccess') %}
+                        <div class="col s12 m12">
+                            <div class="card-panel teal">
+                                <span class="white-text">{{ message }}</span>
+                            </div>
                         </div>
-                    {% endif %}
+
+                    {% endfor %}
                     <h1 class="log-in-heading">Please log in</h1>
                     <label class="log-in-labels" for="inputUsername">Username</label>
                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>

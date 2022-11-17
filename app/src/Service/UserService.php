@@ -2,17 +2,11 @@
 
 namespace App\Service;
 
-
-
-use App\Entity\OrderInfo;
-use App\Entity\UserOrder;
-use App\Repository\OrderInfoRepository;
+use App\Factory\RegisterUserFactory;
 use App\Repository\UserOrderRepository;
 use App\Repository\UserRepository;
-use App\Entity\User;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use function PHPUnit\Framework\throwException;
+
 
 class UserService
 {
@@ -47,20 +41,11 @@ class UserService
     }
 
     function write($parameters){
-        $username = $parameters['username'];
-        $user = new User();
-        $user->setUsername($username);
+        $user = RegisterUserFactory::registerUserFromParams($parameters);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
             $parameters['password']
         );
-//        $users = $this->repository->findAll();
-//        foreach ($users as $user){
-//            if ($user->getUsername()==$username){
-//                return new JsonResponse(["message"=>"error"],202);
-//            }
-//        }
-
         $user->setPassword($hashedPassword);
         $this->repository->save($user);
     }

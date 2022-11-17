@@ -30,7 +30,17 @@ final class Version20221104104335 extends AbstractMigration
                                                   note text,
                                                   user_order_id INT,
                                                   FOREIGN KEY (user_order_id) REFERENCES user_order(id)
-                            );');
+                            )
+                          CREATE Table user(
+                                                  id INT PRIMARY KEY AUTO_INCREMENT,
+                                                  username VARCHAR(255),
+                                                  roles text,
+                                                  password VARCHAR(255),
+                                                  name VARCHAR(255),
+                                                  address VARCHAR(255),
+                                                  phone VARCHAR(255),
+                            );
+                    ');
     }
 
     public function down(Schema $schema): void

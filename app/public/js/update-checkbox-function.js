@@ -7,14 +7,13 @@ async function updateCheckBox(routeEdit,routeNext) {
             dataIds.push(checkBox.getAttribute("data-id"))
         }
     }
-    // alert(dataIds)
+
     try{
         await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({valueId: dataIds}),
         });
-
         window.location.href = routeNext
     }
     catch (e) {

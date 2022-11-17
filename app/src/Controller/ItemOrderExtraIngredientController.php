@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Service\ExtraIngredientService;
 use App\Service\ItemOrderExtraIngredientService;
-use App\Service\ItemOrderIngredientService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

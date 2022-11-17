@@ -2,10 +2,6 @@
 
 namespace App\Service;
 
-
-
-use App\Entity\OrderInfo;
-use App\Entity\UserOrder;
 use App\Factory\OrderInfoFactory;
 use App\Repository\OrderInfoRepository;
 use App\Repository\UserOrderRepository;

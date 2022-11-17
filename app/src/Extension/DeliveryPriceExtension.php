@@ -1,13 +1,12 @@
 <?php
 namespace App\Extension;
 
-use App\Entity\UserOrder;
 use App\Service\UserOrderService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 
-class LastOrderExtension extends AbstractExtension
+class DeliveryPriceExtension extends AbstractExtension
 {
 
     /**
@@ -23,14 +22,15 @@ class LastOrderExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('current_user_order', [$this, 'findUserOrders']),
+            new TwigFunction('current_user_order_delivery_price', [$this, 'findUserOrderDeliveryPrice']),
         ];
     }
 
-    public function findUserOrders() : ?UserOrder
+    public function findUserOrderDeliveryPrice(): float
 
     {
-        return $this->service->findUserOrders();
+//        Delivery price is currently fixed to null. Later add logic here to calculate it.
+        return 0;
 
     }
 

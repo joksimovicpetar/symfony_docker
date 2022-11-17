@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\ItemOrder;
-use App\Entity\UserOrder;
 use App\Repository\UserOrderRepository;
 
 class UserOrderService

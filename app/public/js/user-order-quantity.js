@@ -6,7 +6,6 @@ async function updateOrderItem(routeEdit, dataId, quantity) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({valueId: dataId, quantity: quantity})
 
-
         });
         const response = await updateResponse.json();
         document.getElementById("user_order_table").innerHTML = response.html;

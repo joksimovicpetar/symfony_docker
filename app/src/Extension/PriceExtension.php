@@ -2,7 +2,6 @@
 namespace App\Extension;
 
 
-use App\Entity\ItemOrderExtraIngredient;
 use App\Service\ItemOrderExtraIngredientService;
 use App\Service\ItemOrderService;
 use App\Service\UserOrderService;

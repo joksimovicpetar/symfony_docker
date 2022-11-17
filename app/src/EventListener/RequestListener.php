@@ -8,7 +8,6 @@ use App\Util\CheckoutUtil;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 
 class RequestListener
@@ -26,7 +25,6 @@ class RequestListener
 
     public function onKernelRequest(RequestEvent $event)
     {
-//VarDumper::dump();exit;
         $stepName = $event->getRequest()->get('_route');
         if (!array_key_exists($stepName, CheckoutUtil::CHECKOUT_ROUTES)){
             return;

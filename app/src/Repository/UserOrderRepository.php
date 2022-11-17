@@ -38,34 +38,6 @@ class UserOrderRepository extends ServiceEntityRepository
         }
     }
 
-
-//    public function findUserOrders()
-//    {
-//        $user = $this->security->getUser();
-//        $userIdentifier = $user->getId();
-//
-//        return $this->createQueryBuilder('user_order')
-//
-//            ->select('user_order', 'item', 'user', 'bowl', 'size', 'base', 'sauce', 'itemIngredients', 'itemExtraIngredients', 'ingredients', 'extraIngredients')
-//            ->leftJoin('user_order.itemOrders', 'item')
-//            ->leftJoin('user_order.user', 'user')
-//            ->leftJoin('item.bowl', 'bowl')
-//            ->leftJoin('item.size', 'size')
-//            ->leftJoin('item.base', 'base')
-//            ->leftJoin('item.sauce', 'sauce')
-//            ->leftJoin('item.itemOrderIngredients', 'itemIngredients')
-//            ->leftJoin('item.itemOrderExtraIngredients', 'itemExtraIngredients')
-//            ->leftJoin('itemIngredients.ingredient', 'ingredients')
-//            ->leftJoin('itemExtraIngredients.extraIngredient', 'extraIngredients')
-//            ->orderBy('user_order.id', 'ASC')
-//            ->setParameter('in_progress','in_progress')
-//            ->setParameter('user_check', $userIdentifier)
-//            ->where('user.id LIKE :user_check')
-//            ->andWhere('user_order.status LIKE :in_progress')
-//            ->setMaxResults(1)
-//            ->getQuery()
-//            ->getOneOrNullResult();
-//    }
     public function findUserOrders()
     {
         $user = $this->security->getUser();
@@ -107,29 +79,4 @@ class UserOrderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-//    /**
-//     * @return UserOrder[] Returns an array of UserOrder objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?UserOrder
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

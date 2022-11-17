@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\ItemOrder;
 use App\Service\ItemOrderExtraIngredientService;
 use App\Service\ItemOrderService;
 use App\Service\UserOrderService;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\VarDumper\VarDumper;
 
 class UserOrderController extends AbstractController
 {
@@ -19,7 +17,7 @@ class UserOrderController extends AbstractController
     public function findUserOrders(UserOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService): Response
     {
         $itemOrderExtraIngredients = $itemOrderExtraIngredientService->findItemOrderExtraIngredient();
-//VarDumper::dump($service->findUserOrders());exit;
+
         return $this->render('user_order/index.html.twig', [
             'userOrder' => $service->findUserOrders(),
             'itemOrderExtraIngredients' => $itemOrderExtraIngredients,
@@ -38,7 +36,7 @@ class UserOrderController extends AbstractController
         $render = $this->renderView('user_order/user-order-table.html.twig', [
             'userOrder' => $service->findUserOrders(),
         ]);
-//        VarDumper::dump($render);
+
         return new JsonResponse(['html' => $render]);
 
     }
@@ -49,11 +47,10 @@ class UserOrderController extends AbstractController
         $parameters = json_decode($request->getContent(), true);
         $itemOrderService->update($parameters);
 
-
         $render = $this->renderView('user_order/user-order-table.html.twig', [
             'userOrder' => $service->findUserOrders(),
         ]);
-//
+
         return new JsonResponse(['html' => $render]);
 
     }
