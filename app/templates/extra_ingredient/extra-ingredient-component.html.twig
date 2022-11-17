@@ -1,5 +1,5 @@
 <div class="card card-extra-ingredient" data-id="{{ extraIngredient.id }}">
     <div class="card-body">
-        <p class="ex-item">{{ extraIngredient.name }} <span style="float : right;">{{ extraIngredient.currency }}{{ extraIngredient.price }}</span> </p>
+        <p class="ex-item">{{ extraIngredient.name }} <span style="float : right;">{{ extraIngredient.price|price(2,'.',',') }}</span> </p>
     </div>
 </div>
