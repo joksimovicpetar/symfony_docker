@@ -7,6 +7,7 @@ use App\Entity\UserOrder;
 use App\Repository\BowlRepository;
 use App\Repository\UserOrderRepository;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\VarDumper\VarDumper;
 
 
 class BowlService
@@ -63,6 +64,8 @@ class BowlService
     function updateBowl($parameters)
     {
         $bowl = $this->find($parameters['valueId']);
+//        VarDumper::dump($bowl);exit;
+
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
         $current = $this->itemOrderService->findItemOrderIdStatus();
 

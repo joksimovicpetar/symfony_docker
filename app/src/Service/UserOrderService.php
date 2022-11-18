@@ -4,16 +4,21 @@ namespace App\Service;
 
 use App\Entity\ItemOrder;
 use App\Repository\UserOrderRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\VarDumper\VarDumper;
 
 class UserOrderService
 {
     private $repository;
+    private $requestStack;
 
-    public function __construct(UserOrderRepository $repository, ItemOrderService $itemOrderService, ItemOrderExtraIngredientService $itemOrderExtraIngredientService)
+    public function __construct(UserOrderRepository $repository, ItemOrderService $itemOrderService, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, RequestStack $requestStack)
     {
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->itemOrderExtraIngredientService = $itemOrderExtraIngredientService;
+        $this->requestStack = $requestStack;
+
     }
 
     function save($userOrder)
@@ -63,4 +68,15 @@ class UserOrderService
         return $sum;
     }
 
+    function findUserOrderPrice()
+    {
+        $session = $this->requestStack->getSession();
+        $userOrder = $this->findUserOrders();
+        $itemOrders = $userOrder->getItemOrders()->getValues();
+        $sum = 0;
+        foreach ($itemOrders as $itemOrder) {
+        $sum += $itemOrder->getTotalPrice();
+        }
+        return $sum;
+    }
 }

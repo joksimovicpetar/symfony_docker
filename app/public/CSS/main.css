@@ -2,7 +2,7 @@
     color: #B0413E;
     border-color: #B0413E;
     background-color: white;
-    float: right;
+    float: right !important;
     border-radius: 7px;
     margin-top: 14px;
     margin-right: 10px;
@@ -48,6 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 3px;
 }
 
 .bowl-item-js{
@@ -842,4 +843,16 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 .size-title{
     margin-top: 30px;
     margin-bottom: 0;
+}
+
+.currency-picker{
+    width: 180px !important;
+    float: right !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.currency-select{
+    border-radius: 7px;
+
 }

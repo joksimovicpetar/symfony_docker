@@ -29,14 +29,7 @@ class OrderPriceExtension extends AbstractExtension
     public function findUserOrderPrice(): float
 
     {
-        $userOrder = $this->service->findUserOrders();
-        $itemOrders = $userOrder->getItemOrders()->getValues();
-        $sum = 0;
-        foreach ($itemOrders as $itemOrder) {
-            $sum += $itemOrder->getTotalPrice();
-        }
-        return $sum;
-
+        return $this->service->findUserOrderPrice();
     }
 
 }
