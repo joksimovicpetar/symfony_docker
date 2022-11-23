@@ -26,9 +26,6 @@ class UserOrder
         ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $currency = null;
-
     public function __construct()
     {
         $this->itemOrders = new ArrayCollection();
@@ -95,15 +92,4 @@ class UserOrder
         return $this;
     }
 
-    public function getCurrency(): ?string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(string $currency): self
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
 }
