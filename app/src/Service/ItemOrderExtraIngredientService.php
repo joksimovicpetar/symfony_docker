@@ -53,12 +53,11 @@ class ItemOrderExtraIngredientService
         return $this->repository->find($id);
     }
 
-    public function update($parameters)
+    public function update($dataObjectCollection)
     {
-        $extraIngredientsId = $parameters['valueId'];
         $current = $this->itemOrderService->findItemOrderIdStatus();
-        foreach ($extraIngredientsId as $extraIngredientId) {
-            $extraIngredient = $this->extraIngredientService->find($extraIngredientId);
+        foreach ($dataObjectCollection->getDataObjects() as $dataObject) {
+            $extraIngredient = $this->extraIngredientService->find($dataObject->getId());
             $current = $this->itemOrderService->findItemOrderIdStatus();
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);
             $this->save($itemOrderExtraIngredient);

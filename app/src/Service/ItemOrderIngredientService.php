@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\ItemOrderIngredient;
 use App\Repository\ItemOrderIngredientRepository;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ItemOrderIngredientService
 {
@@ -50,11 +51,10 @@ class ItemOrderIngredientService
         return $this->repository->find($id);
     }
 
-    public function update($parameters)
+    public function update($dataObjectCollection)
     {
-        $ingredientsId = $parameters['valueId'];
-        foreach ($ingredientsId as $ingredientId) {
-            $ingredient = $this->ingredientService->find($ingredientId);
+        foreach ($dataObjectCollection->getDataObjects() as $dataObject) {
+            $ingredient = $this->ingredientService->find($dataObject->getId());
             $current = $this->itemOrderService->findItemOrderIdStatus();
             $itemOrderIngredient = new ItemOrderIngredient($current,$ingredient);
             if ($current->getOrderStep()<=5)

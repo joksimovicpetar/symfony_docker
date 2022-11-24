@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DataObjectCollection;
 use App\Service\ExtraIngredientService;
 use App\Service\ItemOrderExtraIngredientService;
 use App\Service\ItemOrderService;
@@ -27,11 +28,10 @@ class ItemOrderExtraIngredientController extends AbstractController
     }
 
     #[Route('/item_order_extra_ingredient/edit', name: 'app_ext_ingredient_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ItemOrderService $service, ItemOrderExtraIngredientService $itemOrderExtraIngredientService, ExtraIngredientService $extraIngredientService)
+    public function edit(ItemOrderExtraIngredientService $itemOrderExtraIngredientService, DataObjectCollection $dataObjectCollection)
     {
-        $parameters = json_decode($request->getContent(), true);
         $itemOrderExtraIngredientService->deleteOnId();
-        $itemOrderExtraIngredientService->update($parameters);
+        $itemOrderExtraIngredientService->update($dataObjectCollection);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

@@ -10,7 +10,7 @@ async function updateMultiple(routeEdit,routeNext) {
         await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: dataIds}),
+            body: JSON.stringify({ids: dataIds}),
         });
         window.location.href = routeNext
     }

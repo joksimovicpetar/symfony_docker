@@ -31,3 +31,9 @@ services:
         autoconfigure: false
         tags:
             - { name: request.param_converter, converter: attribute, priority: -100 }
+
+
+    App\ParamConverter\SerializedMultipleParamConverter:
+       autoconfigure: false
+       tags:
+           - { name: request.param_converter, converter: attribute, priority: -100 }
