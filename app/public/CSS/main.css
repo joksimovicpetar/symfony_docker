@@ -181,6 +181,7 @@ footer{
     height: 40px;
     width: 100px;
     text-align: center;
+    overflow: inherit;
 }
 
 .btn-next:hover{
@@ -203,6 +204,7 @@ footer{
     border-color: #3c4a6c;
     border-style: solid;
     border-width: 1px;
+    overflow: inherit;
 }
 
 .btn-previous:hover{

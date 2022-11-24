@@ -40,6 +40,18 @@ class Bowl
         return $this->id;
     }
 
+    /**
+     * @param int|null $id
+     * @return Bowl
+     */
+    public function setId(?int $id): Bowl
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
+
     public function getName(): ?string
     {
         return $this->name;

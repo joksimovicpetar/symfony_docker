@@ -61,11 +61,9 @@ class BowlService
         return $this->repository->find($id);
     }
 
-    function updateBowl($parameters)
+    function updateBowl($dataObject)
     {
-        $bowl = $this->find($parameters['valueId']);
-//        VarDumper::dump($bowl);exit;
-
+        $bowl = $this->find($dataObject->getID());
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
         $current = $this->itemOrderService->findItemOrderIdStatus();
 

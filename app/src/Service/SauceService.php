@@ -44,8 +44,8 @@ class SauceService
         return $this->repository->find($id);
     }
 
-    function updateSauce($parameters){
-        $sauce = $this->find($parameters['valueId']);
+    function updateSauce($dataObject){
+        $sauce = $this->find($dataObject->getId());
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setSauce($sauce);

@@ -44,8 +44,8 @@ class SizeService
         return $this->repository->find($id);
     }
 
-    function updateSize($parameters){
-        $size = $this->find($parameters['valueId']);
+    function updateSize($dataObject){
+        $size = $this->find($dataObject->getId());
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setSize($size);

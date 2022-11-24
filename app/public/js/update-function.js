@@ -7,7 +7,7 @@ async function update(routeEdit,routeNext) {
         await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: attribute}),
+            body: JSON.stringify({id: parseInt(attribute)}),
         });
         window.location.href = routeNext
     }

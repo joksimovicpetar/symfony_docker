@@ -43,8 +43,8 @@ class BaseService
         return $this->repository->find($id);
     }
 
-    function updateBase($parameters){
-        $base = $this->find($parameters['valueId']);
+    function updateBase($dataObject){
+        $base = $this->find($dataObject->getId());
         $current = $this->itemOrderService->findItemOrderIdStatus();
 
         $current->setBase($base);

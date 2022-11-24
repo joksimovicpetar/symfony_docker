@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DataObject;
 use App\Service\BaseService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,10 +23,9 @@ class BaseController extends AbstractController
     }
 
     #[Route('/base/edit', name: 'app_base_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ItemOrderService $service, BaseService $baseService)
+    public function edit(ItemOrderService $service, BaseService $baseService, DataObject $dataObject)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $baseService->updateBase($parameters);
+        $baseService->updateBase($dataObject);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

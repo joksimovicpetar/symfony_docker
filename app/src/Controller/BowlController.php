@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Bowl;
+use App\Entity\DataObject;
 use App\Service\BowlService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +24,10 @@ class BowlController extends AbstractController
         ]);
     }
 
-    #[Route('/bowl/new', name: 'app_bowl_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, BowlService $bowlService)
+    #[Route('/bowl/new', name: 'app_bowl_edit', methods: ['POST'])]
+    public function edit(BowlService $bowlService, DataObject $dataObject)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $bowlService->updateBowl($parameters);
+        $bowlService->updateBowl($dataObject);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);

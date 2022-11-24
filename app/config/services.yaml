@@ -17,6 +17,7 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
+            - '../src/ParamConverter/**/*'
             - '../src/Entity/'
             - '../src/Kernel.php'
 
@@ -25,3 +26,8 @@ services:
     App\EventListener\RequestListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    App\ParamConverter\SerializedParamConverter:
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }

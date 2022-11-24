@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DataObject;
 use App\Service\SizeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,9 @@ class SizeController extends AbstractController
     }
 
     #[Route('/size/edit', name: 'app_size_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ItemOrderService $service, SizeService $sizeService)
+    public function edit(ItemOrderService $service, SizeService $sizeService, DataObject $dataObject)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $sizeService->updateSize($parameters);
+        $sizeService->updateSize($dataObject);
 
         $response = new Response();
         $response->setStatusCode(Response::HTTP_OK);
