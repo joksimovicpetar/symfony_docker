@@ -3,14 +3,14 @@
 namespace App\ParamConverter;
 
 use App\Entity\DataObject;
-use App\Entity\DataObjectCollection;
+use App\Entity\DataObjectCurrency;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\VarDumper\VarDumper;
 
-class SerializedMultipleParamConverter implements ParamConverterInterface
+class ParamConverterCurrency implements ParamConverterInterface
 {
 
     private SerializerInterface $serializer;
@@ -21,27 +21,24 @@ class SerializedMultipleParamConverter implements ParamConverterInterface
 
     public function supports(ConfigurationInterface $configuration)
     {
-        if ($configuration->getClass() != DataObjectCollection::class ) {
 
+        if ($configuration->getClass() != DataObjectCurrency::class ) {
             return false;
         }
-
         return true;
     }
 
     public function apply(Request $request, ConfigurationInterface $configuration)
     {
+        $class = $configuration->getClass();
 
         $object = $this->serializer->deserialize(
             $request->getContent(),
-            DataObjectCollection::class,
+            $class,
             'json'
         );
-//        VarDumper::dump($object);exit;
 
         $request->attributes->set($configuration->getName(), $object);
-
-
     }
 
 }

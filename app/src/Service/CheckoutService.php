@@ -17,11 +17,9 @@ class CheckoutService
         $this->userOrderRepository = $userOrderRepository;
     }
 
-    function save($parameters)
+    function save($dataObjectOrderInfo)
     {
-
-
-        $orderInfo = OrderInfoFactory::orderInfoFromParams($parameters);
+        $orderInfo = OrderInfoFactory::orderInfoFromParams($dataObjectOrderInfo);
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
         $id = $currentUserOrder->getId();
 

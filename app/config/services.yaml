@@ -34,6 +34,17 @@ services:
 
 
     App\ParamConverter\SerializedMultipleParamConverter:
-       autoconfigure: false
-       tags:
-           - { name: request.param_converter, converter: attribute, priority: -100 }
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }
+
+
+    App\ParamConverter\ParamConverterCurrency:
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }
+
+    App\ParamConverter\ParamConverterOrderInfo:
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }

@@ -1,11 +1,11 @@
 async function deleteOrderItem(routeEdit, dataId) {
-    console.log(dataId);
+    // console.log(dataId);
 
     try{
         const deleteResponse = await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: dataId}),
+            body: JSON.stringify({id: parseInt(dataId)}),
         });
 
         const response = await deleteResponse.json();

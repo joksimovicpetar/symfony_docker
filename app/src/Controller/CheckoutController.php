@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DataObjectOrderInfo;
 use App\Entity\OrderInfo;
 use App\Form\OrderInfoType;
 use App\Service\CheckoutService;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 class CheckoutController extends AbstractController
 {
@@ -27,10 +29,9 @@ class CheckoutController extends AbstractController
     }
 
     #[Route('/checkout/save', name: 'order_info_update', methods: [ 'POST'])]
-    public function update(Request $request, CheckoutService $checkoutService)
+    public function update(CheckoutService $checkoutService, DataObjectOrderInfo $dataObjectOrderInfo)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $checkoutService->save($parameters);
+        $checkoutService->save($dataObjectOrderInfo);
         $this->addFlash('message', 'Order successful');
 
         $response = new Response();

@@ -15,11 +15,9 @@ class CurrencyService
 
     }
 
-    public function userOderCurrency(mixed $parameters)
+    public function userOderCurrency($dataObjectCurrency)
     {
-        $currency = $parameters['currency'];
         $session = $this->requestStack->getSession();
-        $session->set('currency', $currency);
-//        VarDumper::dump($session);exit;
+        $session->set('currency', $dataObjectCurrency->getCurrency());
     }
 }

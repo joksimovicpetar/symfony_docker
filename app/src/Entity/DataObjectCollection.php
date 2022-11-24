@@ -11,20 +11,20 @@ class DataObjectCollection
     /**
      * @var DataObject[] The DataObjects
      */
-    private ArrayCollection $dataObjects;
+    private array $dataObjects;
 
     public function __construct()
     {
-        $this->dataObjects = new ArrayCollection();
+        $this->dataObjects = [];
     }
 
 
-    public function getDataObjects(): ArrayCollection
+    public function getDataObjects(): array
     {
         return $this->dataObjects;
     }
 
-    public function setDataObjects(ArrayCollection $dataObjects): self
+    public function setDataObjects(array $dataObjects): self
     {
         $this->dataObjects = $dataObjects;
 
@@ -32,7 +32,7 @@ class DataObjectCollection
     }
 
     public function add($object){
-        $this->dataObjects->add($object);
+//        $this->dataObjects->add($object);
     }
 
 

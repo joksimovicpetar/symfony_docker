@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\ItemOrderExtraIngredient;
 use App\Repository\ItemOrderExtraIngredientRepository;
-
+use Symfony\Component\VarDumper\VarDumper;
 
 class ItemOrderExtraIngredientService
 {
@@ -56,7 +56,10 @@ class ItemOrderExtraIngredientService
     public function update($dataObjectCollection)
     {
         $current = $this->itemOrderService->findItemOrderIdStatus();
+//                VarDumper::dump($dataObjectCollection->getDataObjects());exit;
+
         foreach ($dataObjectCollection->getDataObjects() as $dataObject) {
+//            VarDumper::dump($dataObject);exit;
             $extraIngredient = $this->extraIngredientService->find($dataObject->getId());
             $current = $this->itemOrderService->findItemOrderIdStatus();
             $itemOrderExtraIngredient = new ItemOrderExtraIngredient($current,$extraIngredient);

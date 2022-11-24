@@ -4,7 +4,7 @@ async function updateCheckBox(routeEdit,routeNext) {
 
     for (const checkBox of checkedBoxes) {
         if (checkBox.checked) {
-            dataIds.push(checkBox.getAttribute("data-id"))
+            dataIds.push({id: parseInt(checkBox.getAttribute("data-id"))})
         }
     }
 
@@ -12,7 +12,7 @@ async function updateCheckBox(routeEdit,routeNext) {
         await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ids: dataIds}),
+            body: JSON.stringify({dataObjects: dataIds}),
         });
         window.location.href = routeNext
     }

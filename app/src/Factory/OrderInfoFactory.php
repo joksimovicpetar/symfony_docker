@@ -3,18 +3,19 @@
 namespace App\Factory;
 
 use App\Entity\OrderInfo;
+use Symfony\Component\VarDumper\VarDumper;
 
 class OrderInfoFactory
 {
 
-    public static function orderInfoFromParams($parameters){
-        $fullName = $parameters['fullName'];
-        $address = $parameters['address'];
-        $phoneNumber = $parameters['phoneNumber'];
-        $time = $parameters['time'];
-        $payment = $parameters['payment'];
-        $date = $parameters['date'];
-        $note = $parameters['note'];
+    public static function orderInfoFromParams($dataObjectOrderInfo){
+        $fullName = $dataObjectOrderInfo->getAddress();
+        $address = $dataObjectOrderInfo->getFullName();
+        $phoneNumber = $dataObjectOrderInfo->getPhoneNumber();
+        $time = $dataObjectOrderInfo->getDeliveryTime();
+        $payment = $dataObjectOrderInfo->getPayment();
+        $date = $dataObjectOrderInfo->getOrderDate();
+        $note = $dataObjectOrderInfo->getNote();
 
         $orderInfo = new OrderInfo();
         $orderInfo->setFullName($fullName);
