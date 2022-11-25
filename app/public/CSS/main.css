@@ -65,7 +65,7 @@
 .card .card-title{
     font-size: 24px;
     font-weight: bolder;
-    margin-top: 10px;
+    margin-top: 20px;
 
 }
 
@@ -529,6 +529,7 @@ button:focus {
     justify-content: normal;
     border-radius: 7px;
     width: 400px !important;
+    padding-bottom: 15px !important;
 }
 
 .card-summary-total{
@@ -835,11 +836,14 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 
 #size-text{
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 #size-price{
     position: absolute;
     bottom: 5px;
+    margin-left: 10px;
+
 }
 
 .size-title{

@@ -6,6 +6,8 @@ use App\Entity\ItemOrder;
 use App\Entity\UserOrder;
 use App\Repository\BowlRepository;
 use App\Repository\UserOrderRepository;
+use App\Util\OrderStatusUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -19,14 +21,16 @@ class BowlService
     private UserOrderService $userOrderService;
     private UserOrderRepository $userOrderRepository;
     private Security $security;
+    private RequestStack $requestStack;
 
-    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, Security $security)
+    public function  __construct(BowlRepository $repository, ItemOrderService $itemOrderService, UserOrderService $userOrderService, UserOrderRepository $userOrderRepository, Security $security, RequestStack $requestStack)
     {
         $this->repository = $repository;
         $this->itemOrderService = $itemOrderService;
         $this->userOrderService = $userOrderService;
         $this->userOrderRepository = $userOrderRepository;
         $this->security = $security;
+        $this->requestStack = $requestStack;
     }
 
 
@@ -66,6 +70,8 @@ class BowlService
         $bowl = $this->find($dataObject->getID());
         $currentUserOrder = $this->userOrderService->findLastUserOrder();
         $current = $this->itemOrderService->findItemOrderIdStatus();
+        $session = $this->requestStack->getSession();
+        $session->set('currency', "$");
 
         if ($current == null || $current->getOrderStep()==6) {
             $itemOrder = new ItemOrder();
@@ -75,15 +81,15 @@ class BowlService
 
             if ($currentUserOrder == null){
                 $userOrder = new UserOrder();
-                $userOrder->setStatus('in_progress');
+                $userOrder->setStatus(OrderStatusUtil::ORDER_STATUS[1]);
                 $user = $this->security->getUser();
                 $userOrder->setUser($user);
                 $this->userOrderRepository->save($userOrder);
                 $itemOrder->setUserOrder($userOrder);
                 $this->itemOrderService->save($itemOrder);
-            } elseif ($currentUserOrder->getStatus()=='completed'){
+            } elseif ($currentUserOrder->getStatus()==OrderStatusUtil::ORDER_STATUS[2]){
                     $userOrder = new UserOrder();
-                    $userOrder->setStatus('in_progress');
+                    $userOrder->setStatus(OrderStatusUtil::ORDER_STATUS[1]);
                     $user = $this->security->getUser();
                     $userOrder->setUser($user);
                     $this->userOrderRepository->save($userOrder);
