@@ -49,6 +49,7 @@
     flex-direction: column;
     align-items: center;
     padding: 3px;
+    margin-bottom: 20px;
 }
 
 .bowl-item-js{
