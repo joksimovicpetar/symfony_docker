@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\DataObjectRegistration;
 use App\Service\UserService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Exception;
@@ -22,11 +23,11 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/register/write', name: 'register_update', methods: [ 'POST'])]
-    public function write(Request $request, UserService $userService)
+    public function write(UserService $userService, DataObjectRegistration $dataObjectRegistration)
     {
-        $parameters = json_decode($request->getContent(), true);
+
         try {
-            $userService->write($parameters);
+            $userService->write($dataObjectRegistration);
             $this->addFlash('messageSuccess', 'Registration successful');
             return new JsonResponse(["message"=>"Great success!"], 200);
 

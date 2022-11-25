@@ -4,7 +4,7 @@ async function updateOrderItem(routeEdit, dataId, quantity) {
         const updateResponse = await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({valueId: dataId, quantity: quantity})
+            body: JSON.stringify({id: parseInt(dataId), quantity: parseInt(quantity)})
 
         });
         const response = await updateResponse.json();

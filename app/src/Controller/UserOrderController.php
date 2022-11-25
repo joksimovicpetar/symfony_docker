@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\DataObject;
+use App\Entity\DataObjectQuantity;
 use App\Service\ItemOrderExtraIngredientService;
 use App\Service\ItemOrderService;
 use App\Service\UserOrderService;
@@ -41,10 +42,9 @@ class UserOrderController extends AbstractController
     }
 
     #[Route('/user_order/update', name: 'order_list_update', methods: [ 'POST'])]
-    public function update(Request $request, ItemOrderService $itemOrderService, UserOrderService $service)
+    public function update(ItemOrderService $itemOrderService, UserOrderService $service, DataObjectQuantity $dataObjectQuantity)
     {
-        $parameters = json_decode($request->getContent(), true);
-        $itemOrderService->update($parameters);
+        $itemOrderService->update($dataObjectQuantity);
 
         $render = $this->renderView('user_order/user-order-table.html.twig', [
             'userOrder' => $service->findUserOrders(),

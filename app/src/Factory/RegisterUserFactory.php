@@ -7,16 +7,12 @@ use App\Entity\User;
 class RegisterUserFactory
 {
 
-    public static function registerUserFromParams($parameters){
+    public static function registerUserFromParams($dataObjectRegistration){
         $user = new User();
-        $username = $parameters['username'];
-        $user->setUsername($username);
-        $name = $parameters['name'];
-        $user->setName($name);
-        $address = $parameters['address'];
-        $user->setAddress($address);
-        $phone = $parameters['phone'];
-        $user->setPhone($phone);
+        $user->setUsername($dataObjectRegistration->getUsername());
+        $user->setName($dataObjectRegistration->getName());
+        $user->setAddress($dataObjectRegistration->getAddress());
+        $user->setPhone($dataObjectRegistration->getPhone());
 
         return $user;
 

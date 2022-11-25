@@ -23,10 +23,10 @@ class ItemOrderService
         $this->repository->save($itemOrder);
     }
 
-    function update($parameters): void
+    function update($dataObjectQuantity): void
     {
-        $quantity = $parameters['quantity'];
-        $itemOrderId = $parameters['valueId'];
+        $quantity = $dataObjectQuantity->getQuantity();
+        $itemOrderId = $dataObjectQuantity->getId();
         $itemOrder = $this->find($itemOrderId);
         $itemOrder->setQuantity($quantity);
         $itemOrder->setTotalPrice($itemOrder->getPrice()*$itemOrder->getQuantity());

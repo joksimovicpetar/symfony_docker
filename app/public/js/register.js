@@ -13,7 +13,7 @@ async function registerUser(routeEdit, routeNext) {
                 const response = await fetch(routeEdit, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({username: username, password: password, repeatPassword: repeatPassword, name: name, address: address, phone: phone})
+                    body: JSON.stringify({username: username, password: password, name: name, address: address, phone: phone})
                 });
 
                 if (response.status === 202) {

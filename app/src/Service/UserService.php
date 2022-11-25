@@ -40,11 +40,11 @@ class UserService
         return $this->repository->find($id);
     }
 
-    function write($parameters){
-        $user = RegisterUserFactory::registerUserFromParams($parameters);
+    function write($dataObjectRegistration){
+        $user = RegisterUserFactory::registerUserFromParams($dataObjectRegistration);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $user,
-            $parameters['password']
+            $dataObjectRegistration->getPassword()
         );
         $user->setPassword($hashedPassword);
         $this->repository->save($user);

@@ -32,12 +32,10 @@ services:
         tags:
             - { name: request.param_converter, converter: attribute, priority: -100 }
 
-
     App\ParamConverter\SerializedMultipleParamConverter:
         autoconfigure: false
         tags:
             - { name: request.param_converter, converter: attribute, priority: -100 }
-
 
     App\ParamConverter\ParamConverterCurrency:
         autoconfigure: false
@@ -45,6 +43,16 @@ services:
             - { name: request.param_converter, converter: attribute, priority: -100 }
 
     App\ParamConverter\ParamConverterOrderInfo:
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }
+
+    App\ParamConverter\ParamConverterRegistration:
+        autoconfigure: false
+        tags:
+            - { name: request.param_converter, converter: attribute, priority: -100 }
+
+    App\ParamConverter\ParamConverterQuantity:
         autoconfigure: false
         tags:
             - { name: request.param_converter, converter: attribute, priority: -100 }
