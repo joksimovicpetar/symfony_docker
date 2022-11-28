@@ -26,17 +26,10 @@
         </div>
         <div class="row" id="card-rows">
             {% set currentOrder = current_order() %}
-            {% for bowl in bowls %}
-                {% if currentOrder %}
-                    {% set activeBowl = bowl.id == currentOrder.bowl.id %}
-                {% else %}
-                    {% set activeBowl = null %}
-                {% endif %}
-                <div class="col l3 s6 bowl-item-js">
-                    {% include 'bowl/bowl-component.html.twig' with {'bowl': bowl, 'isActive': activeBowl} %}
-                </div>
-
-            {% endfor %}
+            {% include 'bowl/bowl-list-component.html.twig' with {'bowls': bowls, 'currentOrder': currentOrder} %}
+        </div>
+        <div class="row" >
+            <a class="waves-effect waves-light btn btn-load" id="bowl-load">Load more</a>
         </div>
     </div>
 {% endblock %}
@@ -65,5 +58,6 @@
     <script src="{{ asset('js/active-function.js') }}"></script>
     <script src="{{ asset('js/select-currency.js') }}"></script>
     <script src="{{ asset('js/update-function.js') }}"></script>
+    <script src="{{ asset('js/pagination.js') }}"></script>
     <script src="{{ asset('js/bowl.js') }}"></script>
 {% endblock %}

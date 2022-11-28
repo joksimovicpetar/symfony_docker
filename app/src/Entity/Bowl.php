@@ -30,6 +30,10 @@ class Bowl
     ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id')]
     private ?Image $image = null;
 
+    #[ORM\OneToOne(targetEntity: 'Category', cascade: ['persist', 'remove']),
+    ORM\JoinColumn(name: 'category', referencedColumnName: 'id')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->itemOrders = new ArrayCollection();
@@ -121,6 +125,24 @@ class Bowl
     public function setImage(?Image $image): Bowl
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Category|null
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category|null $category
+     * @return Bowl
+     */
+    public function setCategory(?Category $category): Bowl
+    {
+        $this->category = $category;
         return $this;
     }
 

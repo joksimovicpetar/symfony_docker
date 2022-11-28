@@ -44,12 +44,11 @@
     position: relative;
     width: 300px;
     border-radius: 7px;
-    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 3px;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 }
 
 .bowl-item-js{
@@ -862,4 +861,27 @@ input[type=password]:not(.browser-default):focus:not([readonly])+label{
 .currency-select{
     border-radius: 7px;
 
+}
+.btn-load{
+    color: #B0413E;
+    border-color: #B0413E;
+    background-color: white;
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    height: 35px;
+    line-height: 29px;
+    width: 100px;
+    font-size: 12px;
+    padding: 1px;
+    z-index: 0;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-load:hover {
+    color: white;
+    background-color: lightcoral;
 }

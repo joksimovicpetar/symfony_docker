@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Bowl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @extends ServiceEntityRepository<Bowl>
@@ -46,13 +47,19 @@ class BowlRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function findBowls()
+    public function findSaltyBowls($offset, $page)
     {
+        $firstResult = ($page-1)*$offset;
         return $this->createQueryBuilder('bowl')
 
-            ->select('bowl', 'i')
+            ->select('bowl', 'i', 'category')
             ->leftJoin('bowl.image', 'i')
+            ->leftJoin('bowl.category', 'category')
             ->orderBy('bowl.id', 'ASC')
+            ->setParameter('category_check', 'Salty')
+            ->where('category.name LIKE :category_check')
+            ->setFirstResult(0)
+            ->setMaxResults($offset)
             ->getQuery()
             ->getResult();
     }

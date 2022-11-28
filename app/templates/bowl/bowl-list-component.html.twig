@@ -1,0 +1,11 @@
+{% for bowl in bowls %}
+    {% if currentOrder %}
+        {% set activeBowl = bowl.id == currentOrder.bowl.id %}
+    {% else %}
+        {% set activeBowl = null %}
+    {% endif %}
+    <div class="col l3 s6 bowl-item-js">
+        {% include 'bowl/bowl-component.html.twig' with {'bowl': bowl, 'isActive': activeBowl} %}
+    </div>
+
+{% endfor %}
