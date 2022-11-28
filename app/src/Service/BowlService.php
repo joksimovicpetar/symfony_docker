@@ -55,9 +55,9 @@ class BowlService
         return $bowls;
     }
 
-    function findSaltyBowls($offset = 4, $page = 1)
+    function findBowls($offset = 4, $page = 1)
     {
-        return $this->repository->findSaltyBowls($offset, $page);
+        return $this->repository->findBowls($offset, $page);
     }
 
     function find($id)

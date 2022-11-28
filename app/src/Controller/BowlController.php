@@ -19,7 +19,7 @@ class BowlController extends AbstractController
     #[Route('/bowl', name: 'bowl_list', methods: ['GET'])]
     public function index(BowlService $service): Response
     {
-        $bowls = $service->findSaltyBowls();
+        $bowls = $service->findBowls();
 
         return $this->render('bowl/index.html.twig', [
             'bowls' => $bowls,
@@ -31,7 +31,7 @@ class BowlController extends AbstractController
     {
         $offset = json_decode($request->getContent())->offset;
         $page = json_decode($request->getContent())->page;
-        $bowls = $service->findSaltyBowls($offset, $page+1);
+        $bowls = $service->findBowls($offset, $page);
         $currentOrder = $itemOrderService->findItemOrderIdStatus();
 
         $render = $this->renderView('bowl/bowl-list-component.html.twig', [
@@ -39,7 +39,7 @@ class BowlController extends AbstractController
             'currentOrder' => $currentOrder
         ]);
 
-        return new JsonResponse(['html' => $render]);
+        return new JsonResponse(['html' => $render, 'hasMoreResults' => count($bowls)==$offset]);
     }
 
     #[Route('/bowl/new', name: 'app_bowl_edit', methods: ['POST'])]

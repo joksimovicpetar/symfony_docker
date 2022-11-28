@@ -7,7 +7,7 @@ async function loadMore(routeEdit) {
         const response = await fetch(routeEdit, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({offset, page}),
+            body: JSON.stringify({offset, page: ++page}),
         });
 
         const decodedResponse = await response.json();
@@ -18,8 +18,8 @@ async function loadMore(routeEdit) {
     }
 }
 
-const btn = document.getElementById("bowl-load");
-btn.addEventListener('click', () => {
+const loadMoreButton = document.getElementById("bowl-load");
+loadMoreButton.addEventListener('click', () => {
         loadMore('http://localhost:8080/bowl')
     }
     , false);
