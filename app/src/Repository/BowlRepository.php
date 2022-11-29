@@ -57,7 +57,7 @@ class BowlRepository extends ServiceEntityRepository
             ->leftJoin('bowl.category', 'category')
             ->setParameter('category_check', $category)
             ->where('category.id LIKE :category_check')
-//            ->add("orderBy", "bowl.id ASC")
+            ->add("orderBy", "bowl.id ASC")
             ->setFirstResult($firstResult)
             ->setMaxResults($offset);
 
