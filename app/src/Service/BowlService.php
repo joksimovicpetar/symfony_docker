@@ -57,7 +57,9 @@ class BowlService
 
     function findBowls($category, $offset = 4, $page = 1)
     {
-        return $this->repository->findBowls($category, $offset, $page);
+        $currentBowl = $this->itemOrderService->findItemOrderIdStatus();
+        $bowlId = $currentBowl ? ($currentBowl->getBowl() ? $currentBowl->getBowl()->getId() : null) : null;
+        return $this->repository->findBowls($category, $offset, $page, $bowlId);
     }
 
     function find($id)

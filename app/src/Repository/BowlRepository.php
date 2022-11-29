@@ -47,20 +47,24 @@ class BowlRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function findBowls($category, $offset, $page)
+    public function findBowls($category, $offset, $page, $currentBowl=null)
     {
-        $firstResult = ($page-1)*$offset;
-        return $this->createQueryBuilder('bowl')
 
+        $firstResult = ($page-1)*$offset;
+         $qb = $this->createQueryBuilder('bowl')
             ->select('bowl', 'i', 'category')
             ->leftJoin('bowl.image', 'i')
             ->leftJoin('bowl.category', 'category')
-            ->orderBy('bowl.id', 'ASC')
             ->setParameter('category_check', $category)
             ->where('category.id LIKE :category_check')
+//            ->add("orderBy", "bowl.id ASC")
             ->setFirstResult($firstResult)
-            ->setMaxResults($offset)
-            ->getQuery()
+            ->setMaxResults($offset);
+
+         if ($currentBowl){
+             $qb->add("orderBy", "FIELD(bowl.id, :ids) DESC")->setParameter('ids', [$currentBowl]);
+         }
+        return $qb->getQuery()
             ->getResult();
     }
 }

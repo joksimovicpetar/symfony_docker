@@ -1,7 +1,7 @@
 
     {% for bowl in bowls %}
 {#        {% dump bowl %}#}
-        {% if currentOrder %}
+        {% if currentOrder and currentOrder.bowl %}
             {% set activeBowl = bowl.id == currentOrder.bowl.id %}
         {% else %}
             {% set activeBowl = null %}
