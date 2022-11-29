@@ -24,18 +24,29 @@
                 <p/>
             </div>
         </div>
-        <div class="row" >
-            <div class="col s4">
-                <h2 class="bowl-category-name">Salty bowls</h2>
-            </div>
-        </div>
+
         <div class="row" id="card-rows">
+{#            {% dump categories %}#}
             {% set currentOrder = current_order() %}
-            {% include 'bowl/bowl-list-component.html.twig' with {'bowls': bowls, 'currentOrder': currentOrder} %}
+            {% for category in categories %}
+                <div class="row" >
+                    <div class="col s4">
+                        <h2 class="bowl-category-name">{{ category.name }} bowls</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="category-container-{{ category.id }}">
+
+                    </div>
+                </div>
+{#                {% include 'bowl/bowl-list-component.html.twig' with {'category': category, 'currentOrder': currentOrder} %}#}
+                <div class="row" >
+                    <a class="waves-effect waves-light btn btn-load bowl-load" id="bowl-load-more-{{ category.id }}" data-id="{{ category.id }}">Load more</a>
+                </div>
+            {% endfor %}
         </div>
-        <div class="row" >
-            <a class="waves-effect waves-light btn btn-load" id="bowl-load">Load more</a>
-        </div>
+
+
     </div>
 {% endblock %}
 {% block footer %}
@@ -60,6 +71,10 @@
     </div>
 {%endblock %}
 {% block javascriptsBody %}
+    <script>
+        const categories = {{ categories|json_encode|raw }};
+        // console.log(categories);
+    </script>
     <script src="{{ asset('js/active-function.js') }}"></script>
     <script src="{{ asset('js/select-currency.js') }}"></script>
     <script src="{{ asset('js/update-function.js') }}"></script>

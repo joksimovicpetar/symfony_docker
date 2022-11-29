@@ -47,7 +47,7 @@ class BowlRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function findBowls($offset, $page)
+    public function findBowls($category, $offset, $page)
     {
         $firstResult = ($page-1)*$offset;
         return $this->createQueryBuilder('bowl')
@@ -56,8 +56,8 @@ class BowlRepository extends ServiceEntityRepository
             ->leftJoin('bowl.image', 'i')
             ->leftJoin('bowl.category', 'category')
             ->orderBy('bowl.id', 'ASC')
-            ->setParameter('category_check', 'Salty')
-            ->where('category.name LIKE :category_check')
+            ->setParameter('category_check', $category)
+            ->where('category.id LIKE :category_check')
             ->setFirstResult($firstResult)
             ->setMaxResults($offset)
             ->getQuery()

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bowl;
 use App\Entity\DataObject;
 use App\Service\BowlService;
+use App\Service\CategoryService;
 use App\Service\ItemOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,12 +18,12 @@ use Symfony\Component\VarDumper\VarDumper;
 class BowlController extends AbstractController
 {
     #[Route('/bowl', name: 'bowl_list', methods: ['GET'])]
-    public function index(BowlService $service): Response
+    public function index(BowlService $service, CategoryService $categoryService): Response
     {
-        $bowls = $service->findBowls();
+        $categories = $categoryService->findCategories();
 
         return $this->render('bowl/index.html.twig', [
-            'bowls' => $bowls,
+            'categories' => $categories
         ]);
     }
 
@@ -31,7 +32,8 @@ class BowlController extends AbstractController
     {
         $offset = json_decode($request->getContent())->offset;
         $page = json_decode($request->getContent())->page;
-        $bowls = $service->findBowls($offset, $page);
+        $category = json_decode($request->getContent())->category;
+        $bowls = $service->findBowls($category, $offset, $page);
         $currentOrder = $itemOrderService->findItemOrderIdStatus();
 
         $render = $this->renderView('bowl/bowl-list-component.html.twig', [

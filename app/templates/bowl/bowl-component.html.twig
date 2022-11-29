@@ -1,4 +1,6 @@
 <div class="card card-bowl {{ isActive ? 'active' : '' }}" data-id="{{ bowl.id }}">
+{#    {% dump bowl %}#}
+
     <div class="row">
         <img src="{{ asset(bowl.image.imagePath) }}" alt="{{ bowl.image.imagePath }}" class="card-img-top" draggable="false">
     </div>

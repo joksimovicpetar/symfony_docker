@@ -30,7 +30,7 @@ class Bowl
     ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id')]
     private ?Image $image = null;
 
-    #[ORM\OneToOne(targetEntity: 'Category', cascade: ['persist', 'remove']),
+    #[ORM\ManyToOne(targetEntity: 'Category', cascade: ['persist', 'remove'], inversedBy: 'bowls'),
     ORM\JoinColumn(name: 'category', referencedColumnName: 'id')]
     private ?Category $category = null;
 

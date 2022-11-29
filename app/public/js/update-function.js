@@ -1,7 +1,7 @@
 async function update(routeEdit,routeNext) {
     let active_card = document.getElementsByClassName("active")[0];
     let attribute = active_card.getAttribute("data-id");
-    console.log("active_card");
+    // console.log("active_card");
 
     try{
         await fetch(routeEdit, {

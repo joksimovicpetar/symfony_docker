@@ -17,7 +17,7 @@ async function selectedCurrency(routeEdit, currency) {
 }
 function updateItem(){
     const btn = document.getElementById('currency-picker');
-console.log(btn)
+// console.log(btn)
         btn.addEventListener('change', (event) => {
             // console.log(event.target.value)
             const currency = event.target.value;

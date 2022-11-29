@@ -42,7 +42,7 @@ class ItemOrder
     private ?int $orderStep = 1;
 
     #[ORM\ManyToOne(targetEntity: UserOrder::class, inversedBy: 'itemOrders'),
-        ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
+    ORM\JoinColumn(name: 'user_order_id', referencedColumnName: 'id')]
     private ?UserOrder $userOrder = null;
 
     #[ORM\Column]
