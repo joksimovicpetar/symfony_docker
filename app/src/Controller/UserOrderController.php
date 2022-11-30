@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\DataObject;
 use App\Entity\DataObjectQuantity;
+use App\EventListener\QuantityChangeEvent;
 use App\Service\ItemOrderExtraIngredientService;
 use App\Service\ItemOrderService;
 use App\Service\UserOrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,11 +47,16 @@ class UserOrderController extends AbstractController
     public function update(ItemOrderService $itemOrderService, UserOrderService $service, DataObjectQuantity $dataObjectQuantity)
     {
         $itemOrderService->update($dataObjectQuantity);
+        $userOrder = $service->findLastUserOrder();
+        $itemOrder = $itemOrderService->findItemOrderIdStatus();
+        $dispatcher = new EventDispatcher();
+
 
         $render = $this->renderView('user_order/user-order-table.html.twig', [
             'userOrder' => $service->findUserOrders(),
         ]);
-
+        $event = new QuantityChangeEvent($userOrder, $itemOrder);
+        $dispatcher->dispatch($event);
         return new JsonResponse(['html' => $render]);
 
     }
