@@ -26,9 +26,13 @@ class UserOrder
         ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'userOrderId', targetEntity: Logger::class)]
+    private Collection $loggers;
+
     public function __construct()
     {
         $this->itemOrders = new ArrayCollection();
+        $this->loggers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,6 +92,36 @@ class UserOrder
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Logger>
+     */
+    public function getLoggers(): Collection
+    {
+        return $this->loggers;
+    }
+
+    public function addLogger(Logger $logger): self
+    {
+        if (!$this->loggers->contains($logger)) {
+            $this->loggers->add($logger);
+            $logger->setUserOrderId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLogger(Logger $logger): self
+    {
+        if ($this->loggers->removeElement($logger)) {
+            // set the owning side to null (unless already changed)
+            if ($logger->getUserOrderId() === $this) {
+                $logger->setUserOrderId(null);
+            }
+        }
 
         return $this;
     }
