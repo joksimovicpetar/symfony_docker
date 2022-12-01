@@ -26,8 +26,7 @@ class UserOrder
         ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'userOrderId', targetEntity: Logger::class)]
-    private Collection $loggers;
+
 
     public function __construct()
     {
@@ -108,7 +107,7 @@ class UserOrder
     {
         if (!$this->loggers->contains($logger)) {
             $this->loggers->add($logger);
-            $logger->setUserOrderId($this);
+            $logger->setUserOrder($this);
         }
 
         return $this;
@@ -118,8 +117,8 @@ class UserOrder
     {
         if ($this->loggers->removeElement($logger)) {
             // set the owning side to null (unless already changed)
-            if ($logger->getUserOrderId() === $this) {
-                $logger->setUserOrderId(null);
+            if ($logger->getUserOrder() === $this) {
+                $logger->setUserOrder(null);
             }
         }
 

@@ -3,18 +3,24 @@
 namespace App\Service;
 
 use App\Entity\ItemOrder;
+use App\EventListener\QuantityChangeEvent;
 use App\Repository\ItemOrderRepository;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 
 class ItemOrderService
 {
     private $repository;
+    private UserOrderService $userOrderService;
+    private EventDispatcherInterface $eventDispatcher;
 
-    public function  __construct(ItemOrderRepository $repository, Security $security)
+    public function  __construct(ItemOrderRepository $repository, Security $security, EventDispatcherInterface $eventDispatcher)
     {
         $this->repository = $repository;
         $this->security = $security;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
 
@@ -25,12 +31,23 @@ class ItemOrderService
 
     function update($dataObjectQuantity): void
     {
-        $quantity = $dataObjectQuantity->getQuantity();
+        $quantityAfter = $dataObjectQuantity->getQuantity();
         $itemOrderId = $dataObjectQuantity->getId();
         $itemOrder = $this->find($itemOrderId);
-        $itemOrder->setQuantity($quantity);
+        $quantityBefore = $itemOrder->getQuantity();
+        $itemOrder->setQuantity($quantityAfter);
         $itemOrder->setTotalPrice($itemOrder->getPrice()*$itemOrder->getQuantity());
         $this->save($itemOrder);
+        $this->dispatchEvent($dataObjectQuantity, $quantityBefore, $quantityAfter);
+    }
+
+    function dispatchEvent($dataObjectQuantity, $quantityBefore,$quantityAfter){
+        $itemOrder = $this->find($dataObjectQuantity->getId());
+        $quantity = [
+            'before'=>$quantityBefore,
+            'after'=>$quantityAfter];
+        $event = new QuantityChangeEvent($itemOrder, $quantity);
+        $this->eventDispatcher->dispatch($event);
     }
 
     function delete(ItemOrder $itemOrder): void

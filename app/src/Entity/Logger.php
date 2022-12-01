@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LoggerRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LoggerRepository::class)]
@@ -14,37 +15,38 @@ class Logger
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'loggers')]
-    private ?UserOrder $userOrderId = null;
+    private ?ItemOrder $itemOrder = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?ItemOrder $itemOrderId = null;
+    #[ORM\Column]
+    private array $quantity = [];
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserOrderId(): ?UserOrder
+    public function getItemOrder(): ?ItemOrder
     {
-        return $this->userOrderId;
+        return $this->itemOrder;
     }
 
-    public function setUserOrderId(?UserOrder $userOrderId): self
+    public function setItemOrder(?ItemOrder $itemOrder): self
     {
-        $this->userOrderId = $userOrderId;
+        $this->itemOrder = $itemOrder;
 
         return $this;
     }
 
-    public function getItemOrderId(): ?ItemOrder
+    public function getQuantity(): array
     {
-        return $this->itemOrderId;
+        return $this->quantity;
     }
 
-    public function setItemOrderId(?ItemOrder $itemOrderId): self
+    public function setQuantity(array $quantity): self
     {
-        $this->itemOrderId = $itemOrderId;
+        $this->quantity = $quantity;
 
         return $this;
     }
+
 }

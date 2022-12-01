@@ -47,16 +47,11 @@ class UserOrderController extends AbstractController
     public function update(ItemOrderService $itemOrderService, UserOrderService $service, DataObjectQuantity $dataObjectQuantity)
     {
         $itemOrderService->update($dataObjectQuantity);
-        $userOrder = $service->findLastUserOrder();
-        $itemOrder = $itemOrderService->findItemOrderIdStatus();
-        $dispatcher = new EventDispatcher();
-
 
         $render = $this->renderView('user_order/user-order-table.html.twig', [
             'userOrder' => $service->findUserOrders(),
         ]);
-        $event = new QuantityChangeEvent($userOrder, $itemOrder);
-        $dispatcher->dispatch($event);
+
         return new JsonResponse(['html' => $render]);
 
     }

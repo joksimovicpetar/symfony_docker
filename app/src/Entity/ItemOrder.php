@@ -54,6 +54,9 @@ class ItemOrder
     #[ORM\Column]
     private ?float $totalPrice = null;
 
+    #[ORM\OneToMany(mappedBy: 'itemOrder', targetEntity: Logger::class)]
+    private Collection $loggers;
+
 
     public function __construct()
     {

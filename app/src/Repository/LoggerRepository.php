@@ -21,7 +21,7 @@ class LoggerRepository extends ServiceEntityRepository
         parent::__construct($registry, Logger::class);
     }
 
-    public function save(Logger $entity, bool $flush = false): void
+    public function save(Logger $entity, bool $flush = true): void
     {
         $this->getEntityManager()->persist($entity);
 

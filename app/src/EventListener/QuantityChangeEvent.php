@@ -8,15 +8,13 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class QuantityChangeEvent extends Event
 {
-
-
-    private UserOrder $userOrder;
     private ItemOrder $itemOrder;
+    private array $quantity;
 
-    public function __construct(UserOrder $userOrder, ItemOrder $itemOrder)
+    public function __construct(ItemOrder $itemOrder, array $quantity)
     {
-        $this->userOrder = $userOrder;
         $this->itemOrder = $itemOrder;
+        $this->quantity = $quantity;
     }
 
     /**
@@ -34,6 +32,26 @@ class QuantityChangeEvent extends Event
     {
         return $this->itemOrder;
     }
+
+    /**
+     * @return array
+     */
+    public function getQuantity(): array
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param array $quantity
+     * @return QuantityChangeEvent
+     */
+    public function setQuantity(array $quantity): QuantityChangeEvent
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+
 
 
 
